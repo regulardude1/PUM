@@ -211,6 +211,10 @@ class ModListPanel(customtkinter.CTkFrame):
         filtered.sort(key=lambda x: x.get("is_favorite", False), reverse=True)
 
         # Insert
+        # Treeview item IDs (iid) must be unique. Some users may have duplicate mod names
+        # (e.g. multiple folders or variants with the same display name), so we generate
+        # a stable unique iid using folder_path when available.
+        used_iids = set()
         for i, mod in enumerate(filtered):
             name = mod.get("name", "Unknown")
             is_checked = name in self._checked_mods
@@ -229,9 +233,26 @@ class ModListPanel(customtkinter.CTkFrame):
             if is_fav:
                 tags.append("favorite")
 
+            base_iid = name
+            try:
+                fp = mod.get("folder_path")
+                if fp:
+                    base_iid = f"{name}::{fp}"
+            except Exception:
+                base_iid = name
+
+            iid = base_iid
+            if iid in used_iids:
+                # Ensure uniqueness even if folder_path is missing/duplicated
+                n = 2
+                while f"{base_iid}#{n}" in used_iids:
+                    n += 1
+                iid = f"{base_iid}#{n}"
+            used_iids.add(iid)
+
             self.tree.insert(
                 "", "end",
-                iid=name,  # Use mod name as unique ID
+                iid=iid,
                 values=(check_mark, star, name, author, version, category),
                 tags=tuple(tags),
             )
@@ -267,8 +288,8 @@ class ModListPanel(customtkinter.CTkFrame):
         """Handle row selection — show mod details."""
         selection = self.tree.selection()
         if selection:
-            mod_name = selection[0]
-            mod = self._find_mod(mod_name)
+            item_id = selection[0]
+            mod = self._find_mod(item_id)
             if mod and self.on_select:
                 self.on_select(mod)
 
@@ -283,8 +304,16 @@ class ModListPanel(customtkinter.CTkFrame):
         if not item:
             return
 
+        # Always select the clicked row so the right preview updates reliably.
+        # (Treeview selection can be skipped depending on click target/column.)
+        try:
+            self.tree.selection_set(item)
+        except Exception:
+            pass
+
         if col == "#1":  # Checked column
-            mod_name = item
+            mod = self._find_mod(item)
+            mod_name = (mod or {}).get("name", item.split("::", 1)[0])
             if mod_name in self._checked_mods:
                 self._checked_mods.discard(mod_name)
                 is_checked = False
@@ -301,6 +330,11 @@ class ModListPanel(customtkinter.CTkFrame):
             mod = self._find_mod(item)
             if mod and self.on_favorite:
                 self.on_favorite(mod)
+        else:
+            # Any other column: treat as a normal selection click
+            mod = self._find_mod(item)
+            if mod and self.on_select:
+                self.on_select(mod)
 
     def _on_right_click_event(self, event):
         """Handle right-click for context menu."""
@@ -315,12 +349,13 @@ class ModListPanel(customtkinter.CTkFrame):
         """Update a single row's visual state without full refresh."""
         try:
             values = list(self.tree.item(item_id, "values"))
-            is_checked = item_id in self._checked_mods
+            mod = self._find_mod(item_id)
+            mod_name = (mod or {}).get("name", values[2] if len(values) > 2 else item_id.split("::", 1)[0])
+            is_checked = mod_name in self._checked_mods
             values[0] = "☑" if is_checked else "☐"
 
             # Determine tags
             idx = self.tree.index(item_id)
-            mod = self._find_mod(item_id)
             tags = ["even" if idx % 2 == 0 else "odd"]
             if is_checked:
                 tags.append("checked")
@@ -331,8 +366,19 @@ class ModListPanel(customtkinter.CTkFrame):
         except Exception:
             pass
 
-    def _find_mod(self, name: str) -> Optional[Dict]:
-        """Find mod info by name."""
+    def _find_mod(self, item_id: str) -> Optional[Dict]:
+        """Find mod info by Treeview iid or display name."""
+        # New iid format: "<name>::<folder_path>[#n]"
+        name = item_id
+        folder_path = None
+        if "::" in item_id:
+            name, rest = item_id.split("::", 1)
+            folder_path = rest.split("#", 1)[0] if rest else None
+
+        if folder_path:
+            for mod in self._all_mods:
+                if mod.get("folder_path") == folder_path and mod.get("name", "") == name:
+                    return mod
         for mod in self._all_mods:
             if mod.get("name", "") == name:
                 return mod

@@ -411,6 +411,37 @@ class App(customtkinter.CTk, TkinterDnD.DnDWrapper):
             _gui.apply_modern_theme()
             _gui.build_layout(self)
 
+            # Start maximized (Windows). This often needs to run after the window is realized.
+            def _maximize():
+                try:
+                    self.update_idletasks()
+                except Exception:
+                    pass
+                try:
+                    self.state("zoomed")
+                    return
+                except Exception:
+                    pass
+                try:
+                    self.attributes("-zoomed", True)
+                    return
+                except Exception:
+                    pass
+                # Last-resort fallback: set geometry to full screen size
+                try:
+                    sw = self.winfo_screenwidth()
+                    sh = self.winfo_screenheight()
+                    if sw and sh:
+                        self.geometry(f"{sw}x{sh}+0+0")
+                except Exception:
+                    pass
+
+            try:
+                self.after(0, _maximize)
+                self.after(200, _maximize)
+            except Exception:
+                _maximize()
+
             self.drop_target_register(DND_ALL)
             self.dnd_bind('<<Drop>>', self.on_drop)
             self.protocol("WM_DELETE_WINDOW", self._on_close)

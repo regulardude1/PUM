@@ -239,6 +239,22 @@ class PreviewPanel(customtkinter.CTkFrame):
 
         # Hide placeholder
         self._placeholder_label.grid_remove()
+        # Ensure action widgets are visible again (placeholder mode hides them)
+        try:
+            self._toggle_btn.grid()
+        except Exception:
+            pass
+        try:
+            # Only show config when applicable (mirrors logic below)
+            if mod.get("has_options"):
+                self._config_btn.grid()
+        except Exception:
+            pass
+        try:
+            if mod.get("url", ""):
+                self._link_label.grid()
+        except Exception:
+            pass
 
         # Show preview
         if self._use_3d and self._3d_viewer is not None:

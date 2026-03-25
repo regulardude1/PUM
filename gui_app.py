@@ -270,6 +270,7 @@ def build_layout(app):
         width=420  # initial minimum visual width
     )
     # The right panel shouldn't stretch its width forever like the list
+    # NOTE: ttk.PanedWindow doesn't support minsize on all Tk builds.
     paned_window.add(app.preview_panel, weight=0)
 
     # ── Save and Restore Sash Position ──
@@ -286,10 +287,48 @@ def build_layout(app):
     if saved_sash is not None:
         def restore_sash():
             try:
-                paned_window.sashpos(0, saved_sash)
+                # Clamp to keep preview pane visible
+                app.update_idletasks()
+                w = app.winfo_width()
+                min_preview = 360
+                if w and w > min_preview + 200:
+                    saved = int(saved_sash)
+                    saved = max(200, min(saved, w - min_preview))
+                    paned_window.sashpos(0, saved)
+                else:
+                    paned_window.sashpos(0, int(saved_sash))
             except Exception:
                 pass
         app.after(100, restore_sash)
+    else:
+        # Default: make the preview panel ~30% of the window width.
+        # (When starting maximized, the default sash can make the right pane huge.)
+        def set_default_sash():
+            try:
+                app.update_idletasks()
+                w = app.winfo_width()
+                if w and w > 200:
+                    min_preview = 360
+                    sash = int(w * 0.70)
+                    sash = max(200, min(sash, w - min_preview))
+                    paned_window.sashpos(0, sash)
+            except Exception:
+                pass
+        # Run a couple times to survive initial maximize/layout settling
+        app.after(200, set_default_sash)
+        app.after(600, set_default_sash)
+
+        # Also run once on first real resize (some systems report width late)
+        def _once_configure(event=None):
+            try:
+                paned_window.unbind("<Configure>", _bind_id)
+            except Exception:
+                pass
+            set_default_sash()
+        try:
+            _bind_id = paned_window.bind("<Configure>", _once_configure)
+        except Exception:
+            pass
     app.preview_panel.on_toggle = lambda mod: _toggle_from_preview(app, mod)
     app.preview_panel.on_configure = lambda mod: app.open_config_window(mod)
 
