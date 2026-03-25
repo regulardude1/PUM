@@ -19,6 +19,7 @@ import zipfile
 import tempfile
 import subprocess
 import re
+from typing import List
 try:
     from tkinterdnd2 import TkinterDnD, DND_ALL
 except ImportError:
@@ -33,10 +34,17 @@ except ImportError:
         def _require(self): return None
     DND_ALL = 'all'
 
+# New GUI modules
+try:
+    import gui_app as _gui
+    _USE_NEW_GUI = True
+except ImportError:
+    _USE_NEW_GUI = False
+
 customtkinter.set_appearance_mode("dark")
 theme = "dark"
 dynamic_text_color = ("black", "white")
-APP_VERSION = "1.2.0"
+APP_VERSION = "2.0.0"
 
 
 from pathlib import Path as _Path
@@ -384,15 +392,43 @@ class App(customtkinter.CTk, TkinterDnD.DnDWrapper):
         self._log_fh = None
 
         self.title(t("app_title"))
-        self.geometry("950x500")
         try:
             self.iconbitmap(default=str(ASSETS_DIR / "icon.ico"))
         except Exception:
             try:
-                # fallback to system default if icon fails
                 self.iconbitmap(default="icon.ico")
             except Exception:
                 pass
+
+        # ── New modern GUI ──
+        if _USE_NEW_GUI:
+            self.mod_checkboxes = []  # compatibility shim
+            self.focused_mod = None
+            self.suppress_install_dialog = False
+            self.is_batch_mode = False
+            self.sort_order = "A-Z"
+            self.sort_key = "name"
+            _gui.apply_modern_theme()
+            _gui.build_layout(self)
+
+            self.drop_target_register(DND_ALL)
+            self.dnd_bind('<<Drop>>', self.on_drop)
+            self.protocol("WM_DELETE_WINDOW", self._on_close)
+            self.bind("<Unmap>", self._on_unmap)
+
+            self.refresh_logic()
+            self.last_mods_state = self._get_mods_state()
+            self.after(2000, self._poll_mods_changes)
+
+            if self.app_settings.get("enable_console", False):
+                try:
+                    self.console_button.grid(row=0, column=6, padx=10, pady=5)
+                except Exception:
+                    pass
+            return  # Skip old GUI setup
+        # ── End new GUI ──
+
+        self.geometry("950x500")
         self.grid_columnconfigure((0, 1), weight=1)
         self.grid_rowconfigure(0, weight=0)
         self.grid_rowconfigure(1, weight=1)
@@ -1399,14 +1435,51 @@ class App(customtkinter.CTk, TkinterDnD.DnDWrapper):
     # endregion
 
     # region --- Profile Management ---
+    def _profiles_dir(self) -> str:
+        return "profiles"
+
+    def _profile_path(self, profile_name: str) -> str:
+        return os.path.join(self._profiles_dir(), f"{profile_name}.json")
+
+    def _get_checked_mod_names(self) -> List[str]:
+        """Return currently enabled mod names, supporting both UIs."""
+        try:
+            if _USE_NEW_GUI and hasattr(self, "mod_list_panel") and self.mod_list_panel is not None:
+                return list(self.mod_list_panel.get_checked_names())
+        except Exception:
+            pass
+        try:
+            return [item["mod_info"]["name"] for item in self.mod_checkboxes if item["variable"].get() == 1]
+        except Exception:
+            return []
+
+    def _set_checked_mod_names(self, names: List[str]):
+        """Set enabled mod names in UI, supporting both UIs."""
+        name_set = set(names or [])
+        # New GUI
+        try:
+            if _USE_NEW_GUI and hasattr(self, "mod_list_panel") and self.mod_list_panel is not None:
+                self.mod_list_panel._checked_mods = name_set
+                self.mod_list_panel._refresh_tree()
+                return
+        except Exception:
+            pass
+        # Legacy UI
+        try:
+            for item in self.mod_checkboxes:
+                item["variable"].set(1 if item["mod_info"]["name"] in name_set else 0)
+        except Exception:
+            pass
+
     def save_current_profile(self):
         # Pedir nombre para un NUEVO perfil
         dialog = customtkinter.CTkInputDialog(text="Enter new profile name:", title="New Profile")
         name = dialog.get_input()
         
         if name and name.strip() != "":
-            active_mods = [item["mod_info"]["name"] for item in self.mod_checkboxes if item["variable"].get() == 1]
-            profile_path = os.path.join("profiles", f"{name}.json")
+            os.makedirs(self._profiles_dir(), exist_ok=True)
+            active_mods = self._get_checked_mod_names()
+            profile_path = self._profile_path(name)
             
             with open(profile_path, "w") as f:
                 json.dump(active_mods, f)
@@ -1414,38 +1487,64 @@ class App(customtkinter.CTk, TkinterDnD.DnDWrapper):
             # Refrescar menú y seleccionar el nuevo
             self.profile_menu.configure(values=self.get_saved_profiles())
             self.profile_var.set(name)
+            self.load_profile_event(name)
     
     def save_to_active_profile(self):
         ##Guarda la selección actual en el archivo del perfil seleccionado en el OptionMenu
-        current_profile = self.profile_var.get()
-        profile_path = os.path.join("profiles", f"{current_profile}.json")
+        current_profile = getattr(self, "profile_var", None).get() if hasattr(self, "profile_var") else "Default Profile"
+        os.makedirs(self._profiles_dir(), exist_ok=True)
+        profile_path = self._profile_path(current_profile)
         
         # Obtenemos los nombres de los mods marcados
-        active_mods = [item["mod_info"]["name"] for item in self.mod_checkboxes if item["variable"].get() == 1]
+        active_mods = self._get_checked_mod_names()
         
         with open(profile_path, "w") as f:
             json.dump(active_mods, f)
 
     def load_profile_event(self, profile_name):
-        profile_path = os.path.join("profiles", f"{profile_name}.json")
+        os.makedirs(self._profiles_dir(), exist_ok=True)
+        profile_path = self._profile_path(profile_name)
         
         if os.path.exists(profile_path):
             with open(profile_path, "r") as f:
-                selected_names = json.load(f)
+                try:
+                    selected_names = json.load(f) or []
+                except Exception:
+                    selected_names = []
             
-            # Actualizamos los checkboxes visualmente
-            for item in self.mod_checkboxes:
-                if item["mod_info"]["name"] in selected_names:
-                    item["variable"].set(1)
-                else:
-                    item["variable"].set(0)
-            
-            # Aplicamos los cambios al sistema de mods (y esto a su vez llamará a update_select)
-            self.update_select()
+            # Apply UI state (new + legacy supported)
+            self._set_checked_mod_names(selected_names)
+
+            # Persist active profile selection in app_settings
+            try:
+                self.app_settings["active_profile"] = profile_name
+            except Exception:
+                pass
+
+            # Keep config.json selection aligned with the active profile so deploy/run uses it.
+            try:
+                save_config(self.current_path, list(selected_names), self.mod_options, app_settings=self.app_settings)
+            except Exception:
+                try:
+                    save_config(self.current_path, list(selected_names), self.mod_options)
+                except Exception:
+                    pass
+
+            # Update UI stats/preview
+            try:
+                self.update_stats_display()
+            except Exception:
+                pass
+            try:
+                if hasattr(self, "focused_mod") and self.focused_mod and hasattr(self, "preview_panel"):
+                    is_enabled = self.focused_mod.get("name", "") in set(selected_names)
+                    self.preview_panel.show_mod(self.focused_mod, is_enabled=is_enabled)
+            except Exception:
+                pass
 
     def get_saved_profiles(self):
-        profiles_dir = "profiles"
-        default_file = os.path.join(profiles_dir, "Default Profile.json")
+        profiles_dir = self._profiles_dir()
+        default_file = self._profile_path("Default Profile")
         
         if not os.path.exists(profiles_dir):
             os.makedirs(profiles_dir)
@@ -1475,7 +1574,7 @@ class App(customtkinter.CTk, TkinterDnD.DnDWrapper):
         # Confirmación simple
         import tkinter.messagebox as messagebox
         if messagebox.askyesno(t("delete_title"), f"{t('delete_confirm')} '{current_profile}'?"):
-            profile_path = os.path.join("profiles", f"{current_profile}.json")
+            profile_path = self._profile_path(current_profile)
             if os.path.exists(profile_path):
                 os.remove(profile_path)
             
@@ -1488,7 +1587,7 @@ class App(customtkinter.CTk, TkinterDnD.DnDWrapper):
     # region --- Profile Export/Import ---
     def export_profile(self):
         current_profile = self.profile_var.get()
-        profile_path = os.path.join("profiles", f"{current_profile}.json")
+        profile_path = self._profile_path(current_profile)
         if not os.path.exists(profile_path):
             return
 
@@ -1503,7 +1602,15 @@ class App(customtkinter.CTk, TkinterDnD.DnDWrapper):
             "mods": []
         }
         
-        installed_map = {m["mod_info"]["name"]: m["mod_info"] for m in self.mod_checkboxes}
+        # Installed mod metadata (used only to embed URLs in export)
+        installed_map = {}
+        try:
+            if _USE_NEW_GUI and hasattr(self, "mod_list_panel") and self.mod_list_panel is not None:
+                installed_map = {m.get("name"): m for m in (self.mod_list_panel._all_mods or []) if m.get("name")}
+            else:
+                installed_map = {m["mod_info"]["name"]: m["mod_info"] for m in self.mod_checkboxes}
+        except Exception:
+            installed_map = {}
         
         for name in mod_names:
             mod_data = {"name": name}
@@ -1548,7 +1655,13 @@ class App(customtkinter.CTk, TkinterDnD.DnDWrapper):
         imported_name = data.get("profile_name", "Imported")
         mods_list = data.get("mods", [])
         
-        installed_names = {m["mod_info"]["name"] for m in self.mod_checkboxes}
+        try:
+            if _USE_NEW_GUI and hasattr(self, "mod_list_panel") and self.mod_list_panel is not None:
+                installed_names = {m.get("name") for m in (self.mod_list_panel._all_mods or []) if m.get("name")}
+            else:
+                installed_names = {m["mod_info"]["name"] for m in self.mod_checkboxes}
+        except Exception:
+            installed_names = set()
         missing = []
         profile_mod_names = []
         
@@ -1560,11 +1673,12 @@ class App(customtkinter.CTk, TkinterDnD.DnDWrapper):
                 missing.append(m_entry)
         
         target_name = imported_name
-        if os.path.exists(os.path.join("profiles", f"{target_name}.json")):
+        if os.path.exists(self._profile_path(target_name)):
             target_name = f"{imported_name}_{int(time.time())}"
         
         try:
-            with open(os.path.join("profiles", f"{target_name}.json"), "w") as outfile:
+            os.makedirs(self._profiles_dir(), exist_ok=True)
+            with open(self._profile_path(target_name), "w") as outfile:
                 json.dump(profile_mod_names, outfile)
         except Exception as e:
             tkinter.messagebox.showerror("Error", str(e))
@@ -1837,15 +1951,21 @@ class App(customtkinter.CTk, TkinterDnD.DnDWrapper):
 
         self.focused_mod = mod
 
-        # Limpiar el frame de configuración para refrescar la info
+        # ── New GUI: use PreviewPanel ──
+        if _USE_NEW_GUI and hasattr(self, 'preview_panel'):
+            checked = self.mod_list_panel.get_checked_names()
+            is_on = mod.get("name", "") in checked
+            self.preview_panel.show_mod(mod, is_enabled=is_on)
+            return
+        # ── End new GUI ──
+
+        # Legacy: Limpiar el frame de configuración
         for widget in self.config_frame.winfo_children():
             widget.destroy()
 
-        # Título del Mod
         title = customtkinter.CTkLabel(self.config_frame, text=mod["name"], font=("Arial", 20, "bold"))
         title.grid(row=0, column=0, padx=10, pady=10, sticky="w")
 
-        # Imagen de Previsualización (Usando Pillow)
         self.render_preview(mod)
 
         # Autor y Versión
@@ -1920,17 +2040,26 @@ class App(customtkinter.CTk, TkinterDnD.DnDWrapper):
         self.show_mod_details(mod)
 
     def get(self):
+        if _USE_NEW_GUI and hasattr(self, 'mod_list_panel'):
+            checked = set(self.mod_list_panel.get_checked_names())
+            return [item["mod_info"] for item in self.mod_checkboxes
+                    if item["mod_info"].get("name") in checked]
         return [item["mod_info"] for item in self.mod_checkboxes if item["variable"].get() == 1]
 
     def toggle_all_mods(self):
-        # Si hay alguno desactivado, activamos todos. Si no, desactivamos todos.
+        # ── New GUI ──
+        if _USE_NEW_GUI and hasattr(self, 'mod_list_panel'):
+            self.mod_list_panel._toggle_all()
+            checked = self.mod_list_panel.get_checked_names()
+            save_config(self.current_path, checked, self.mod_options)
+            self.save_to_active_profile()
+            self.update_stats_display()
+            return
+        # ── End ──
         any_unselected = any(item["variable"].get() == 0 for item in self.mod_checkboxes)
         new_val = 1 if any_unselected else 0
-        
         for item in self.mod_checkboxes:
             item["variable"].set(new_val)
-        
-        # Actualizamos el guardado automático
         self.update_select()
     # endregion
     
@@ -1980,7 +2109,30 @@ class App(customtkinter.CTk, TkinterDnD.DnDWrapper):
 
     # region --- Refresh & Selection Logic ---
     def refresh_logic(self):
-        # Limpiar UI
+        # ── New GUI path ──
+        if _USE_NEW_GUI and hasattr(self, 'mod_list_panel'):
+            _, saved_selected_mods, _ = load_config()
+            loaded_mods = mod_info()
+            # Update compatibility shim
+            self.mod_checkboxes = []
+            for mod in loaded_mods:
+                var = tkinter.IntVar(value=1 if mod["name"] in saved_selected_mods else 0)
+                self.mod_checkboxes.append({"mod_info": mod, "variable": var})
+            # Apply category filter
+            try:
+                sel_display = self.cat_filter.get()
+                idx = self.cat_display_values.index(sel_display)
+                cat = self.cat_canonical[idx]
+            except Exception:
+                cat = "All Categories"
+            self.mod_list_panel.set_category(cat)
+            self.mod_list_panel.set_mods(loaded_mods, saved_selected_mods)
+            self.update_stats_display()
+            print(t("mod_list_refreshed"))
+            return
+        # ── End new GUI path ──
+
+        # Legacy: Limpiar UI
         for widget in self.modlist_frame.winfo_children():
             widget.destroy()
         self.mod_checkboxes = []
@@ -2557,8 +2709,8 @@ class App(customtkinter.CTk, TkinterDnD.DnDWrapper):
             return
         self.setting_window = customtkinter.CTkToplevel(self)
         self.setting_window.title(t("settings_title"))
-        # Smaller window since contents will be compact
-        self.setting_window.geometry("420x420")
+        # Window big enough for all settings including font size
+        self.setting_window.geometry("420x520")
         self.setting_window.after(200, lambda: self.setting_window.iconbitmap(str(ASSETS_DIR / "icon.ico")))
         # Ensure the settings window appears on top and receives focus
         try:
@@ -2696,6 +2848,43 @@ class App(customtkinter.CTk, TkinterDnD.DnDWrapper):
         backup_cb.pack(anchor="w", pady=4)
         self.settings_backup_cb = backup_cb
 
+        # AES Key input (for UModel 3D extraction)
+        aes_frame = customtkinter.CTkFrame(extras_frame, fg_color="transparent")
+        aes_frame.pack(anchor="w", pady=4, fill="x")
+        aes_label = customtkinter.CTkLabel(aes_frame, text="AES Key (3D Preview):")
+        aes_label.pack(side="left", padx=(0, 4))
+        self.aes_var = customtkinter.StringVar(value=app_settings.get("aes_key", ""))
+        aes_entry = customtkinter.CTkEntry(aes_frame, textvariable=self.aes_var, width=150, height=24)
+        aes_entry.pack(side="left", fill="x", expand=True)
+
+        # Font size slider
+        font_frame = customtkinter.CTkFrame(extras_frame, fg_color="transparent")
+        font_frame.pack(anchor="w", pady=(8, 4), fill="x")
+        cur_font_size = app_settings.get("font_size", 11)
+        self.font_size_var = customtkinter.IntVar(value=cur_font_size)
+        font_label = customtkinter.CTkLabel(font_frame, text=f"Text Size: {cur_font_size}", font=("Arial", 12, "bold"))
+        font_label.pack(side="left", padx=(0, 8))
+        def _on_font_slider(val):
+            v = int(float(val))
+            self.font_size_var.set(v)
+            font_label.configure(text=f"Text Size: {v}")
+            # Apply font change immediately across the entire app
+            if _USE_NEW_GUI:
+                try:
+                    _gui.live_rescale_fonts(self, v)
+                except Exception:
+                    pass
+        font_slider = customtkinter.CTkSlider(
+            font_frame, from_=8, to=18, number_of_steps=10,
+            variable=self.font_size_var,
+            fg_color="#0e1525", progress_color=self._accent_color(),
+            button_color=self._accent_color(),
+            button_hover_color=self._hover_color(),
+            command=_on_font_slider,
+            width=180,
+        )
+        font_slider.pack(side="left", padx=4)
+
         # Button to open backups folder
         def open_backups_folder():
             b_path = Path("backups")
@@ -2737,19 +2926,31 @@ class App(customtkinter.CTk, TkinterDnD.DnDWrapper):
             except Exception:
                 accent_val = self.app_settings.get("accent_color", self._accent_color())
 
+            # Include font_size if the slider exists
+            font_size_val = self.app_settings.get("font_size", 11)
+            try:
+                if hasattr(self, 'font_size_var'):
+                    font_size_val = int(self.font_size_var.get())
+            except Exception:
+                pass
             self.app_settings.update({
                 "language": self.lang_menu.get() if hasattr(self.lang_menu, 'get') else None,
                 "check_updates": bool(self.check_updates_var.get()),
                 "minimize_to_tray": bool(self.minimize_tray_var.get()),
                 "enable_console": bool(self.console_var.get()),
                 "backup_mods": bool(self.backup_mods_var.get()),
+                "font_size": font_size_val,
                 "appearance": appearance_val or self.app_settings.get("appearance", "Dark"),
                 "accent_color": accent_val or self.app_settings.get("accent_color", self._accent_color()),
                 "button_color": accent_val or self.app_settings.get("button_color", self._accent_color())
             })
             new_app = self.app_settings
             # Save while preserving other config keys
-            save_config(self.current_path, [m["mod_info"]["name"] for m in self.mod_checkboxes if m["variable"].get() == 1], self.mod_options, app_settings=new_app)
+            if _USE_NEW_GUI and hasattr(self, 'mod_list_panel'):
+                _checked = self.mod_list_panel.get_checked_names()
+            else:
+                _checked = [m["mod_info"]["name"] for m in self.mod_checkboxes if m["variable"].get() == 1]
+            save_config(self.current_path, _checked, self.mod_options, app_settings=new_app)
             # Update runtime settings so changes take effect immediately
             try:
                 self.app_settings = new_app
