@@ -43,6 +43,8 @@ class ModListPanel(customtkinter.CTkFrame):
         self._sort_reverse = False
         self._search_term = ""
         self._category_filter = "All Categories"
+        # Persist user-resized column widths across refreshes
+        self._col_widths: Dict[str, int] = {}
 
         # Callbacks
         self.on_select: Optional[Callable] = None
@@ -88,7 +90,8 @@ class ModListPanel(customtkinter.CTkFrame):
         self.grid_rowconfigure(0, weight=1)
 
         # Treeview
-        columns = ("checked", "fav", "name", "author", "version", "category")
+        # Keep original Category but add dedicated Character column.
+        columns = ("checked", "fav", "name", "author", "version", "category", "character")
         self.tree = ttk.Treeview(
             self,
             columns=columns,
@@ -104,13 +107,15 @@ class ModListPanel(customtkinter.CTkFrame):
         self.tree.heading("author", text="Author", command=lambda: self._sort_by("author"))
         self.tree.heading("version", text="Version", command=lambda: self._sort_by("version"))
         self.tree.heading("category", text="Category", command=lambda: self._sort_by("category"))
+        self.tree.heading("character", text="Character", command=lambda: self._sort_by("character"))
 
         self.tree.column("checked", width=36, minwidth=36, stretch=False, anchor="center")
         self.tree.column("fav", width=36, minwidth=36, stretch=False, anchor="center")
         self.tree.column("name", width=200, minwidth=120, stretch=True, anchor="w")
         self.tree.column("author", width=120, minwidth=80, stretch=True, anchor="w")
-        self.tree.column("version", width=70, minwidth=50, stretch=False, anchor="center")
-        self.tree.column("category", width=80, minwidth=60, stretch=False, anchor="center")
+        self.tree.column("version", width=70, minwidth=50, stretch=True, anchor="center")
+        self.tree.column("category", width=110, minwidth=80, stretch=True, anchor="w")
+        self.tree.column("character", width=140, minwidth=90, stretch=True, anchor="w")
 
         # Tags for visual states
         self.tree.tag_configure("even", background="#1a1a2e")
@@ -129,6 +134,15 @@ class ModListPanel(customtkinter.CTkFrame):
         self.tree.bind("<<TreeviewSelect>>", self._on_tree_select)
         self.tree.bind("<Button-1>", self._on_click)
         self.tree.bind("<Button-3>", self._on_right_click_event)
+        self.tree.bind("<ButtonRelease-1>", self._on_mouse_release)
+
+    def _on_mouse_release(self, event=None):
+        """Persist column widths after user drags column separators."""
+        try:
+            for col in self.tree["columns"]:
+                self._col_widths[col] = int(self.tree.column(col, "width"))
+        except Exception:
+            pass
 
     def set_mods(self, mods: List[Dict], checked_names: List[str]):
         """
@@ -186,21 +200,32 @@ class ModListPanel(customtkinter.CTkFrame):
         for item in self.tree.get_children():
             self.tree.delete(item)
 
+        # Re-apply any user-resized column widths so they don't "snap back"
+        try:
+            for col, w in (self._col_widths or {}).items():
+                if col in self.tree["columns"] and isinstance(w, int) and w > 10:
+                    self.tree.column(col, width=w)
+        except Exception:
+            pass
+
         # Filter
         filtered = []
         for mod in self._all_mods:
             name = mod.get("name", "").lower()
             author = mod.get("author", "").lower()
-            cat = mod.get("category", "Other")
+            category = mod.get("category", "Other")
+            character = mod.get("character", "")
 
             # Search filter
             if self._search_term and self._search_term not in name and self._search_term not in author:
                 continue
 
-            # Category filter
-            if self._category_filter != "All Categories" and cat != self._category_filter:
-                continue
-
+            # Category/Character filter:
+            # - if you selected a real category (Skin/Voice/UI/...) match `category`
+            # - if you selected a character name match `character`
+            if self._category_filter != "All Categories":
+                if category != self._category_filter and character != self._category_filter:
+                    continue
             filtered.append(mod)
 
         # Sort — favorites first, then by sort key
@@ -225,6 +250,7 @@ class ModListPanel(customtkinter.CTkFrame):
             author = mod.get("author", "???")
             version = f"v{mod.get('version', '1.0')}"
             category = mod.get("category", "Other")
+            character = mod.get("character", "")
 
             tags = []
             tags.append("even" if i % 2 == 0 else "odd")
@@ -253,12 +279,12 @@ class ModListPanel(customtkinter.CTkFrame):
             self.tree.insert(
                 "", "end",
                 iid=iid,
-                values=(check_mark, star, name, author, version, category),
+                values=(check_mark, star, name, author, version, category, character),
                 tags=tuple(tags),
             )
 
         # Update heading sort indicator
-        for col in ("name", "author", "version", "category"):
+        for col in ("name", "author", "version", "category", "character"):
             heading_text = col.capitalize()
             if col == self._sort_key:
                 heading_text += " ▼" if not self._sort_reverse else " ▲"

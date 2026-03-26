@@ -19,7 +19,7 @@ import zipfile
 import tempfile
 import subprocess
 import re
-from typing import List
+from typing import List, Optional, Dict
 try:
     from tkinterdnd2 import TkinterDnD, DND_ALL
 except ImportError:
@@ -274,6 +274,310 @@ def t(key: str, **kwargs):
 # endregion
 
 # region --- Mod Scanning ---
+CHAR_SCAN_CACHE_PATH = Path("cache") / "character_scan_cache.json"
+_CHAR_SCAN_CACHE_LOCK = threading.Lock()
+_CHAR_SCAN_CACHE: dict = {}
+CHAR_SCAN_CACHE_VERSION = 3  # kept for future cache-invalidations (no longer part of the key)
+
+def _load_char_scan_cache() -> dict:
+    try:
+        if CHAR_SCAN_CACHE_PATH.exists():
+            with open(CHAR_SCAN_CACHE_PATH, "r", encoding="utf-8") as rf:
+                data = json.load(rf) or {}
+                if not isinstance(data, dict):
+                    return {}
+                # Normalize keys: older cache entries may include a "|vN" suffix.
+                # We strip it so mapping logic changes apply immediately without rescanning.
+                norm = {}
+                import re
+                for k, v in data.items():
+                    if not isinstance(k, str):
+                        continue
+                    nk = re.sub(r"\|v\d+$", "", k)
+                    norm[nk] = v
+                return norm
+    except Exception:
+        pass
+    return {}
+
+# Load cache at import time so mod_info and background scans reuse it immediately.
+try:
+    _CHAR_SCAN_CACHE = _load_char_scan_cache()
+except Exception:
+    _CHAR_SCAN_CACHE = {}
+
+def _save_char_scan_cache(cache: dict):
+    try:
+        CHAR_SCAN_CACHE_PATH.parent.mkdir(parents=True, exist_ok=True)
+        tmp = CHAR_SCAN_CACHE_PATH.with_suffix(".tmp")
+        with open(tmp, "w", encoding="utf-8") as wf:
+            json.dump(cache, wf, indent=2, ensure_ascii=False)
+        try:
+            tmp.replace(CHAR_SCAN_CACHE_PATH)
+        except Exception:
+            # Fallback for Windows rename edge cases
+            with open(CHAR_SCAN_CACHE_PATH, "w", encoding="utf-8") as wf:
+                json.dump(cache, wf, indent=2, ensure_ascii=False)
+    except Exception:
+        pass
+
+def _pak_cache_key(pak_path: Path) -> str:
+    try:
+        st = pak_path.stat()
+        return f"{str(pak_path.resolve())}|{int(st.st_mtime)}|{int(st.st_size)}"
+    except Exception:
+        return str(pak_path)
+
+def _pick_mod_pak(mod_folder: Path) -> Optional[Path]:
+    """Find a representative .pak for a mod (first .pak under assets/)."""
+    try:
+        assets = mod_folder / "assets"
+        if assets.exists():
+            paks = sorted(list(assets.glob("*.pak")), key=lambda p: p.stat().st_size if p.exists() else 0, reverse=True)
+            return paks[0] if paks else None
+    except Exception:
+        pass
+    return None
+
+def _umodel_exe() -> Path:
+    # Prefer 64-bit if present
+    p64 = Path("tools") / "umodel_64.exe"
+    if p64.exists():
+        return p64
+    return Path("tools") / "umodel.exe"
+
+def _scan_pak_for_character(pak_path: Path, aes_key: str = "") -> str:
+    """
+    Use umodel -list to find Character/Ch### in asset paths.
+    Returns a character label (full name or Ch###) or "" if unknown.
+    """
+    try:
+        ch, _emote = _scan_pak_for_character_and_emote(pak_path, aes_key=aes_key)
+        return ch or ""
+    except Exception:
+        return ""
+
+def _scan_pak_for_character_and_emote(pak_path: Path, aes_key: str = ""):
+    """
+    Use umodel -list to detect:
+      - character label from Character/Ch### mount point or /Game/Character/Ch### paths
+      - emote (animation-only mod): contains animation assets but no mesh assets
+    """
+    try:
+        import re
+        if not pak_path.exists():
+            return ("", False)
+
+        cmd = [
+            str(_umodel_exe()),
+            "-list",
+            "-game=ue4.27",
+            f"-path={str(pak_path.parent)}",
+        ]
+        if aes_key:
+            cmd.append(f"-aes={aes_key.strip()}")
+        cmd.append("*")
+
+        startupinfo = subprocess.STARTUPINFO()
+        startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
+        r = subprocess.run(cmd, capture_output=True, text=True, timeout=60, startupinfo=startupinfo)
+        out = (r.stdout or "") + "\n" + (r.stderr or "")
+
+        # Emote detector: if it's mostly animations without meshes.
+        # (This keeps character skins from being misclassified as emotes.)
+        has_anim = re.search(
+            r"(AnimSequence|AnimMontage|AnimSet|MeshAnimation|AnimBlueprintGeneratedClass|/Animations/)",
+            out,
+            flags=re.IGNORECASE,
+        ) is not None
+        has_mesh = re.search(
+            r"(SkeletalMesh|StaticMesh|/Mesh/|SK_|SM_)",
+            out,
+            flags=re.IGNORECASE,
+        ) is not None
+        has_character_mount = re.search(r"Character/Ch(\d{3})/", out, flags=re.IGNORECASE) is not None
+        # Treat as an emote when it contains animation assets, but isn't behaving like a character skin package.
+        # - No mesh => very likely animation-only emote.
+        # - Mesh present => still consider it an emote if it's not mounted under Character/Ch### paths.
+        is_emote = has_anim and (not has_mesh or not has_character_mount)
+
+        # Prefer mount point line (fast + reliable)
+        m = re.search(r"mount point:\s*\"[^\"]*Character/Ch(\d{3})/", out, flags=re.IGNORECASE)
+        if m:
+            chid = f"Ch{m.group(1)}"
+            base_char = _detect_character_label(chid, "")
+            # Variant detection: Deku OFA
+            if chid.upper() == "CH001" and re.search(r"\bOFA\b|One\s*For\s*All|OneForAll", out, flags=re.IGNORECASE):
+                base_char = "Deku OFA"
+            return (base_char or "", is_emote)
+
+        # Otherwise find any /Game/Character/Ch###/... path
+        ids = re.findall(r"/Game/Character/Ch(\d{3})/", out, flags=re.IGNORECASE)
+        if ids:
+            from collections import Counter
+            chid_id = Counter(ids).most_common(1)[0][0]
+            chid = f"Ch{chid_id}"
+            base_char = _detect_character_label(chid, "")
+            if chid.upper() == "CH001" and re.search(r"\bOFA\b|One\s*For\s*All|OneForAll", out, flags=re.IGNORECASE):
+                base_char = "Deku OFA"
+            return (base_char or "", is_emote)
+
+        return ("", is_emote)
+    except Exception:
+        return ("", False)
+
+def _detect_character_label(mod_name: str, folder_name: str) -> str:
+    """
+    Heuristic character detection from mod/folder name.
+    Returns "" if unknown.
+    """
+    import re
+
+    s = f"{mod_name} {folder_name}".strip()
+    if not s:
+        return ""
+
+    # If the name contains an Unreal character id like Ch001, try to map it to a known name.
+    m = re.search(r"\bCh(\d{3})\b", s, flags=re.IGNORECASE)
+    if m:
+        ch = f"Ch{m.group(1)}"
+        ch_map = {
+            # Add more if you know your game's id-to-name mapping
+            "Ch006": "Tsuyu Asui",
+            "Ch018": "Himiko Toga",
+            "Ch001": "Izuku Midoriya",
+            "Ch003": "Ochako Uraraka",
+            "Ch025": "Nejire Hado",
+            "Ch115": "Lady Nagant",
+            "Ch102": "Ibara Shiozaki",
+            "Ch100": "Mt. Lady",
+            "Ch010": "Momo Yaoyorozu",
+            "Ch046": "Kendo",
+            "Ch202": "Deku OFA",
+            # Remaining ids detected by pak scan
+            "Ch012": "All Might",
+            "Ch101": "Cementoss",
+        }
+        return ch_map.get(ch, ch)
+
+    # Normalize
+    base = s
+    base = re.sub(r"[-_]", " ", base)
+    base = re.sub(r"\bWindowsNoEditor\b", " ", base, flags=re.IGNORECASE)
+    base = re.sub(r"\bNoEditor\b", " ", base, flags=re.IGNORECASE)
+    base = re.sub(r"\bBy\b.*$", " ", base, flags=re.IGNORECASE)  # trim trailing "by Author"
+    base = re.sub(r"\s+", " ", base).strip().lower()
+
+    # Optional user overrides: create `character_aliases.json` in the app folder:
+    # { "frawg": "Tsuyu Asui", "mtlady": "Mt. Lady" }
+    user_aliases = {}
+    try:
+        p = Path("character_aliases.json")
+        if p.exists():
+            with open(p, "r", encoding="utf-8") as rf:
+                raw = json.load(rf) or {}
+                if isinstance(raw, dict):
+                    user_aliases = {str(k).lower().strip(): str(v).strip() for k, v in raw.items() if k and v}
+    except Exception:
+        user_aliases = {}
+
+    # Common nicknames / mappings (smart recognition)
+    mapping = {
+        # Tsuyu Asui
+        "tsuyu": "Tsuyu Asui",
+        "asui": "Tsuyu Asui",
+        "froppy": "Tsuyu Asui",
+        "frawg": "Tsuyu Asui",
+        "frog": "Tsuyu Asui",
+        # Himiko Toga
+        "toga": "Himiko Toga",
+        "himiko": "Himiko Toga",
+        # Ochako Uraraka
+        "ochako": "Ochako Uraraka",
+        "uraraka": "Ochako Uraraka",
+        # Izuku Midoriya
+        "deku": "Izuku Midoriya",
+        "midoriya": "Izuku Midoriya",
+        "izuku": "Izuku Midoriya",
+        # Momo Yaoyorozu
+        "momo": "Momo Yaoyorozu",
+        "yaoyorozu": "Momo Yaoyorozu",
+        # Kendo
+        "kendo": "Kendo",
+        "itsuka": "Kendo",
+        # Lady Nagant
+        "nagant": "Lady Nagant",
+        "lady nagant": "Lady Nagant",
+        # Nejire Hado
+        "nejire": "Nejire Hado",
+        "hado": "Nejire Hado",
+        # Ibara Shiozaki
+        "ibara": "Ibara Shiozaki",
+        "shiozaki": "Ibara Shiozaki",
+        # Mt. Lady
+        "mtlady": "Mt. Lady",
+        "mt lady": "Mt. Lady",
+        # Camie (sometimes shows up as Cammy in mod names)
+        "camie": "Camie Utsushimi",
+        "cammy": "Camie Utsushimi",
+        "utsushimi": "Camie Utsushimi",
+        # Mina
+        "mina": "Mina Ashido",
+        "ashido": "Mina Ashido",
+        # Minaku (Deku OFA variant in your set)
+        "minaku": "Deku OFA",
+    }
+
+    # User aliases override built-ins
+    mapping.update(user_aliases)
+
+    for k, v in mapping.items():
+        if re.search(rf"\b{re.escape(k)}\b", base):
+            return v
+
+    # Best-effort: try to find a capitalized-looking name token after stripping common prefixes.
+    # (We keep this conservative to avoid nonsense labels.)
+    base2 = re.sub(r"^\bmod\b", " ", base).strip()
+    base2 = re.sub(r"^\bx\b", " ", base2).strip()
+    toks = [t for t in re.split(r"\s+", base2) if len(t) >= 4]
+    if toks:
+        cand = toks[0].capitalize()
+        return cand
+    return ""
+
+def _infer_category(mod: Dict, folder_name: str, mod_name: str) -> str:
+    """
+    Infer/normalize mod category to one of:
+      - Skin, Voice, UI, Music, Other
+
+    Important: if the mod is a "Model" (or appears to be one), we map it to "Skin".
+    """
+    try:
+        cur = str(mod.get("category", "") or "")
+    except Exception:
+        cur = ""
+
+    s = f"{cur} {folder_name} {mod_name}".lower()
+
+    # Voice
+    if any(k in s for k in ["voice", "vo_", "vo", "seiyuu", "seiyun"]):
+        return "Voice"
+
+    # UI
+    if any(k in s for k in ["ui", "hud", "menu", "screen", "cursor"]):
+        return "UI"
+
+    # Music
+    if any(k in s for k in ["music", "bgm", "song", "ost", "soundtrack", "batu"]):
+        return "Music"
+
+    # Skin / Model -> Skin (explicit)
+    # Many mods label themselves as "Model" but functionally they are character skins.
+    if "skin" in s or "model" in s:
+        return "Skin"
+
+    return cur if cur in ["Skin", "Voice", "UI", "Music", "Other"] else "Other"
+
 def mod_info():
     mods_folder = Path("./mods").resolve()
     if not mods_folder.exists(): mods_folder.mkdir()
@@ -346,6 +650,81 @@ def mod_info():
                         with open(info_path, "r", encoding="utf-8") as f:
                             data = json.load(f)
                             data["folder_path"] = folder 
+                            # Normalize category (treat "Model" as "Skin")
+                            try:
+                                folder_name = folder.name
+                                mod_name = data.get("name", folder_name)
+                                data["category"] = _infer_category(data, str(folder_name), str(mod_name))
+                            except Exception:
+                                pass
+                            # IMPORTANT:
+                            # Some mods have incorrect/duplicated `name` inside modinfo.json.
+                            # Since folder name + pak mount point are what we use for reliable
+                            # character detection and unique identification, prefer the folder
+                            # name for the display name.
+                            folder_name = folder.name
+                            if not data.get("name") or data.get("name") != folder_name:
+                                data["name"] = folder_name
+                            # Auto-detect character label from folder/mod name (fast heuristic)
+                            try:
+                                mod_name = data.get("name", folder_name)
+                                ch = _detect_character_label(str(mod_name), str(folder_name))
+                                if ch:
+                                    data["character"] = ch
+                            except Exception:
+                                pass
+
+                            # Real pak scan (cached): if we have a pak and a cached scan, prefer that.
+                            try:
+                                pak = _pick_mod_pak(folder)
+                                if pak:
+                                    data["_pak_path"] = str(pak)
+                                    key = _pak_cache_key(pak)
+                                    with _CHAR_SCAN_CACHE_LOCK:
+                                        cached = _CHAR_SCAN_CACHE.get(key)
+                                    if isinstance(cached, dict):
+                                        c = cached.get("character")
+                                        if c:
+                                            # Cached values may be raw Ch### from older logic.
+                                            if isinstance(c, str) and c.lower().startswith("ch"):
+                                                mapped = _detect_character_label(c, "")
+                                                if mapped:
+                                                    data["character"] = mapped
+                                                else:
+                                                    data["character"] = c
+                                            else:
+                                                data["character"] = c
+                                        # Emote detector result (may be missing in older cache files)
+                                        try:
+                                            if "emote" in cached:
+                                                data["emote"] = bool(cached.get("emote"))
+                                        except Exception:
+                                            pass
+                            except Exception:
+                                pass
+
+                            # If we successfully detected a character, treat this mod as a skin by default.
+                            # (Most content in this app is character skins/models.)
+                            try:
+                                cat = str(data.get("category", "") or "").strip()
+                                if data.get("emote"):
+                                    data["category"] = "Emote"
+                                elif data.get("character"):
+                                    # Keep "Voice" only if the mod clearly looks like a voice pack.
+                                    # Otherwise, even if modinfo.json says "Voice", treat it as Skin.
+                                    voice_blob = f"{folder_name} {mod_name} {data.get('description','')}".lower()
+                                    looks_like_voice = re.search(
+                                        r"(\\bvoice\\b|\\bvo_\\b|\\bseiyuu\\b|\\bseiyun\\b|\\b-dub\\b|\\bspoken\\b)",
+                                        voice_blob,
+                                        flags=re.IGNORECASE,
+                                    ) is not None
+
+                                    if cat.lower() == "voice" and looks_like_voice:
+                                        data["category"] = "Voice"
+                                    else:
+                                        data["category"] = "Skin"
+                            except Exception:
+                                pass
                             mod_list.append(data)
                     except Exception:
                         # If modinfo is corrupt, skip
@@ -482,9 +861,8 @@ class App(customtkinter.CTk, TkinterDnD.DnDWrapper):
         self.download_btn = customtkinter.CTkButton(self.top_bar, text=t("btn_url_download"), corner_radius=2, height=20, fg_color="transparent", hover_color=("gray80", "gray25"), text_color=dynamic_text_color, command=self.download_url_callback)
         self.download_btn.grid(row=0, column=2, padx=10, pady=5)
 
-        # Keep credits visible
-        self.credits_button = customtkinter.CTkButton(self.top_bar, text=t("credits_title"), corner_radius=2, height=20, fg_color="transparent", hover_color=("gray80", "gray25"),text_color=dynamic_text_color, command=self.open_credits)
-        self.credits_button.grid(row=0, column=5, padx=10, pady=5)
+        # Credits removed from UI (per request)
+        self.credits_button = None
 
         # Console button (only shown when enabled in settings)
         self.console_button = customtkinter.CTkButton(self.top_bar, text=t("console_button"), corner_radius=2, height=20, fg_color="transparent", hover_color=("gray80", "gray25"), text_color=dynamic_text_color, command=self.open_console_window)
@@ -618,8 +996,19 @@ class App(customtkinter.CTk, TkinterDnD.DnDWrapper):
 
         # Filtro de Categoría
         # Keep canonical category keys (matching modinfo) and localized display values
-        self.cat_canonical = ["All Categories", "Skin", "Voice", "UI", "Music", "Other"]
-        self.cat_display_values = [t("all_categories"), t("cat_skin"), t("cat_voice"), t("cat_ui"), t("cat_music"), t("cat_other")]
+        self.cat_canonical = ["All Categories", "Skin", "Voice", "Emote", "UI", "Music", "Other"]
+        cat_emote_display = t("cat_emote")
+        if cat_emote_display == "cat_emote":
+            cat_emote_display = "Emote"
+        self.cat_display_values = [
+            t("all_categories"),
+            t("cat_skin"),
+            t("cat_voice"),
+            cat_emote_display,
+            t("cat_ui"),
+            t("cat_music"),
+            t("cat_other"),
+        ]
         self.cat_filter = customtkinter.CTkOptionMenu(
             self.filter_frame,
             values=self.cat_display_values,
@@ -2096,7 +2485,13 @@ class App(customtkinter.CTk, TkinterDnD.DnDWrapper):
     
     # region --- Context Menu ---
     def show_context_menu(self, event, mod):
-        menu = tkinter.Menu(self, tearoff=0)
+        # Make context menu match the app font sizing/style.
+        # `font_size` is managed in the new GUI settings window.
+        try:
+            fs = int(self.app_settings.get("font_size", 11))
+        except Exception:
+            fs = 11
+        menu = tkinter.Menu(self, tearoff=0, font=("Segoe UI", fs))
         menu.add_command(label=t("ctx_open_folder"), command=lambda: os.startfile(mod["folder_path"]))
         menu.add_command(label=t("edit_mod_info"), command=lambda: self.open_metadata_editor_direct(mod))
         menu.add_separator()
@@ -2149,17 +2544,110 @@ class App(customtkinter.CTk, TkinterDnD.DnDWrapper):
             for mod in loaded_mods:
                 var = tkinter.IntVar(value=1 if mod["name"] in saved_selected_mods else 0)
                 self.mod_checkboxes.append({"mod_info": mod, "variable": var})
+
+            # Update category dropdown with auto character categories
+            try:
+                base_values = list(self.cat_display_values)
+                chars = sorted({m.get("character") for m in loaded_mods if m.get("character")})
+                char_values = [f"Character: {c}" for c in chars]
+                values = base_values + char_values
+                # CTkOptionMenu uses configure(values=...), ttk Combobox uses ["values"]
+                try:
+                    self.cat_filter.configure(values=values)
+                except Exception:
+                    try:
+                        self.cat_filter["values"] = values
+                    except Exception:
+                        pass
+                # If currently selected value disappeared, reset to All Categories
+                try:
+                    if self.cat_filter.get() not in values:
+                        self.cat_filter.set(base_values[0])
+                except Exception:
+                    pass
+            except Exception:
+                pass
+
             # Apply category filter
             try:
                 sel_display = self.cat_filter.get()
-                idx = self.cat_display_values.index(sel_display)
-                cat = self.cat_canonical[idx]
+                if sel_display in self.cat_display_values:
+                    idx = self.cat_display_values.index(sel_display)
+                    cat = self.cat_canonical[idx]
+                elif isinstance(sel_display, str) and sel_display.startswith("Character: "):
+                    cat = sel_display.replace("Character: ", "", 1).strip()
+                else:
+                    # auto character categories are passed through as-is
+                    cat = sel_display
             except Exception:
                 cat = "All Categories"
             self.mod_list_panel.set_category(cat)
             self.mod_list_panel.set_mods(loaded_mods, saved_selected_mods)
             self.update_stats_display()
             print(t("mod_list_refreshed"))
+
+            # Kick off background character scanning for mods without cached results.
+            try:
+                if not hasattr(self, "_char_scan_running"):
+                    self._char_scan_running = False
+                if not self._char_scan_running:
+                    self._char_scan_running = True
+                    aes = ""
+                    try:
+                        aes = (self.app_settings or {}).get("aes_key", "") or ""
+                    except Exception:
+                        aes = ""
+
+                    def _worker(mods_snapshot):
+                        try:
+                            updated_any = False
+                            for m in mods_snapshot:
+                                try:
+                                    pak_str = m.get("_pak_path")
+                                    if not pak_str:
+                                        continue
+                                    pak = Path(pak_str)
+                                    key = _pak_cache_key(pak)
+                                    with _CHAR_SCAN_CACHE_LOCK:
+                                        cached = _CHAR_SCAN_CACHE.get(key)
+                                    need_scan = True
+                                    if isinstance(cached, dict):
+                                        cached_ch = cached.get("character", "")
+                                        cached_em = cached.get("emote", None)
+                                        need_scan = not (cached_ch and cached_em is not None)
+
+                                    if not need_scan:
+                                        continue
+
+                                    ch, is_emote = _scan_pak_for_character_and_emote(pak, aes_key=aes)
+                                    if ch or is_emote:
+                                        with _CHAR_SCAN_CACHE_LOCK:
+                                            _CHAR_SCAN_CACHE[key] = {
+                                                "character": ch,
+                                                "emote": bool(is_emote),
+                                                "pak": str(pak),
+                                            }
+                                            _save_char_scan_cache(_CHAR_SCAN_CACHE)
+                                        updated_any = True
+                                except Exception:
+                                    continue
+                        finally:
+                            try:
+                                self._char_scan_running = False
+                            except Exception:
+                                pass
+                            if updated_any:
+                                try:
+                                    self.after(0, self.refresh_logic)
+                                except Exception:
+                                    pass
+
+                    threading.Thread(target=_worker, args=(list(loaded_mods),), daemon=True).start()
+            except Exception:
+                try:
+                    self._char_scan_running = False
+                except Exception:
+                    pass
             return
         # ── End new GUI path ──
 
@@ -2847,13 +3335,9 @@ class App(customtkinter.CTk, TkinterDnD.DnDWrapper):
         extras_frame = customtkinter.CTkFrame(self.setting_window, fg_color="transparent")
         extras_frame.pack(padx=12, pady=(6, 12), fill="both", expand=True)
 
-        # Check for updates
+        # Check for updates UI removed (per request)
         self.check_updates_var = customtkinter.BooleanVar(value=app_settings.get("check_updates", True))
-        updates_cb = customtkinter.CTkCheckBox(extras_frame, text=t("check_updates_label"), variable=self.check_updates_var,
-                   fg_color=self._accent_color(), hover_color=self._hover_color(),
-                   command=lambda: self._save_app_settings())
-        updates_cb.pack(anchor="w", pady=4)
-        self.settings_updates_cb = updates_cb
+        self.settings_updates_cb = None
 
         # Minimize to tray
         self.minimize_tray_var = customtkinter.BooleanVar(value=app_settings.get("minimize_to_tray", False))
@@ -2879,14 +3363,24 @@ class App(customtkinter.CTk, TkinterDnD.DnDWrapper):
         backup_cb.pack(anchor="w", pady=4)
         self.settings_backup_cb = backup_cb
 
-        # AES Key input (for UModel 3D extraction)
-        aes_frame = customtkinter.CTkFrame(extras_frame, fg_color="transparent")
-        aes_frame.pack(anchor="w", pady=4, fill="x")
-        aes_label = customtkinter.CTkLabel(aes_frame, text="AES Key (3D Preview):")
-        aes_label.pack(side="left", padx=(0, 4))
+        # Auto 3D preview (prevents lag when disabled)
+        try:
+            self.auto_3d_var = customtkinter.BooleanVar(value=app_settings.get("auto_3d_preview", True))
+        except Exception:
+            self.auto_3d_var = customtkinter.BooleanVar(value=True)
+        auto3d_cb = customtkinter.CTkCheckBox(
+            extras_frame,
+            text="Auto-render 3D previews (may lag)",
+            variable=self.auto_3d_var,
+            fg_color=self._accent_color(),
+            hover_color=self._hover_color(),
+            command=lambda: self._save_app_settings(),
+        )
+        auto3d_cb.pack(anchor="w", pady=4)
+        self.settings_auto3d_cb = auto3d_cb
+
+        # AES Key UI removed (per request)
         self.aes_var = customtkinter.StringVar(value=app_settings.get("aes_key", ""))
-        aes_entry = customtkinter.CTkEntry(aes_frame, textvariable=self.aes_var, width=150, height=24)
-        aes_entry.pack(side="left", fill="x", expand=True)
 
         # Font size slider
         font_frame = customtkinter.CTkFrame(extras_frame, fg_color="transparent")
@@ -2906,7 +3400,7 @@ class App(customtkinter.CTk, TkinterDnD.DnDWrapper):
                 except Exception:
                     pass
         font_slider = customtkinter.CTkSlider(
-            font_frame, from_=8, to=18, number_of_steps=10,
+            font_frame, from_=8, to=25, number_of_steps=17,
             variable=self.font_size_var,
             fg_color="#0e1525", progress_color=self._accent_color(),
             button_color=self._accent_color(),
@@ -2922,14 +3416,24 @@ class App(customtkinter.CTk, TkinterDnD.DnDWrapper):
             b_path.mkdir(exist_ok=True)
             os.startfile(b_path)
 
-        btn_open_backups = customtkinter.CTkButton(extras_frame, text=t("open_backups"), 
-                               fg_color=self._accent_color(), hover_color=self._hover_color(), height=24,
-                               command=open_backups_folder)
-        btn_open_backups.pack(anchor="w", pady=(0, 4), padx=28)
+        btn_open_backups = customtkinter.CTkButton(
+            extras_frame,
+            text=t("open_backups"),
+            fg_color=self._accent_color(),
+            hover_color=self._hover_color(),
+            height=24,
+            command=open_backups_folder,
+        )
+        btn_open_backups.pack(anchor="center", pady=(0, 4))
 
         # Small helper save button to persist current app settings
-        save_btn = customtkinter.CTkButton(self.setting_window, text=t("save_settings"), fg_color=self._accent_color(), hover_color=self._hover_color(),
-                           command=lambda: self._save_app_settings(show_msg=True))
+        save_btn = customtkinter.CTkButton(
+            self.setting_window,
+            text="Apply & Close",
+            fg_color=self._accent_color(),
+            hover_color=self._hover_color(),
+            command=lambda: self._save_app_settings(show_msg=False) or (self.setting_window.destroy() if self.setting_window is not None else None),
+        )
         save_btn.pack(pady=(6, 10))
 
         # Version shown in settings as well
@@ -2970,6 +3474,8 @@ class App(customtkinter.CTk, TkinterDnD.DnDWrapper):
                 "minimize_to_tray": bool(self.minimize_tray_var.get()),
                 "enable_console": bool(self.console_var.get()),
                 "backup_mods": bool(self.backup_mods_var.get()),
+                "auto_3d_preview": bool(self.auto_3d_var.get()) if hasattr(self, "auto_3d_var") else bool(self.app_settings.get("auto_3d_preview", True)),
+                "aes_key": (self.aes_var.get().strip() if hasattr(self, "aes_var") and self.aes_var is not None else self.app_settings.get("aes_key", "")),
                 "font_size": font_size_val,
                 "appearance": appearance_val or self.app_settings.get("appearance", "Dark"),
                 "accent_color": accent_val or self.app_settings.get("accent_color", self._accent_color()),
@@ -2993,6 +3499,16 @@ class App(customtkinter.CTk, TkinterDnD.DnDWrapper):
                     am = new_app.get("appearance")
                     if am:
                         customtkinter.set_appearance_mode(am.lower())
+                except Exception:
+                    pass
+                # Update 3D preview AES key immediately
+                try:
+                    if _USE_NEW_GUI and hasattr(self, "preview_panel") and self.preview_panel is not None:
+                        self.preview_panel.set_game_path(self.current_path, aes_key=new_app.get("aes_key", ""))
+                        try:
+                            self.preview_panel.set_auto_3d_preview(bool(new_app.get("auto_3d_preview", True)))
+                        except Exception:
+                            pass
                 except Exception:
                     pass
                 # Console enable/disable handling
@@ -3212,9 +3728,24 @@ class App(customtkinter.CTk, TkinterDnD.DnDWrapper):
                     prev_display = self.cat_filter.get()
                 except Exception:
                     prev_display = None
-                old_display = getattr(self, 'cat_display_values', [t("all_categories"), t("cat_skin"), t("cat_voice"), t("cat_ui"), t("cat_music"), t("cat_other")])
+                old_display = getattr(
+                    self,
+                    'cat_display_values',
+                    [t("all_categories"), t("cat_skin"), t("cat_voice"), t("cat_emote"), t("cat_ui"), t("cat_music"), t("cat_other")],
+                )
 
-                new_display = [t("all_categories"), t("cat_skin"), t("cat_voice"), t("cat_ui"), t("cat_music"), t("cat_other")]
+                cat_emote_display = t("cat_emote")
+                if cat_emote_display == "cat_emote":
+                    cat_emote_display = "Emote"
+                new_display = [
+                    t("all_categories"),
+                    t("cat_skin"),
+                    t("cat_voice"),
+                    cat_emote_display,
+                    t("cat_ui"),
+                    t("cat_music"),
+                    t("cat_other"),
+                ]
                 # update the stored display values first
                 self.cat_display_values = new_display
                 try:

@@ -45,7 +45,14 @@ except ImportError:
 # ---------------------------------------------------------------------------
 CACHE_DIR = Path("cache") / "models"
 TOOLS_DIR = Path("tools")
-UMODEL_EXE = TOOLS_DIR / "umodel.exe"
+def _umodel_exe() -> Path:
+    """Prefer 64-bit UModel when available."""
+    p64 = TOOLS_DIR / "umodel_64.exe"
+    if p64.exists():
+        return p64
+    return TOOLS_DIR / "umodel.exe"
+
+UMODEL_EXE = _umodel_exe()
 
 # ---------------------------------------------------------------------------
 # ModelExtractor — extracts meshes from .pak via umodel CLI
@@ -61,7 +68,10 @@ class ModelExtractor:
     @staticmethod
     def is_available() -> bool:
         """Check whether umodel binary is present."""
-        return UMODEL_EXE.exists()
+        try:
+            return _umodel_exe().exists()
+        except Exception:
+            return UMODEL_EXE.exists()
 
     def extract_asset(self, asset_path: str, output_dir: Optional[Path] = None) -> Optional[Path]:
         """
@@ -141,6 +151,18 @@ class ModelExtractor:
         Try to extract a 3D model from a mod's .pak file.
         Returns path to directory with exported mesh, or None.
         """
+        # Determine whether this mod should be treated as an emote.
+        # (We use modinfo.json because it is authored by the mod packaging.)
+        is_emote = False
+        try:
+            info_path = mod_folder / "modinfo.json"
+            if info_path.exists():
+                with open(info_path, "r", encoding="utf-8") as rf:
+                    info = json.load(rf) or {}
+                is_emote = bool(info.get("emote") or str(info.get("category", "")).lower() == "emote")
+        except Exception:
+            is_emote = False
+
         assets_dir = mod_folder / "assets"
         if not assets_dir.exists():
             return None
@@ -149,57 +171,252 @@ class ModelExtractor:
         if not pak_files:
             return None
 
-        # Use first .pak file
-        pak = pak_files[0]
-        safe_name = pak.stem
-        output_dir = CACHE_DIR / f"mod_{safe_name}"
-
-        if output_dir.exists():
-            mesh_files = (list(output_dir.rglob("*.gltf")) +
-                         list(output_dir.rglob("*.glb")) +
-                         list(output_dir.rglob("*.obj")) +
-                         list(output_dir.rglob("*.psk")))
-            if mesh_files:
-                return output_dir
-
-        output_dir.mkdir(parents=True, exist_ok=True)
+        # Try multiple paks: some emote packs store animations in a different pak.
+        # Sort by size desc to likely pick the most complete pak first.
+        try:
+            pak_files = sorted(
+                pak_files,
+                key=lambda p: p.stat().st_size if p.exists() else 0,
+                reverse=True,
+            )
+        except Exception:
+            pass
 
         if not self.is_available():
             return None
 
-        # Export this specific pak
-        cmd = [
-            str(UMODEL_EXE),
-            "-game=ue4.27",
-            f"-path={pak.parent}",
-            "-export",
-            "-gltf",
-            f"-out={output_dir}",
-        ]
-        if hasattr(self, 'aes_key') and self.aes_key:
-            cmd.append(f"-aes={self.aes_key.strip()}")
-            
-        cmd.append("*")
+        def _build_combined_umodel_path(mod_assets: Path) -> Optional[Path]:
+            """
+            UModel accepts only one -path. Emote animations often reference Skeleton assets
+            from the base game paks, so we build a temporary directory containing junctions
+            to both the mod assets folder and the game's pak folder.
+            """
+            try:
+                if os.name != "nt":
+                    return None
+                game_dir = None
+                try:
+                    game_dir = getattr(self, "game_paks_path", None)
+                except Exception:
+                    game_dir = None
+                if not game_dir:
+                    return None
+                game_dir = Path(game_dir)
+                if not game_dir.exists():
+                    return None
+                if not mod_assets.exists():
+                    return None
 
-        try:
-            startupinfo = subprocess.STARTUPINFO()
-            startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
-            result = subprocess.run(
-                cmd,
-                capture_output=True,
-                text=True,
-                timeout=120,
-                startupinfo=startupinfo,
-            )
-        except Exception as e:
-            print(f"[ModelViewer] extract failed: {e}")
+                base = CACHE_DIR / "_umodel_path"
+                base.mkdir(parents=True, exist_ok=True)
+                # Stable name per mod assets folder path
+                safe = str(mod_assets.resolve()).replace(":", "").replace("\\", "_").replace("/", "_")
+                work = base / safe
+                if work.exists():
+                    return work
+                work.mkdir(parents=True, exist_ok=True)
+
+                # Create junctions
+                mods_link = work / "mods_assets"
+                game_link = work / "game_paks"
+                cmd1 = ["cmd", "/c", "mklink", "/J", str(mods_link), str(mod_assets.resolve())]
+                cmd2 = ["cmd", "/c", "mklink", "/J", str(game_link), str(game_dir.resolve())]
+                subprocess.run(cmd1, capture_output=True, text=True, timeout=10)
+                subprocess.run(cmd2, capture_output=True, text=True, timeout=10)
+                return work
+            except Exception:
+                return None
+
+        def _has_export_files(out_dir: Path) -> bool:
+            gltf_or_anim = bool(list(out_dir.rglob("*.gltf")) or list(out_dir.rglob("*.glb")))
+            mesh_or_psk = bool(list(out_dir.rglob("*.obj")) or list(out_dir.rglob("*.psk")))
+            return gltf_or_anim or mesh_or_psk
+
+        def _find_skeletal_mesh_asset(pak: Path) -> Optional[str]:
+            """
+            Use umodel -list to find a representative skeletal mesh asset path.
+            This is used for emote preview so we can render a skeleton.
+            """
+            try:
+                out_dir = pak.parent
+                cmd = [
+                    str(UMODEL_EXE),
+                    "-list",
+                    "-game=ue4.27",
+                    f"-path={str(out_dir)}",
+                ]
+                if hasattr(self, "aes_key") and self.aes_key:
+                    cmd.append(f"-aes={self.aes_key.strip()}")
+                cmd.append("*")
+
+                startupinfo = subprocess.STARTUPINFO()
+                startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
+                r = subprocess.run(
+                    cmd,
+                    capture_output=True,
+                    text=True,
+                    timeout=45,
+                    startupinfo=startupinfo,
+                )
+                out = (r.stdout or "") + "\n" + (r.stderr or "")
+                # Candidate: UE asset paths for skeletal meshes in exported refs.
+                # Common patterns: /Game/.../Mesh/SK_XXX
+                import re
+                matches = re.findall(r"(/Game/[^\"'\\s]+?/Mesh/SK_[^\"'\\s]*)", out, flags=re.IGNORECASE)
+                if matches:
+                    # Return shortest path (often the base skeleton mesh)
+                    matches = sorted(set(matches), key=lambda s: len(s))
+                    return matches[0]
+
+                # Sometimes list output includes just SK_ paths without trailing items.
+                matches2 = re.findall(r"(/Game/[^\"'\\s]+?/SK_[^\"'\\s]*)", out, flags=re.IGNORECASE)
+                if matches2:
+                    matches2 = sorted(set(matches2), key=lambda s: len(s))
+                    return matches2[0]
+            except Exception:
+                return None
             return None
 
-        mesh_files = (list(output_dir.rglob("*.gltf")) +
-                     list(output_dir.rglob("*.glb")) +
-                     list(output_dir.rglob("*.obj")) +
-                     list(output_dir.rglob("*.psk")))
-        return output_dir if mesh_files else None
+        def _find_anim_asset(pak: Path) -> Optional[str]:
+            """Find a representative AnimSequence/Montage path inside the pak."""
+            try:
+                out_dir = pak.parent
+                cmd = [
+                    str(UMODEL_EXE),
+                    "-list",
+                    "-game=ue4.27",
+                    f"-path={str(out_dir)}",
+                ]
+                if hasattr(self, "aes_key") and self.aes_key:
+                    cmd.append(f"-aes={self.aes_key.strip()}")
+                cmd.append("*")
+
+                startupinfo = subprocess.STARTUPINFO()
+                startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
+                r = subprocess.run(cmd, capture_output=True, text=True, timeout=45, startupinfo=startupinfo)
+                out = (r.stdout or "") + "\n" + (r.stderr or "")
+                import re
+                # Prefer AnimSequence
+                m = re.search(r"(/Game/[^\\s\"']+?)\\.uasset\\s*[\\r\\n]+\\s*\\d+\\s+[0-9A-F]+\\s+\\d+\\s+AnimSequence\\b", out, flags=re.IGNORECASE)
+                if m:
+                    return m.group(1)
+                # Fallback to AnimMontage
+                m2 = re.search(r"(/Game/[^\\s\"']+?)\\.uasset\\s*[\\r\\n]+\\s*\\d+\\s+[0-9A-F]+\\s+\\d+\\s+AnimMontage\\b", out, flags=re.IGNORECASE)
+                if m2:
+                    return m2.group(1)
+            except Exception:
+                return None
+            return None
+
+        # Special path for emotes: export a skeletal mesh asset to ensure skeleton data exists.
+        if is_emote:
+            for pak in pak_files:
+                safe_name = pak.stem
+                output_dir = CACHE_DIR / f"mod_{safe_name}_emote_skel"
+                try:
+                    if output_dir.exists() and _has_export_files(output_dir):
+                        return output_dir
+                except Exception:
+                    pass
+
+                if not self.is_available():
+                    break
+
+                sk_asset = _find_skeletal_mesh_asset(pak)
+                anim_asset = _find_anim_asset(pak)
+                if not sk_asset and not anim_asset:
+                    continue
+
+                # Export only that asset from the mod pak directory (NOT the main game path).
+                # This ensures UModel can see the mod .pak we're targeting.
+                try:
+                    output_dir.mkdir(parents=True, exist_ok=True)
+                except Exception:
+                    pass
+
+                try:
+                    # If the emote is animation-only, we need a combined path so the Skeleton package
+                    # can be resolved from the base game paks.
+                    combined = _build_combined_umodel_path(pak.parent)
+                    umodel_path = str(combined) if combined else str(pak.parent)
+
+                    # Prefer exporting the animation asset (it will pull skeleton as needed).
+                    asset_to_export = anim_asset or sk_asset
+                    if not asset_to_export:
+                        continue
+
+                    cmd = [
+                        str(UMODEL_EXE),
+                        "-game=ue4.27",
+                        f"-path={umodel_path}",
+                        "-notex",
+                        "-export",
+                        "-gltf",
+                        f"-out={output_dir}",
+                    ]
+                    if hasattr(self, "aes_key") and self.aes_key:
+                        cmd.append(f"-aes={self.aes_key.strip()}")
+                    cmd.append(str(asset_to_export))
+
+                    startupinfo = subprocess.STARTUPINFO()
+                    startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
+                    subprocess.run(
+                        cmd,
+                        capture_output=True,
+                        text=True,
+                        timeout=180,
+                        startupinfo=startupinfo,
+                    )
+
+                    if _has_export_files(output_dir):
+                        return output_dir
+                except Exception:
+                    continue
+
+        # Generic path: export wildcard assets from each pak until something is exported.
+        for pak in pak_files:
+            safe_name = pak.stem
+            output_dir = CACHE_DIR / f"mod_{safe_name}"
+
+            if output_dir.exists() and _has_export_files(output_dir):
+                return output_dir
+
+            output_dir.mkdir(parents=True, exist_ok=True)
+
+            # Export this specific pak
+            cmd = [
+                str(UMODEL_EXE),
+                "-game=ue4.27",
+                f"-path={pak.parent}",
+                # Avoid huge/unsupported texture exports crashing UModel.
+                # We can still preview geometry using vertex colors / default material.
+                "-notex",
+                "-export",
+                "-gltf",
+                f"-out={output_dir}",
+            ]
+            if hasattr(self, 'aes_key') and self.aes_key:
+                cmd.append(f"-aes={self.aes_key.strip()}")
+            cmd.append("*")
+
+            try:
+                startupinfo = subprocess.STARTUPINFO()
+                startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
+                subprocess.run(
+                    cmd,
+                    capture_output=True,
+                    text=True,
+                    timeout=180,
+                    startupinfo=startupinfo,
+                )
+            except Exception as e:
+                print(f"[ModelViewer] extract failed ({pak.name}): {e}")
+                continue
+
+            if _has_export_files(output_dir):
+                return output_dir
+
+        return None
 
 
 # ---------------------------------------------------------------------------
@@ -404,6 +621,256 @@ class MeshData:
 
 
 # ---------------------------------------------------------------------------
+# SkeletonData — joint positions + parent edges (for emote preview)
+# ---------------------------------------------------------------------------
+class SkeletonData:
+    """Minimal skeleton representation for preview (points + bone lines)."""
+
+    def __init__(self, points: np.ndarray, edges: List[tuple[int, int]]):
+        self.points = points  # (N, 3) float32
+        self.edges = edges  # list of (a_idx, b_idx) into points
+        self.center: np.ndarray = np.zeros(3, dtype=np.float32)
+        self.scale: float = 1.0
+        if points is not None and len(points) > 0:
+            bbox_min = points.min(axis=0)
+            bbox_max = points.max(axis=0)
+            self.center = (bbox_min + bbox_max) / 2.0
+            extent = (bbox_max - bbox_min).max()
+            self.scale = 2.0 / extent if extent > 0 else 1.0
+
+    @staticmethod
+    def _quat_to_mat4(q: List[float]) -> np.ndarray:
+        # q is [x, y, z, w]
+        x, y, z, w = q
+        xx = x * x
+        yy = y * y
+        zz = z * z
+        xy = x * y
+        xz = x * z
+        yz = y * z
+        wx = w * x
+        wy = w * y
+        wz = w * z
+
+        # Column-major math from quaternion; we still use standard row-major arrays
+        m = np.array(
+            [
+                [1.0 - 2.0 * (yy + zz), 2.0 * (xy - wz), 2.0 * (xz + wy), 0.0],
+                [2.0 * (xy + wz), 1.0 - 2.0 * (xx + zz), 2.0 * (yz - wx), 0.0],
+                [2.0 * (xz - wy), 2.0 * (yz + wx), 1.0 - 2.0 * (xx + yy), 0.0],
+                [0.0, 0.0, 0.0, 1.0],
+            ],
+            dtype=np.float32,
+        )
+        return m
+
+    @staticmethod
+    def _compose_local_matrix(node: dict) -> np.ndarray:
+        if "matrix" in node and isinstance(node["matrix"], list) and len(node["matrix"]) == 16:
+            # glTF stores matrix in column-major order
+            mat = np.array(node["matrix"], dtype=np.float32).reshape((4, 4), order="F").T
+            return mat
+
+        t = node.get("translation", [0.0, 0.0, 0.0])
+        r = node.get("rotation", [0.0, 0.0, 0.0, 1.0])
+        s = node.get("scale", [1.0, 1.0, 1.0])
+
+        T = np.array(
+            [
+                [1.0, 0.0, 0.0, float(t[0])],
+                [0.0, 1.0, 0.0, float(t[1])],
+                [0.0, 0.0, 1.0, float(t[2])],
+                [0.0, 0.0, 0.0, 1.0],
+            ],
+            dtype=np.float32,
+        )
+        R = SkeletonData._quat_to_mat4([float(r[0]), float(r[1]), float(r[2]), float(r[3])])
+        S = np.array(
+            [
+                [float(s[0]), 0.0, 0.0, 0.0],
+                [0.0, float(s[1]), 0.0, 0.0],
+                [0.0, 0.0, float(s[2]), 0.0],
+                [0.0, 0.0, 0.0, 1.0],
+            ],
+            dtype=np.float32,
+        )
+        # Local transform follows glTF TRS: M = T * R * S
+        return T @ R @ S
+
+    @staticmethod
+    def load_from_directory(directory: Path) -> Optional["SkeletonData"]:
+        """
+        Load skeleton joints from the first glTF that contains skins/joints.
+        This is intended as a lightweight fallback for emote preview.
+        """
+        try:
+            if not directory.exists():
+                return None
+
+            def _load_gltf_json(path: Path) -> Optional[dict]:
+                try:
+                    if path.suffix.lower() == ".gltf":
+                        with open(path, "r", encoding="utf-8") as rf:
+                            return json.load(rf) or {}
+                    if path.suffix.lower() == ".glb":
+                        b = path.read_bytes()
+                        # GLB header: magic(4), version(u32), length(u32)
+                        if len(b) < 28 or b[0:4] != b"glTF":
+                            return None
+                        # First chunk: chunkLen(u32), chunkType(4)
+                        chunk_len = int.from_bytes(b[12:16], "little")
+                        chunk_type = b[16:20]
+                        if chunk_type != b"JSON":
+                            return None
+                        json_bytes = b[20 : 20 + chunk_len]
+                        txt = json_bytes.decode("utf-8", errors="ignore").strip()
+                        return json.loads(txt) if txt else {}
+                except Exception:
+                    return None
+                return None
+
+            gltf_files = list(directory.rglob("*.gltf"))
+            glb_files = list(directory.rglob("*.glb"))
+            if not gltf_files and not glb_files:
+                return None
+
+            # Prefer .gltf (readable), then fall back to .glb.
+            candidates = gltf_files + glb_files
+            for gltf in candidates:
+                data = _load_gltf_json(gltf)
+                if not isinstance(data, dict) or not data:
+                    continue
+
+                skins = data.get("skins") or []
+                nodes = data.get("nodes") or []
+                animations = data.get("animations") or []
+                # Some animation/emote exports don't include skins; allow fallbacks.
+                if not nodes:
+                    continue
+
+                joints = None
+                if skins and isinstance(skins[0], dict):
+                    joints = skins[0].get("joints")
+
+                joints_indices: List[int] = []
+                if isinstance(joints, list) and joints:
+                    joints_indices = [int(j) for j in joints if isinstance(j, (int, float, str))]
+
+                # Fallback: sometimes exports don't include skins; try to identify bone-like nodes by name.
+                if not joints_indices:
+                    bone_candidates: List[int] = []
+                    for idx, node in enumerate(nodes):
+                        if not isinstance(node, dict):
+                            continue
+                        nm = str(node.get("name", "")).lower()
+                        if "bone" in nm or "joint" in nm:
+                            bone_candidates.append(idx)
+                    joints_indices = bone_candidates
+
+                # Final fallback: if the export has animations but no skins/bone names,
+                # draw nodes referenced by animation channels.
+                if not joints_indices and isinstance(animations, list) and animations:
+                    anim_node_set = set()
+                    for anim in animations:
+                        if not isinstance(anim, dict):
+                            continue
+                        channels = anim.get("channels")
+                        if not isinstance(channels, list):
+                            continue
+                        for ch in channels:
+                            if not isinstance(ch, dict):
+                                continue
+                            target = ch.get("target")
+                            if isinstance(target, dict):
+                                n = target.get("node", None)
+                                try:
+                                    if n is not None:
+                                        anim_node_set.add(int(n))
+                                except Exception:
+                                    pass
+                    joints_indices = sorted(anim_node_set)
+
+                # Last-resort: if we couldn't identify joint nodes, still draw something
+                # from transform-bearing nodes so emote preview doesn't revert to the cube.
+                if not joints_indices:
+                    try:
+                        transform_nodes: List[int] = []
+                        for idx, node in enumerate(nodes):
+                            if not isinstance(node, dict):
+                                continue
+                            if any(k in node for k in ("translation", "rotation", "scale", "matrix")):
+                                transform_nodes.append(idx)
+                        if transform_nodes:
+                            joints_indices = transform_nodes[:80]
+                        else:
+                            joints_indices = list(range(min(len(nodes), 80)))
+                    except Exception:
+                        joints_indices = []
+
+                if not joints_indices:
+                    continue
+
+                # Build a parent map from node children lists (tree-ish in most exports).
+                parent_map: Dict[int, int] = {}
+                for parent_idx, node in enumerate(nodes):
+                    children = node.get("children") if isinstance(node, dict) else None
+                    if isinstance(children, list):
+                        for ch in children:
+                            try:
+                                ci = int(ch)
+                                parent_map[ci] = parent_idx
+                            except Exception:
+                                pass
+
+                local_memo: Dict[int, np.ndarray] = {}
+                world_memo: Dict[int, np.ndarray] = {}
+
+                def local_mat(i: int) -> np.ndarray:
+                    if i in local_memo:
+                        return local_memo[i]
+                    node = nodes[i]
+                    lm = SkeletonData._compose_local_matrix(node)
+                    local_memo[i] = lm
+                    return lm
+
+                def world_mat(i: int) -> np.ndarray:
+                    if i in world_memo:
+                        return world_memo[i]
+                    p = parent_map.get(i)
+                    if p is None:
+                        wm = local_mat(i)
+                    else:
+                        wm = world_mat(p) @ local_mat(i)
+                    world_memo[i] = wm
+                    return wm
+
+                # Joint points (world space)
+                points_list: List[np.ndarray] = []
+                for ji in joints_indices:
+                    wm = world_mat(ji)
+                    points_list.append(wm[:3, 3].astype(np.float32))
+
+                points = np.vstack(points_list).astype(np.float32)
+
+                # Edges: connect each joint to its parent joint (if parent is also a joint).
+                # If we derived joints from animation targets, node hierarchy may still give
+                # a useful "skeleton-like" line structure.
+                joint_set = set(joints_indices)
+                joint_to_point_idx = {j: idx for idx, j in enumerate(joints_indices)}
+                edges: List[tuple[int, int]] = []
+                for j in joints_indices:
+                    p = parent_map.get(j)
+                    if p is not None and p in joint_set:
+                        edges.append((joint_to_point_idx[p], joint_to_point_idx[j]))
+
+                return SkeletonData(points=points, edges=edges)
+        except Exception:
+            return None
+
+        return None
+
+
+# ---------------------------------------------------------------------------
 # ModelViewer — OpenGL viewport embedded in tkinter
 # ---------------------------------------------------------------------------
 if _GL_AVAILABLE:
@@ -421,6 +888,7 @@ if _GL_AVAILABLE:
         def __init__(self, *args, **kwargs):
             super().__init__(*args, **kwargs)
             self.mesh_data: Optional[List[MeshData]] = None
+            self.skeleton_data: Optional[SkeletonData] = None
             self._tex_ids: List[int] = []
             self._rot_x = 0.0
             self._rot_y = 15.0
@@ -496,6 +964,8 @@ if _GL_AVAILABLE:
 
             if self.mesh_data is not None:
                 self._draw_mesh()
+            elif self.skeleton_data is not None and getattr(self.skeleton_data, "points", None) is not None and len(self.skeleton_data.points) > 0:
+                self._draw_skeleton()
             else:
                 self._draw_placeholder()
 
@@ -621,6 +1091,7 @@ if _GL_AVAILABLE:
         def set_mesh(self, mesh_data: Optional[List[MeshData]]):
             """Set the mesh to display."""
             self.mesh_data = mesh_data
+            self.skeleton_data = None
             if getattr(self, '_display_list', None) is not None:
                 try:
                     glDeleteLists(self._display_list, 1)
@@ -644,6 +1115,19 @@ if _GL_AVAILABLE:
                 self._pan_x = 0.0
                 self._pan_y = 0.0
 
+        def set_skeleton(self, skeleton: Optional[SkeletonData]):
+            """Set skeleton points/edges to display (used for emote preview)."""
+            self.skeleton_data = skeleton
+            self.mesh_data = None
+            self.skeleton_data = skeleton
+            # Reset view framing for the skeleton
+            if self.skeleton_data is not None and getattr(self.skeleton_data, "points", None) is not None and len(self.skeleton_data.points) > 0:
+                self._rot_x = 0.0
+                self._rot_y = 15.0
+                self._zoom = 3.0
+                self._pan_x = 0.0
+                self._pan_y = 0.0
+
         def clear(self):
             """Clear the displayed model."""
             if getattr(self, '_display_list', None) is not None:
@@ -661,6 +1145,55 @@ if _GL_AVAILABLE:
                     pass
             self._tex_ids = []
             self.mesh_data = None
+            self.skeleton_data = None
+
+        def _draw_skeleton(self):
+            """Draw skeleton joints as points + bone edges as lines."""
+            sk = self.skeleton_data
+            if sk is None:
+                return
+            pts = getattr(sk, "points", None)
+            if pts is None or len(pts) == 0:
+                return
+
+            glPushMatrix()
+
+            # Normalize to viewer space (same centering strategy as meshes).
+            global_min = pts.min(axis=0)
+            global_max = pts.max(axis=0)
+            global_center = (global_min + global_max) / 2.0
+            global_extent = (global_max - global_min).max()
+            global_scale = 2.0 / global_extent if global_extent > 0 else 1.0
+
+            glScalef(global_scale, global_scale, global_scale)
+            glTranslatef(-global_center[0], -global_center[1], -global_center[2])
+
+            glDisable(GL_LIGHTING)
+
+            # Bone lines
+            edges = getattr(sk, "edges", None) or []
+            if edges:
+                glLineWidth(2.0)
+                glColor3f(0.35, 0.85, 0.75)
+                glBegin(GL_LINES)
+                for a, b in edges:
+                    try:
+                        glVertex3fv(pts[a])
+                        glVertex3fv(pts[b])
+                    except Exception:
+                        pass
+                glEnd()
+
+            # Joint points
+            glPointSize(6.0)
+            glColor3f(0.25, 0.95, 0.80)
+            glBegin(GL_POINTS)
+            for p in pts:
+                glVertex3fv(p)
+            glEnd()
+
+            glEnable(GL_LIGHTING)
+            glPopMatrix()
 
         # --- Mouse interaction ---
         def _on_left_press(self, event):
@@ -734,8 +1267,9 @@ class PreviewManager:
 
     def can_preview_3d(self) -> bool:
         """Check if 3D preview is possible (all dependencies available)."""
-        return (_GL_AVAILABLE and _TRIMESH_AVAILABLE and
-                self.extractor is not None and self.extractor.is_available())
+        # Skeleton emotes can be previewed without trimesh (JSON-only glTF parsing).
+        # Mesh preview still needs trimesh, but we handle that inside the worker.
+        return (_GL_AVAILABLE and self.extractor is not None and self.extractor.is_available())
 
     def preview_mod(self, mod_folder: Path, callback=None):
         """
@@ -762,16 +1296,41 @@ class PreviewManager:
                         self._on_load_callback(False)
                     return
 
-                mesh_data = MeshData.load_from_directory(export_dir)
-                if mesh_data is None:
-                    self._loading = False
-                    if self._on_load_callback:
-                        self._on_load_callback(False)
-                    return
+                # Load mod metadata so we can decide whether to attempt skeleton preview.
+                is_emote = False
+                try:
+                    info_path = mod_folder / "modinfo.json"
+                    if info_path.exists():
+                        with open(info_path, "r", encoding="utf-8") as rf:
+                            raw = json.load(rf) or {}
+                        is_emote = bool(raw.get("emote") or (str(raw.get("category", "")).lower() == "emote"))
+                except Exception:
+                    is_emote = False
 
-                # Set mesh on viewer (must be done from main thread context)
-                if self.viewer is not None:
-                    self.viewer.set_mesh(mesh_data)
+                mesh_data = None
+                if _TRIMESH_AVAILABLE:
+                    mesh_data = MeshData.load_from_directory(export_dir)
+
+                if is_emote:
+                    # Prefer skeleton-only emote preview (no textures/mesh), falling back to mesh if needed.
+                    skeleton = SkeletonData.load_from_directory(export_dir)
+                    if skeleton is not None and self.viewer is not None:
+                        self.viewer.set_skeleton(skeleton)
+                    elif mesh_data is not None and self.viewer is not None:
+                        self.viewer.set_mesh(mesh_data)
+                    else:
+                        self._loading = False
+                        if self._on_load_callback:
+                            self._on_load_callback(False)
+                        return
+                else:
+                    if mesh_data is not None and self.viewer is not None:
+                        self.viewer.set_mesh(mesh_data)
+                    else:
+                        self._loading = False
+                        if self._on_load_callback:
+                            self._on_load_callback(False)
+                        return
 
                 self._loading = False
                 if self._on_load_callback:

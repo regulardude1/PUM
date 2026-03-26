@@ -32,12 +32,15 @@ class PreviewPanel(customtkinter.CTkFrame):
     2. Image preview (fallback) — always available
     """
 
-    def __init__(self, parent, accent_color="#1a9f84", game_path="", aes_key="", **kwargs):
+    def __init__(self, parent, accent_color="#1a9f84", game_path="", aes_key="", auto_3d_preview: bool = True, **kwargs):
         super().__init__(parent, fg_color="#16213e", corner_radius=12, **kwargs)
 
         self.accent_color = accent_color
         self._game_path = game_path
         self._aes_key = aes_key
+        # If False, selecting a mod won't trigger 3D extraction/rendering (prevents UI lag).
+        # Users can still manually switch to 3D via the preview mode toggle.
+        self.auto_3d_preview = bool(auto_3d_preview)
         self._current_mod: Optional[Dict] = None
 
         # Callbacks
@@ -198,6 +201,11 @@ class PreviewPanel(customtkinter.CTkFrame):
         version = mod.get("version", "1.0")
         category = mod.get("category", "Other")
         description = mod.get("description", "No description available.")
+        is_emote = False
+        try:
+            is_emote = bool(mod.get("emote")) or str(category).lower() == "emote"
+        except Exception:
+            is_emote = False
 
         # Header
         self._title_label.configure(text=name)
@@ -257,10 +265,49 @@ class PreviewPanel(customtkinter.CTkFrame):
             pass
 
         # Show preview
-        if self._use_3d and self._3d_viewer is not None:
-            self._show_3d_preview(mod)
-        else:
+        # Emotes: disable 3D preview (UModel can't reliably export animations for this game).
+        if is_emote:
+            self._use_3d = False
+            try:
+                if hasattr(self, "_mode_toggle"):
+                    self._mode_toggle.set("Image")
+                    # Hide the toggle entirely for emotes to avoid confusion.
+                    self._mode_toggle.pack_forget()
+            except Exception:
+                pass
             self._show_image_preview(mod)
+        else:
+            # Ensure toggle is visible again for non-emotes and default back to 3D when possible.
+            try:
+                if hasattr(self, "_mode_toggle"):
+                    self._mode_toggle.pack(side="right")
+            except Exception:
+                pass
+
+            # If we previously selected an emote, `_use_3d` may have been forced off.
+            # For normal skins/models:
+            # - if auto_3d_preview is enabled, prefer 3D preview when available
+            # - otherwise default to Image to avoid lag on selection
+            try:
+                can_3d = (self._3d_viewer is not None and self._preview_mgr is not None and self._preview_mgr.can_preview_3d())
+            except Exception:
+                can_3d = (self._3d_viewer is not None)
+            self._use_3d = bool(can_3d and self.auto_3d_preview)
+
+            try:
+                if hasattr(self, "_mode_toggle"):
+                    self._mode_toggle.set("3D Preview" if self._use_3d else "Image")
+            except Exception:
+                pass
+
+            if self._use_3d and self._3d_viewer is not None:
+                self._show_3d_preview(mod)
+            else:
+                self._show_image_preview(mod)
+
+    def set_auto_3d_preview(self, enabled: bool):
+        """Enable/disable auto 3D rendering on selection."""
+        self.auto_3d_preview = bool(enabled)
 
     def _show_3d_preview(self, mod: Dict):
         """Attempt to load and display 3D model."""
@@ -274,7 +321,39 @@ class PreviewPanel(customtkinter.CTkFrame):
         if folder and self._preview_mgr:
             def on_load(success):
                 if not success:
-                    # Fallback to image
+                    # For emotes, keep 3D mode so we can at least show skeleton placeholder
+                    # and avoid bouncing to the generic image.
+                    try:
+                        is_emote = bool(mod.get("emote")) or str(mod.get("category", "")).lower() == "emote"
+                    except Exception:
+                        is_emote = False
+
+                    if is_emote:
+                        try:
+                            if self._3d_viewer and hasattr(self._3d_viewer, "clear"):
+                                self._3d_viewer.clear()
+                        except Exception:
+                            pass
+                        # Emote animation preview needs the AES key (and it must be correct) to resolve
+                        # the referenced Skeleton from base game paks. Show a helpful hint instead of a silent cube.
+                        try:
+                            if True:
+                                msg = "Emote preview needs AES key (Settings → AES Key)."
+                                if (self._aes_key or "").strip():
+                                    msg = "Emote preview needs the correct AES key (Settings → AES Key)."
+                                self._image_label.configure(
+                                    image=None,
+                                    text=msg,
+                                    text_color="#c0c0d8",
+                                    font=("Segoe UI", 12),
+                                )
+                                self._image_label.grid(row=0, column=0, sticky="nsew", padx=8, pady=8)
+                        except Exception:
+                            pass
+                        # Leave mode toggle unchanged (stays in 3D Preview)
+                        return
+
+                    # Fallback to image for non-emotes (existing behavior)
                     try:
                         def _do_fallback():
                             self._show_image_preview(mod)
@@ -379,11 +458,16 @@ class PreviewPanel(customtkinter.CTkFrame):
         self._config_btn.configure(fg_color=color, hover_color=self._darken(color))
         self._link_label.configure(text_color=color)
 
-    def set_game_path(self, path: str):
-        """Update game path for model extraction."""
+    def set_game_path(self, path: str, aes_key: str = ""):
+        """Update game path (and AES key) for model extraction."""
         self._game_path = path
+        if aes_key is not None:
+            try:
+                self._aes_key = str(aes_key)
+            except Exception:
+                pass
         if self._preview_mgr:
-            self._preview_mgr.set_game_path(path)
+            self._preview_mgr.set_game_path(path, aes_key=(self._aes_key or ""))
 
     @staticmethod
     def _darken(hex_color: str, factor: float = 0.18) -> str:

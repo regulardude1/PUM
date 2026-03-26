@@ -130,7 +130,6 @@ def build_layout(app):
     for i, (txt, cmd) in enumerate([
         (t("preferences"), app.toggle_pref_dropdown),
         (t("btn_url_download"), app.download_url_callback),
-        (t("credits_title"), app.open_credits),
     ]):
         btn = customtkinter.CTkButton(
             top, text=txt, height=24, corner_radius=4,
@@ -145,7 +144,7 @@ def build_layout(app):
     # Keep references the old code expects
     app.pref_button = top.winfo_children()[0]
     app.download_btn = top.winfo_children()[1]
-    app.credits_button = top.winfo_children()[2]
+    app.credits_button = None
 
     # Console button (hidden until enabled)
     app.console_button = customtkinter.CTkButton(
@@ -185,16 +184,36 @@ def build_layout(app):
     app.search_entry = search
 
     # Category filter
-    app.cat_canonical = ["All Categories", "Skin", "Voice", "UI", "Music", "Other"]
-    app.cat_display_values = [t("all_categories"), t("cat_skin"), t("cat_voice"),
-                               t("cat_ui"), t("cat_music"), t("cat_other")]
+    app.cat_canonical = ["All Categories", "Skin", "Voice", "Emote", "UI", "Music", "Other"]
+    # `t()` returns the key name if missing; in that case we fall back to a literal label.
+    cat_emote_display = t("cat_emote")
+    if cat_emote_display == "cat_emote":
+        cat_emote_display = "Emote"
+    app.cat_display_values = [
+        t("all_categories"),
+        t("cat_skin"),
+        t("cat_voice"),
+        cat_emote_display,
+        t("cat_ui"),
+        t("cat_music"),
+        t("cat_other"),
+    ]
     app.cat_filter = customtkinter.CTkOptionMenu(
         filter_bar, values=app.cat_display_values,
-        width=110, height=32, fg_color=accent,
+        width=150, height=32, fg_color=accent,
         font=("Segoe UI", _fs(-1)),
         command=lambda _: app.refresh_logic(),
     )
     app.cat_filter.grid(row=0, column=1, padx=(0, 4))
+    # Make dropdown wide enough for long entries (safe across customtkinter versions)
+    try:
+        app.cat_filter.configure(dynamic_resizing=False)
+    except Exception:
+        pass
+    try:
+        app.cat_filter.configure(dropdown_width=260)
+    except Exception:
+        pass
 
     # Profile menu (persist last active profile)
     last_profile = "Default Profile"
@@ -266,7 +285,10 @@ def build_layout(app):
     # ── Preview panel (right) ──
     app.preview_panel = PreviewPanel(
         paned_window, accent_color=accent, game_path=app.current_path,
-        aes_key=app.app_settings.get("aes_key", "0xB65A5EF761739F55923ECAE30C87159593C89FFC420AC6C7DD5264CC10D7EDD8"),
+        # AES key is required for encrypted base-game paks.
+        # Don't ship a placeholder default here: a wrong key looks "set" but still fails.
+        aes_key=app.app_settings.get("aes_key", "") or "",
+        auto_3d_preview=bool(app.app_settings.get("auto_3d_preview", True)),
         width=420  # initial minimum visual width
     )
     # The right panel shouldn't stretch its width forever like the list

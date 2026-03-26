@@ -11,3 +11,7 @@ mods/
 
 # Local logs
 notify.log
+
+# Local user profiles (keep Default Profile committed)
+profiles/*.json
+!profiles/Default\ Profile.json
