@@ -8,11 +8,12 @@ _Based on Python_
 
 PUM is a mod loader and mod manager for My Hero Ultra Rumble, that uses a simple system to check folders and copy files right into the game.
 
-<img width="1542" height="934" alt="image" src="https://github.com/user-attachments/assets/7e247200-39dc-42b3-8afd-df177dc2d6f0" />
+<img width="3839" height="2089" alt="image" src="https://github.com/user-attachments/assets/1ee7963a-04e0-4a78-ba4d-a5e05dc2f68c" />
+
 
 ## WARNING!
 Before using PUM make sure your ~mods file folder is empty, otherwise ALL mods within the folder will get removed.
 
 For installation info, see [Quick Start Up](https://github.com/Bacrian/PUM/wiki/Quick-Start-Up)
 
-Any contribution to this project is appreciated as long as the function it performs is clearly defined with a pull request, whether it is bug fixing, a new feature, a suggestion, etc.
+Original Creator's Page - [PUM](https://github.com/Bacrian/PUM)
