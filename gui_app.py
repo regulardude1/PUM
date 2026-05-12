@@ -9,6 +9,7 @@ from tkinter import ttk
 from pathlib import Path
 from mod_list import ModListPanel
 from preview_panel import PreviewPanel
+from discord_store import DiscordStorePanel
 import os
 
 ASSETS_DIR = Path("assets")
@@ -87,6 +88,70 @@ def live_rescale_fonts(app, new_size):
 
 
 def apply_modern_theme():
+    # ... (keeps existing theme definition)
+    import tkinter.ttk as ttk
+    style = ttk.Style()
+    style.theme_use("clam")
+
+def _show_local_display_settings(app):
+    """Show a popup with checkboxes to toggle treeview columns."""
+    popup = customtkinter.CTkToplevel(app)
+    popup.title("Column Visibility")
+    popup.geometry("280x280")
+    popup.transient(app)
+    popup.attributes("-topmost", True)
+    popup.after(100, lambda: popup.attributes("-topmost", False))
+    popup.configure(fg_color="#1e1e2e")
+
+    customtkinter.CTkLabel(popup, text="⚙ Mod List Columns", font=("Segoe UI", 15, "bold")).pack(pady=(15, 10))
+    customtkinter.CTkLabel(popup, text="Choose which columns to display:", 
+                           font=("Segoe UI", 11), text_color="#b5bac1").pack(padx=15, pady=(0, 8))
+
+    fields = [
+        ("author", "Author"),
+        ("version", "Version"),
+        ("category", "Category"),
+        ("character", "Character"),
+    ]
+    vars_ = {}
+    from main import save_config as _save_cfg
+
+    current_vis = list(app.mod_list_panel.tree.cget("displaycolumns"))
+    if not current_vis or "#all" in current_vis or current_vis == ["#all"]:
+        current_vis = list(app.mod_list_panel.tree["columns"])
+        
+    for key, label in fields:
+        is_vis = key in current_vis
+        var = customtkinter.BooleanVar(value=is_vis)
+        vars_[key] = var
+        cb = customtkinter.CTkCheckBox(popup, text=label, variable=var,
+                                       font=("Segoe UI", 12), fg_color="#5865F2",
+                                       hover_color="#4752C4", corner_radius=4)
+        cb.pack(anchor="w", padx=25, pady=4)
+
+    def _apply():
+        new_vis = []
+        for col in current_vis:
+            if col in ["checked", "fav", "name"]:
+                new_vis.append(col)
+            elif col in vars_ and vars_[col].get():
+                new_vis.append(col)
+                
+        # Include newly checked columns
+        for key, var in vars_.items():
+            if var.get() and key not in new_vis:
+                new_vis.append(key)
+        
+        app.mod_list_panel.tree["displaycolumns"] = new_vis
+        app.app_settings["local_columns"] = new_vis
+        try:
+            _save_cfg(app.current_path, getattr(app, 'saved_mods', []), app.mod_options, app_settings=app.app_settings)
+        except Exception:
+            pass
+        popup.destroy()
+
+    customtkinter.CTkButton(popup, text="Apply", fg_color="#5865F2", hover_color="#4752C4",
+                            height=34, font=("Segoe UI", 13, "bold"), command=_apply).pack(pady=(12, 10))
     """Configure customtkinter and ttk for the modern dark look."""
     customtkinter.set_appearance_mode("dark")
     customtkinter.set_default_color_theme("dark-blue")
@@ -157,13 +222,47 @@ def build_layout(app):
     # ── Preferences dropdown (overlay) ──
     _build_pref_dropdown(app, accent)
 
-    # ── Resizable Main Layout ──
-    paned_window = ttk.PanedWindow(app, orient="horizontal")
-    paned_window.grid(row=1, column=0, columnspan=2, sticky="nsew", padx=10, pady=8)
+    # ── Main Tabview Layout ──
+    app.main_tabview = customtkinter.CTkTabview(app)
+    app.main_tabview.grid(row=1, column=0, columnspan=2, sticky="nsew", padx=10, pady=8)
+    
+    local_tab = app.main_tabview.add("Local Mods")
+    discord_tab = app.main_tabview.add("Discord Store")
+    
+    local_tab.grid_columnconfigure(0, weight=0) # Sidebar
+    local_tab.grid_columnconfigure(1, weight=1) # PanedWindow
+    local_tab.grid_rowconfigure(0, weight=1)
+    discord_tab.grid_columnconfigure(0, weight=1)
+    discord_tab.grid_rowconfigure(0, weight=1)
 
-    # ── Mod list (left) ──
-    left_frame = customtkinter.CTkFrame(paned_window, fg_color=COLORS["bg_card"],
-                                         corner_radius=12)
+    # ── Category Sidebar (Leftmost) ──
+    app.local_sidebar_frame = customtkinter.CTkFrame(local_tab, fg_color="#1a1a2e", width=170, corner_radius=12)
+    app.local_sidebar_frame.grid(row=0, column=0, sticky="ns", padx=(0, 4), pady=0)
+    app.local_sidebar_frame.grid_propagate(False)
+
+    sidebar_title = customtkinter.CTkLabel(app.local_sidebar_frame, text="📂 Categories", font=("Segoe UI", _fs(1), "bold"), anchor="w")
+    sidebar_title.pack(fill="x", padx=10, pady=(10, 6))
+
+    app.local_sidebar_scroll = customtkinter.CTkScrollableFrame(app.local_sidebar_frame, fg_color="transparent")
+    app.local_sidebar_scroll.pack(fill="both", expand=True, padx=4, pady=(0, 6))
+
+    # Keep track of the currently selected sidebar category
+    app.selected_sidebar_category = "All Categories"
+    app.sidebar_buttons = {}
+
+    def _select_sidebar_cat(cat_name):
+        app.selected_sidebar_category = cat_name
+        for name, btn in app.sidebar_buttons.items():
+            btn.configure(fg_color=accent if name == cat_name else "transparent")
+        app.after(50, app.refresh_logic)
+    app._select_sidebar_cat = _select_sidebar_cat
+
+    # ── Resizable Main Layout (Local Mods) ──
+    paned_window = ttk.PanedWindow(local_tab, orient="horizontal")
+    paned_window.grid(row=0, column=1, sticky="nsew", padx=0, pady=0)
+
+    # ── Mod list (center) ──
+    left_frame = customtkinter.CTkFrame(paned_window, fg_color=COLORS["bg_card"], corner_radius=12)
     paned_window.add(left_frame, weight=1)
     left_frame.grid_columnconfigure(0, weight=1)
     left_frame.grid_rowconfigure(1, weight=1)
@@ -183,37 +282,15 @@ def build_layout(app):
     search.grid(row=0, column=0, sticky="ew", padx=(0, 6))
     app.search_entry = search
 
-    # Category filter
-    app.cat_canonical = ["All Categories", "Skin", "Voice", "Emote", "UI", "Music", "Other"]
-    # `t()` returns the key name if missing; in that case we fall back to a literal label.
-    cat_emote_display = t("cat_emote")
-    if cat_emote_display == "cat_emote":
-        cat_emote_display = "Emote"
-    app.cat_display_values = [
-        t("all_categories"),
-        t("cat_skin"),
-        t("cat_voice"),
-        cat_emote_display,
-        t("cat_ui"),
-        t("cat_music"),
-        t("cat_other"),
-    ]
-    app.cat_filter = customtkinter.CTkOptionMenu(
-        filter_bar, values=app.cat_display_values,
-        width=150, height=32, fg_color=accent,
-        font=("Segoe UI", _fs(-1)),
-        command=lambda _: app.refresh_logic(),
+    # ⚙ Settings button next to search
+    app.local_settings_btn = customtkinter.CTkButton(
+        filter_bar, text="⚙", width=34, height=32,
+        fg_color="#36393f", hover_color="#4752C4",
+        font=("Segoe UI", 16), corner_radius=8,
+        command=lambda: _show_local_display_settings(app),
     )
-    app.cat_filter.grid(row=0, column=1, padx=(0, 4))
-    # Make dropdown wide enough for long entries (safe across customtkinter versions)
-    try:
-        app.cat_filter.configure(dynamic_resizing=False)
-    except Exception:
-        pass
-    try:
-        app.cat_filter.configure(dropdown_width=260)
-    except Exception:
-        pass
+    app.local_settings_btn.grid(row=0, column=1, padx=(0, 4))
+
 
     # Profile menu (persist last active profile)
     last_profile = "Default Profile"
@@ -266,8 +343,25 @@ def build_layout(app):
     app.mod_list_panel = ModListPanel(left_frame, accent_color=accent,
                                        font_size=_font_size, fg_color="transparent")
     app.mod_list_panel.grid(row=1, column=0, sticky="nsew", padx=4, pady=4)
+    
+    # Restore saved column order/visibility
+    saved_cols = app.app_settings.get("local_columns")
+    if saved_cols:
+        try:
+            app.mod_list_panel.tree["displaycolumns"] = saved_cols
+        except Exception:
+            pass
+
+    def _on_columns_changed(cols):
+        app.app_settings["local_columns"] = list(cols)
+        from main import save_config as _save_cfg
+        try:
+            _save_cfg(app.current_path, getattr(app, 'saved_mods', []), app.mod_options, app_settings=app.app_settings)
+        except Exception:
+            pass
 
     # Wire callbacks
+    app.mod_list_panel.on_columns_changed = _on_columns_changed
     app.mod_list_panel.on_select = lambda mod: _on_mod_select(app, mod)
     app.mod_list_panel.on_toggle = lambda name, chk: _on_mod_toggle(app, name, chk)
     app.mod_list_panel.on_right_click = lambda e, m: app.show_context_menu(e, m)
@@ -296,63 +390,87 @@ def build_layout(app):
     paned_window.add(app.preview_panel, weight=0)
 
     # ── Save and Restore Sash Position ──
-    def on_sash_drag(event):
+    from main import save_config as _save_cfg
+
+    _sash_save_timer = [None]  # mutable container for after() id
+    _sash_dragging = [False]   # track whether user is dragging the sash
+
+    def _persist_sash():
+        """Save sash_pos directly to config.json without needing settings window."""
         try:
-            # Only save if we actually moved the sash (x coordinate interaction)
-            app.app_settings["sash_pos"] = paned_window.sashpos(0)
-            app._save_app_settings()
+            pos = paned_window.sashpos(0)
+            app.app_settings["sash_pos"] = pos
+            _save_cfg(
+                app.current_path,
+                app.mod_list_panel.get_checked_names() if hasattr(app, 'mod_list_panel') else app.saved_mods,
+                app.mod_options,
+                app_settings=app.app_settings,
+            )
         except Exception:
             pass
-    paned_window.bind("<ButtonRelease-1>", on_sash_drag)
+
+    def _on_sash_press(event):
+        """Detect if the click is near the sash (within 12px tolerance)."""
+        try:
+            sash_x = paned_window.sashpos(0)
+            if abs(event.x - sash_x) < 12:
+                _sash_dragging[0] = True
+        except Exception:
+            pass
+
+    def _on_sash_release(event):
+        """Only save sash position if we were actually dragging the sash."""
+        if _sash_dragging[0]:
+            _sash_dragging[0] = False
+            # Debounce the save to avoid redundant I/O
+            if _sash_save_timer[0]:
+                app.after_cancel(_sash_save_timer[0])
+            _sash_save_timer[0] = app.after(300, _persist_sash)
+
+    paned_window.bind("<ButtonPress-1>", _on_sash_press)
+    paned_window.bind("<ButtonRelease-1>", _on_sash_release)
 
     saved_sash = app.app_settings.get("sash_pos")
-    if saved_sash is not None:
-        def restore_sash():
-            try:
-                # Clamp to keep preview pane visible
-                app.update_idletasks()
-                w = app.winfo_width()
-                min_preview = 360
-                if w and w > min_preview + 200:
-                    saved = int(saved_sash)
-                    saved = max(200, min(saved, w - min_preview))
-                    paned_window.sashpos(0, saved)
-                else:
-                    paned_window.sashpos(0, int(saved_sash))
-            except Exception:
-                pass
-        app.after(100, restore_sash)
-    else:
-        # Default: make the preview panel ~30% of the window width.
-        # (When starting maximized, the default sash can make the right pane huge.)
-        def set_default_sash():
-            try:
-                app.update_idletasks()
-                w = app.winfo_width()
-                if w and w > 200:
-                    min_preview = 360
-                    sash = int(w * 0.70)
-                    sash = max(200, min(sash, w - min_preview))
-                    paned_window.sashpos(0, sash)
-            except Exception:
-                pass
-        # Run a couple times to survive initial maximize/layout settling
-        app.after(200, set_default_sash)
-        app.after(600, set_default_sash)
-
-        # Also run once on first real resize (some systems report width late)
-        def _once_configure(event=None):
-            try:
-                paned_window.unbind("<Configure>", _bind_id)
-            except Exception:
-                pass
-            set_default_sash()
+    def restore_sash():
         try:
-            _bind_id = paned_window.bind("<Configure>", _once_configure)
+            app.update_idletasks()
+            w = app.winfo_width()
+            min_preview = 360
+            # Always ensure a minimum width for the list (200) and preview (min_preview)
+            if w > 200 + min_preview:
+                if saved_sash is not None:
+                    saved = int(saved_sash)
+                    # Clamp between 200 and (total width - preview width)
+                    target = max(200, min(saved, w - min_preview))
+                    paned_window.sashpos(0, target)
+                else:
+                    # Default: 65% for list, 35% for preview
+                    paned_window.sashpos(0, int(w * 0.65))
+            else:
+                # Small window fallback
+                paned_window.sashpos(0, max(150, w - min_preview) if w > 150 else 150)
         except Exception:
             pass
+    # Run at increasing delays to catch window mapping AND maximize settling
+    app.after(150, restore_sash)
+    app.after(500, restore_sash)
+    app.after(1000, restore_sash)  # After maximize finishes (~200ms)
+
     app.preview_panel.on_toggle = lambda mod: _toggle_from_preview(app, mod)
     app.preview_panel.on_configure = lambda mod: app.open_config_window(mod)
+
+    # ── Discord Store Panel ──
+    app.discord_store_panel = DiscordStorePanel(discord_tab, accent_color=accent, fg_color="transparent")
+    app.discord_store_panel.grid(row=0, column=0, sticky="nsew", padx=4, pady=4)
+    
+    def on_tab_change():
+        if app.main_tabview.get() == "Discord Store":
+            if not getattr(app.discord_store_panel, "_auto_fetched", False):
+                app.discord_store_panel._auto_fetched = True
+                if app.discord_store_panel.api.get_token():
+                    app.discord_store_panel.load_mods(use_cache=False)
+                    
+    app.main_tabview.configure(command=on_tab_change)
 
     # ── Bottom bar ──
     bot = customtkinter.CTkFrame(app, height=48, corner_radius=0,

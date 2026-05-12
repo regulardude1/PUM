@@ -352,7 +352,7 @@ def _scan_pak_for_character(pak_path: Path, aes_key: str = "") -> str:
     Returns a character label (full name or Ch###) or "" if unknown.
     """
     try:
-        ch, _emote = _scan_pak_for_character_and_emote(pak_path, aes_key=aes_key)
+        ch, pak_info = _scan_pak_for_character_and_emote(pak_path, aes_key=aes_key)
         return ch or ""
     except Exception:
         return ""
@@ -396,10 +396,27 @@ def _scan_pak_for_character_and_emote(pak_path: Path, aes_key: str = ""):
             flags=re.IGNORECASE,
         ) is not None
         has_character_mount = re.search(r"Character/Ch(\d{3})/", out, flags=re.IGNORECASE) is not None
+        has_audio = re.search(r"(SoundWave|Dialogue|AkMediaAsset|/Sound/|/Audio/)", out, flags=re.IGNORECASE) is not None
+        
         # Treat as an emote when it contains animation assets, but isn't behaving like a character skin package.
-        # - No mesh => very likely animation-only emote.
-        # - Mesh present => still consider it an emote if it's not mounted under Character/Ch### paths.
-        is_emote = has_anim and (not has_mesh or not has_character_mount)
+        is_emote_or_anim = has_anim and (not has_mesh or not has_character_mount)
+        
+        # Extract modified slots (skin/costume or emote)
+        slots = set()
+        for m_path in re.finditer(r"/Character/Ch\d{3}/(Model/[^/]+(?:/[^/]+)?)/", out, flags=re.IGNORECASE):
+            slots.add(m_path.group(1).lower())
+        for m_path in re.finditer(r"/Character/Ch\d{3}/(Animation/[^.]+)\.uasset", out, flags=re.IGNORECASE):
+            slot_name = m_path.group(1).lower()
+            if not slot_name.endswith("_montage"):
+                slots.add(slot_name)
+        
+        pak_info = {
+            "is_emote": is_emote_or_anim,
+            "is_anim": is_emote_or_anim, # They share the same structural pattern
+            "is_voice": has_audio,
+            "has_mesh": has_mesh,
+            "slots": list(slots)
+        }
 
         # Prefer mount point line (fast + reliable)
         m = re.search(r"mount point:\s*\"[^\"]*Character/Ch(\d{3})/", out, flags=re.IGNORECASE)
@@ -409,7 +426,7 @@ def _scan_pak_for_character_and_emote(pak_path: Path, aes_key: str = ""):
             # Variant detection: Deku OFA
             if chid.upper() == "CH001" and re.search(r"\bOFA\b|One\s*For\s*All|OneForAll", out, flags=re.IGNORECASE):
                 base_char = "Deku OFA"
-            return (base_char or "", is_emote)
+            return (base_char or "", pak_info)
 
         # Otherwise find any /Game/Character/Ch###/... path
         ids = re.findall(r"/Game/Character/Ch(\d{3})/", out, flags=re.IGNORECASE)
@@ -420,11 +437,11 @@ def _scan_pak_for_character_and_emote(pak_path: Path, aes_key: str = ""):
             base_char = _detect_character_label(chid, "")
             if chid.upper() == "CH001" and re.search(r"\bOFA\b|One\s*For\s*All|OneForAll", out, flags=re.IGNORECASE):
                 base_char = "Deku OFA"
-            return (base_char or "", is_emote)
+            return (base_char or "", pak_info)
 
-        return ("", is_emote)
+        return ("", pak_info)
     except Exception:
-        return ("", False)
+        return ("", {"is_emote": False, "is_anim": False, "is_voice": False, "has_mesh": False})
 
 def _detect_character_label(mod_name: str, folder_name: str) -> str:
     """
@@ -454,6 +471,14 @@ def _detect_character_label(mod_name: str, folder_name: str) -> str:
             "Ch010": "Momo Yaoyorozu",
             "Ch046": "Kendo",
             "Ch202": "Deku OFA",
+            
+            # Additional mappings requested by user
+            "Ch000": "Katsuki Bakugo",
+            "Ch002": "Shoto Todoroki",
+            "Ch007": "Denki Kaminari",
+            "Ch013": "Shota Aizawa",
+            "Ch114": "Star and Stripe",
+            "Ch201": "All For One",
             # Remaining ids detected by pak scan
             "Ch012": "All Might",
             "Ch101": "Cementoss",
@@ -540,8 +565,13 @@ def _detect_character_label(mod_name: str, folder_name: str) -> str:
     base2 = re.sub(r"^\bmod\b", " ", base).strip()
     base2 = re.sub(r"^\bx\b", " ", base2).strip()
     toks = [t for t in re.split(r"\s+", base2) if len(t) >= 4]
+    
+    # Catch non-character modifiers leaking through the regex parser
     if toks:
         cand = toks[0].capitalize()
+        # Avoid treating "Xfancards" or UI strings as characters
+        if cand.lower() in ("xfancards", "fancards", "card", "cards", "ui", "icon"):
+            return ""
         return cand
     return ""
 
@@ -559,24 +589,32 @@ def _infer_category(mod: Dict, folder_name: str, mod_name: str) -> str:
 
     s = f"{cur} {folder_name} {mod_name}".lower()
 
-    # Voice
-    if any(k in s for k in ["voice", "vo_", "vo", "seiyuu", "seiyun"]):
+    # Voice (expanded heuristics)
+    if any(k in s for k in ["voice", "vo_", "vo", "seiyuu", "seiyun", "dub", "audio"]):
         return "Voice"
 
     # UI
-    if any(k in s for k in ["ui", "hud", "menu", "screen", "cursor"]):
+    if any(k in s for k in ["ui", "hud", "menu", "screen", "cursor", "icon", "card"]):
         return "UI"
 
     # Music
     if any(k in s for k in ["music", "bgm", "song", "ost", "soundtrack", "batu"]):
         return "Music"
 
+    # Emotes vs Animations
+    # "Emotes" usually are explicit or use the "over X" pattern for slots
+    if "emote" in s or "dance" in s or re.search(r'\bover\s+[^-_\.]+', s, flags=re.IGNORECASE):
+        return "Emote"
+        
+    if any(k in s for k in ["anim", "animation", "run", "walk", "idle", "attack", "moveset"]):
+        return "Animation"
+
     # Skin / Model -> Skin (explicit)
     # Many mods label themselves as "Model" but functionally they are character skins.
-    if "skin" in s or "model" in s:
+    if "skin" in s or "model" in s or "costume" in s or "outfit" in s or "suit" in s:
         return "Skin"
 
-    return cur if cur in ["Skin", "Voice", "UI", "Music", "Other"] else "Other"
+    return cur if cur in ["Skin", "Voice", "UI", "Music", "Emote", "Animation", "Other"] else "Other"
 
 def mod_info():
     mods_folder = Path("./mods").resolve()
@@ -650,6 +688,10 @@ def mod_info():
                         with open(info_path, "r", encoding="utf-8") as f:
                             data = json.load(f)
                             data["folder_path"] = folder 
+                            try:
+                                data["date_added"] = folder.stat().st_mtime
+                            except Exception:
+                                data["date_added"] = 0
                             # Normalize category (treat "Model" as "Skin")
                             try:
                                 folder_name = folder.name
@@ -695,6 +737,14 @@ def mod_info():
                                             else:
                                                 data["character"] = c
                                         # Emote detector result (may be missing in older cache files)
+                                        # Accurate slot detector (from pak paths)
+                                        try:
+                                            if "slots" in cached and isinstance(cached["slots"], list) and cached["slots"]:
+                                                data["slots"] = cached["slots"]
+                                        except Exception:
+                                            pass
+                                        
+                                        # Emote detector result
                                         try:
                                             if "emote" in cached:
                                                 data["emote"] = bool(cached.get("emote"))
@@ -709,6 +759,13 @@ def mod_info():
                                 cat = str(data.get("category", "") or "").strip()
                                 if data.get("emote"):
                                     data["category"] = "Emote"
+                                    # Fallback: if we didn't get accurate slots from the pak, guess from name
+                                    if not data.get("slots"):
+                                        em_s = f"{data.get('name', folder_name)} {folder_name}"
+                                        import re
+                                        m_slot = re.search(r'\bover\s+([^-_\.]+)', em_s, flags=re.IGNORECASE)
+                                        if m_slot:
+                                            data["slots"] = [m_slot.group(1).strip().lower()]
                                 elif data.get("character"):
                                     # Keep "Voice" only if the mod clearly looks like a voice pack.
                                     # Otherwise, even if modinfo.json says "Voice", treat it as Skin.
@@ -1012,7 +1069,7 @@ class App(customtkinter.CTk, TkinterDnD.DnDWrapper):
         self.cat_filter = customtkinter.CTkOptionMenu(
             self.filter_frame,
             values=self.cat_display_values,
-            command=lambda _: self.refresh_logic(),
+            command=lambda _: self.after(50, self.refresh_logic),
             width=120,
             height=28,
             fg_color=self._accent_color(),
@@ -1522,6 +1579,7 @@ class App(customtkinter.CTk, TkinterDnD.DnDWrapper):
         dialog.geometry("400x220")
         dialog.after(200, lambda: dialog.iconbitmap(str(ASSETS_DIR / "icon.ico")))
         dialog.attributes("-topmost", True)
+        dialog.after(100, lambda: dialog.attributes("-topmost", False))
         dialog.resizable(False, False)
         dialog.geometry(f"+{self.winfo_x() + 100}+{self.winfo_y() + 100}")
 
@@ -1563,6 +1621,7 @@ class App(customtkinter.CTk, TkinterDnD.DnDWrapper):
         dialog.geometry("400x300")
         dialog.after(200, lambda: dialog.iconbitmap(str(ASSETS_DIR / "icon.ico")))
         dialog.attributes("-topmost", True)
+        dialog.after(100, lambda: dialog.attributes("-topmost", False))
         dialog.resizable(False, False)
         
         # Centrar en pantalla (aprox)
@@ -2134,6 +2193,7 @@ class App(customtkinter.CTk, TkinterDnD.DnDWrapper):
         self.batch_win.title(t("batch_download_title"))
         self.batch_win.geometry("400x380")
         self.batch_win.attributes("-topmost", True)
+        self.batch_win.after(100, lambda: self.batch_win.attributes("-topmost", False))
         try:
             self.batch_win.iconbitmap(str(ASSETS_DIR / "icon.ico"))
         except: pass
@@ -2545,39 +2605,64 @@ class App(customtkinter.CTk, TkinterDnD.DnDWrapper):
                 var = tkinter.IntVar(value=1 if mod["name"] in saved_selected_mods else 0)
                 self.mod_checkboxes.append({"mod_info": mod, "variable": var})
 
-            # Update category dropdown with auto character categories
+            # Update sidebar categories
             try:
-                base_values = list(self.cat_display_values)
+                # Core categories we always want shown
+                core_cats = ["All Categories", "Skin", "Voice", "Emote", "Animation", "UI", "Music", "Other"]
+                
+                # Dynamic character categories
                 chars = sorted({m.get("character") for m in loaded_mods if m.get("character")})
-                char_values = [f"Character: {c}" for c in chars]
-                values = base_values + char_values
-                # CTkOptionMenu uses configure(values=...), ttk Combobox uses ["values"]
-                try:
-                    self.cat_filter.configure(values=values)
-                except Exception:
-                    try:
-                        self.cat_filter["values"] = values
-                    except Exception:
-                        pass
-                # If currently selected value disappeared, reset to All Categories
-                try:
-                    if self.cat_filter.get() not in values:
-                        self.cat_filter.set(base_values[0])
-                except Exception:
-                    pass
-            except Exception:
-                pass
+                char_cats = [f"Character: {c}" for c in chars]
+                all_cats = core_cats + char_cats
+                
+                prev_cats = getattr(self, '_last_sidebar_cats', None)
+                if all_cats != prev_cats:
+                    self._last_sidebar_cats = all_cats
+                    
+                    # Clear existing buttons
+                    for w in self.local_sidebar_scroll.winfo_children():
+                        w.destroy()
+                    self.sidebar_buttons.clear()
+                    
+                    # Ensure current selection is still valid
+                    if getattr(self, 'selected_sidebar_category', "All Categories") not in all_cats:
+                        self.selected_sidebar_category = "All Categories"
+                        
+                    # Build buttons
+                    for cat_name in all_cats:
+                        is_active = (cat_name == self.selected_sidebar_category)
+                        # Pick an icon based on category name
+                        icon = "📁"
+                        if cat_name == "All Categories": icon = "📂"
+                        elif cat_name.startswith("Character:"): icon = "👤"
+                        elif cat_name in ["Skin", "Animation"]: icon = "🎮"
+                        elif cat_name in ["Voice", "Music"]: icon = "🎵"
+                        
+                        disp_name = cat_name.replace("Character: ", "") if cat_name.startswith("Character: ") else cat_name
+                        
+                        btn = customtkinter.CTkButton(
+                            self.local_sidebar_scroll,
+                            text=f" {icon} {disp_name}",
+                            anchor="w",
+                            height=30,
+                            fg_color=self._accent_color() if is_active else "transparent",
+                            hover_color="#4752C4",
+                            font=("Segoe UI", 11),
+                            text_color="white",
+                            corner_radius=6,
+                            command=lambda c=cat_name: self._select_sidebar_cat(c),
+                        )
+                        btn.pack(fill="x", padx=4, pady=1)
+                        self.sidebar_buttons[cat_name] = btn
+            except Exception as e:
+                print(f"Error building sidebar: {e}")
 
             # Apply category filter
             try:
-                sel_display = self.cat_filter.get()
-                if sel_display in self.cat_display_values:
-                    idx = self.cat_display_values.index(sel_display)
-                    cat = self.cat_canonical[idx]
-                elif isinstance(sel_display, str) and sel_display.startswith("Character: "):
+                sel_display = getattr(self, 'selected_sidebar_category', "All Categories")
+                if isinstance(sel_display, str) and sel_display.startswith("Character: "):
                     cat = sel_display.replace("Character: ", "", 1).strip()
                 else:
-                    # auto character categories are passed through as-is
                     cat = sel_display
             except Exception:
                 cat = "All Categories"
@@ -2619,12 +2704,16 @@ class App(customtkinter.CTk, TkinterDnD.DnDWrapper):
                                     if not need_scan:
                                         continue
 
-                                    ch, is_emote = _scan_pak_for_character_and_emote(pak, aes_key=aes)
-                                    if ch or is_emote:
+                                    ch, pak_info = _scan_pak_for_character_and_emote(pak, aes_key=aes)
+                                    is_emote = pak_info.get("is_emote", False)
+                                    if ch or is_emote or pak_info.get("is_voice"):
                                         with _CHAR_SCAN_CACHE_LOCK:
                                             _CHAR_SCAN_CACHE[key] = {
                                                 "character": ch,
                                                 "emote": bool(is_emote),
+                                                "is_voice": pak_info.get("is_voice", False),
+                                                "is_anim": pak_info.get("is_anim", False),
+                                                "slots": pak_info.get("slots", []),
                                                 "pak": str(pak),
                                             }
                                             _save_char_scan_cache(_CHAR_SCAN_CACHE)
@@ -2865,6 +2954,7 @@ class App(customtkinter.CTk, TkinterDnD.DnDWrapper):
         dialog.geometry("400x250")
         dialog.resizable(False, False)
         dialog.attributes("-topmost", True)
+        dialog.after(100, lambda: dialog.attributes("-topmost", False))
         dialog.after(200, lambda: dialog.iconbitmap(str(ASSETS_DIR / "icon.ico")))
         
         # Centrar ventana
@@ -3721,51 +3811,6 @@ class App(customtkinter.CTk, TkinterDnD.DnDWrapper):
             except Exception:
                 pass
 
-            # update category OptionMenu display values to new language
-            try:
-                # capture previous displayed selection and current display list
-                try:
-                    prev_display = self.cat_filter.get()
-                except Exception:
-                    prev_display = None
-                old_display = getattr(
-                    self,
-                    'cat_display_values',
-                    [t("all_categories"), t("cat_skin"), t("cat_voice"), t("cat_emote"), t("cat_ui"), t("cat_music"), t("cat_other")],
-                )
-
-                cat_emote_display = t("cat_emote")
-                if cat_emote_display == "cat_emote":
-                    cat_emote_display = "Emote"
-                new_display = [
-                    t("all_categories"),
-                    t("cat_skin"),
-                    t("cat_voice"),
-                    cat_emote_display,
-                    t("cat_ui"),
-                    t("cat_music"),
-                    t("cat_other"),
-                ]
-                # update the stored display values first
-                self.cat_display_values = new_display
-                try:
-                    self.cat_filter.configure(values=new_display)
-                except Exception:
-                    pass
-
-                # try to keep previous selection: map old display to new display via index
-                try:
-                    if prev_display and prev_display in old_display:
-                        idx = old_display.index(prev_display)
-                        # guard index range
-                        if idx < len(self.cat_display_values):
-                            self.cat_filter.set(self.cat_display_values[idx])
-                        else:
-                            self.cat_filter.set(self.cat_display_values[0])
-                    else:
-                        self.cat_filter.set(self.cat_display_values[0])
-                except Exception:
-                    pass
             except Exception:
                 pass
         except Exception:
@@ -3786,6 +3831,7 @@ class App(customtkinter.CTk, TkinterDnD.DnDWrapper):
         update_win.geometry("450x400")
         update_win.after(200, lambda: update_win.iconbitmap("assets/icon.ico"))
         update_win.attributes("-topmost", True) # Ensure the window appears on top
+        update_win.after(100, lambda: update_win.attributes("-topmost", False))
 
         # Title
         title_label = customtkinter.CTkLabel(
@@ -4101,6 +4147,7 @@ class App(customtkinter.CTk, TkinterDnD.DnDWrapper):
         self.loading_win.title(t("url_dl_title"))
         self.loading_win.geometry("300x100")
         self.loading_win.attributes("-topmost", True)
+        self.loading_win.after(100, lambda: self.loading_win.attributes("-topmost", False))
         customtkinter.CTkLabel(self.loading_win, text=t("url_dl_fetching")).pack(expand=True)
         self.loading_win.update()
         try:
@@ -4184,6 +4231,7 @@ class App(customtkinter.CTk, TkinterDnD.DnDWrapper):
         dialog.title(t("url_dl_select_file"))
         dialog.geometry("400x300")
         dialog.attributes("-topmost", True)
+        dialog.after(100, lambda: dialog.attributes("-topmost", False))
         # keep reference so settings changes can update these buttons live
         try:
             self.gb_file_dialog = dialog
@@ -4216,6 +4264,7 @@ class App(customtkinter.CTk, TkinterDnD.DnDWrapper):
         self.dl_win.title(t("url_dl_title"))
         self.dl_win.geometry("300x120")
         self.dl_win.attributes("-topmost", True)
+        self.dl_win.after(100, lambda: self.dl_win.attributes("-topmost", False))
         
         self.dl_label = customtkinter.CTkLabel(self.dl_win, text=t("url_dl_downloading", percent=0))
         self.dl_label.pack(pady=(20, 10))
@@ -4241,6 +4290,7 @@ class App(customtkinter.CTk, TkinterDnD.DnDWrapper):
             except Exception:
                 pass
             win.attributes("-topmost", True)
+            win.after(100, lambda: win.attributes("-topmost", False))
 
             frm = customtkinter.CTkFrame(win, fg_color="transparent")
             frm.pack(fill="both", expand=True, padx=12, pady=12)
@@ -4300,6 +4350,7 @@ class App(customtkinter.CTk, TkinterDnD.DnDWrapper):
         self.dl_win.title(t("url_dl_title"))
         self.dl_win.geometry("400x140")
         self.dl_win.attributes("-topmost", True)
+        self.dl_win.after(100, lambda: self.dl_win.attributes("-topmost", False))
         self.dl_win.after(200, lambda: self.dl_win.iconbitmap(str(ASSETS_DIR / "icon.ico")))
 
         self.dl_label = customtkinter.CTkLabel(self.dl_win, text=t("url_dl_downloading", percent=0))

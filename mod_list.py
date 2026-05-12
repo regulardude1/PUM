@@ -39,8 +39,8 @@ class ModListPanel(customtkinter.CTkFrame):
         self._font_size = font_size
         self._all_mods: List[Dict] = []
         self._checked_mods: set = set()
-        self._sort_key = "name"
-        self._sort_reverse = False
+        self._sort_key = "date_added"
+        self._sort_reverse = True
         self._search_term = ""
         self._category_filter = "All Categories"
         # Persist user-resized column widths across refreshes
@@ -51,6 +51,7 @@ class ModListPanel(customtkinter.CTkFrame):
         self.on_toggle: Optional[Callable] = None
         self.on_right_click: Optional[Callable] = None
         self.on_favorite: Optional[Callable] = None
+        self.on_columns_changed: Optional[Callable] = None
 
         self._setup_ui()
 
@@ -100,14 +101,14 @@ class ModListPanel(customtkinter.CTkFrame):
             style="ModList.Treeview",
         )
 
-        # Column definitions
-        self.tree.heading("checked", text="✓", command=lambda: self._toggle_all())
+        # Column definitions (Sorting is handled manually in event bindings to allow dragging)
+        self.tree.heading("checked", text="✓")
         self.tree.heading("fav", text="★")
-        self.tree.heading("name", text="Name", command=lambda: self._sort_by("name"))
-        self.tree.heading("author", text="Author", command=lambda: self._sort_by("author"))
-        self.tree.heading("version", text="Version", command=lambda: self._sort_by("version"))
-        self.tree.heading("category", text="Category", command=lambda: self._sort_by("category"))
-        self.tree.heading("character", text="Character", command=lambda: self._sort_by("character"))
+        self.tree.heading("name", text="Name")
+        self.tree.heading("author", text="Author")
+        self.tree.heading("version", text="Version")
+        self.tree.heading("category", text="Category")
+        self.tree.heading("character", text="Character")
 
         self.tree.column("checked", width=36, minwidth=36, stretch=False, anchor="center")
         self.tree.column("fav", width=36, minwidth=36, stretch=False, anchor="center")
@@ -122,6 +123,7 @@ class ModListPanel(customtkinter.CTkFrame):
         self.tree.tag_configure("odd", background="#1e1e34")
         self.tree.tag_configure("checked", foreground="#6fdfca")
         self.tree.tag_configure("favorite", foreground="#ffd700")
+        self.tree.tag_configure("clash", foreground="#ff4444")
 
         # Scrollbar
         scrollbar = customtkinter.CTkScrollbar(self, command=self.tree.yview)
@@ -134,15 +136,78 @@ class ModListPanel(customtkinter.CTkFrame):
         self.tree.bind("<<TreeviewSelect>>", self._on_tree_select)
         self.tree.bind("<Button-1>", self._on_click)
         self.tree.bind("<Button-3>", self._on_right_click_event)
-        self.tree.bind("<ButtonRelease-1>", self._on_mouse_release)
+        
+        # Bindings for drag-and-drop columns
+        self.tree.bind("<ButtonPress-1>", self._on_heading_press, add="+")
+        self.tree.bind("<B1-Motion>", self._on_heading_motion, add="+")
+        self.tree.bind("<ButtonRelease-1>", self._on_heading_release, add="+")
 
-    def _on_mouse_release(self, event=None):
-        """Persist column widths after user drags column separators."""
-        try:
-            for col in self.tree["columns"]:
-                self._col_widths[col] = int(self.tree.column(col, "width"))
-        except Exception:
-            pass
+        self._drag_start_col = None
+        self._is_col_drag = False
+
+    def _on_heading_press(self, event):
+        region = self.tree.identify_region(event.x, event.y)
+        if region == "heading":
+            # identify_column returns the display column (e.g. #1, #2)
+            self._drag_start_col = self.tree.identify_column(event.x)
+            self._drag_start_x = event.x
+            self._is_col_drag = False
+        else:
+            self._drag_start_col = None
+
+    def _on_heading_motion(self, event):
+        if getattr(self, "_drag_start_col", None):
+            if not getattr(self, "_is_col_drag", False) and abs(event.x - getattr(self, "_drag_start_x", event.x)) > 5:
+                self._is_col_drag = True
+                self.tree.configure(cursor="fleur")
+                
+            if getattr(self, "_is_col_drag", False):
+                # Fluid real-time column swapping (Explorer style)
+                target_col = self.tree.identify_column(event.x)
+                if target_col and target_col != self._drag_start_col:
+                    current_display = list(self.tree["displaycolumns"])
+                    if current_display == ["#all"] or not current_display:
+                        current_display = list(self.tree["columns"])
+                    
+                    start_id = self.tree.column(self._drag_start_col, "id")
+                    target_id = self.tree.column(target_col, "id")
+                    
+                    # Prevent moving the 'checked' or 'fav' columns
+                    if start_id in ["checked", "fav"] or target_id in ["checked", "fav"]:
+                        pass
+                    elif start_id in current_display and target_id in current_display:
+                        old_idx = current_display.index(start_id)
+                        new_idx = current_display.index(target_id)
+                        
+                        current_display.remove(start_id)
+                        # The removed element shifts indices, so using the original new_idx
+                        # naturally drops it on the correct side of the target!
+                        current_display.insert(new_idx, start_id)
+                        
+                        self.tree["displaycolumns"] = current_display
+                        # Update our tracker so it waits until we hover over the *next* column
+                        self._drag_start_col = target_col
+
+    def _on_heading_release(self, event):
+        self.tree.configure(cursor="")
+        if getattr(self, "_drag_start_col", None):
+            if getattr(self, "_is_col_drag", False):
+                # Drag completed, just fire the save callback
+                if self.on_columns_changed:
+                    current_display = list(self.tree["displaycolumns"])
+                    if current_display == ["#all"] or not current_display:
+                        current_display = list(self.tree["columns"])
+                    self.on_columns_changed(current_display)
+            else:
+                # Handle Click Sorting
+                col_id = self.tree.column(self._drag_start_col, "id")
+                if col_id == "checked":
+                    self._toggle_all()
+                elif col_id in ["name", "author", "version", "category", "character"]:
+                    self._sort_by(col_id)
+                    
+        self._drag_start_col = None
+        self._is_col_drag = False
 
     def set_mods(self, mods: List[Dict], checked_names: List[str]):
         """
@@ -196,6 +261,18 @@ class ModListPanel(customtkinter.CTkFrame):
     def _refresh_tree(self):
         """Rebuild the Treeview content. This is fast because Treeview
         handles items internally in C — no Python widget overhead."""
+        
+        # Capture in-progress column widths before wiping. This completely solves 
+        # the bug where dragging a column boundary during a background refresh 
+        # caused the boundary to flash and snap back to its old position!
+        try:
+            for col in self.tree["columns"]:
+                w = int(self.tree.column(col, "width"))
+                if w > 10:
+                    self._col_widths[col] = w
+        except Exception:
+            pass
+
         # Clear
         for item in self.tree.get_children():
             self.tree.delete(item)
@@ -207,6 +284,18 @@ class ModListPanel(customtkinter.CTkFrame):
                     self.tree.column(col, width=w)
         except Exception:
             pass
+
+        # Calculate slot usage to find clashing mods (Skins, Emotes, etc.)
+        used_slots = {}
+        for mod in self._all_mods:
+            name_ = mod.get("name", "")
+            if name_ in self._checked_mods and mod.get("character"):
+                m_slots = mod.get("slots", [])
+                if not m_slots and mod.get("emote_slot"):
+                    m_slots = [mod.get("emote_slot")]
+                for slot in m_slots:
+                    slot_key = f"{mod.get('character', '')}::{slot}".lower()
+                    used_slots[slot_key] = used_slots.get(slot_key, 0) + 1
 
         # Filter
         filtered = []
@@ -229,10 +318,13 @@ class ModListPanel(customtkinter.CTkFrame):
             filtered.append(mod)
 
         # Sort — favorites first, then by sort key
-        filtered.sort(
-            key=lambda x: str(x.get(self._sort_key, "")).lower(),
-            reverse=self._sort_reverse
-        )
+        def get_sort_value(x):
+            val = x.get(self._sort_key)
+            if isinstance(val, (int, float)):
+                return float(val)
+            return str(val or "").lower()
+
+        filtered.sort(key=get_sort_value, reverse=self._sort_reverse)
         filtered.sort(key=lambda x: x.get("is_favorite", False), reverse=True)
 
         # Insert
@@ -258,6 +350,18 @@ class ModListPanel(customtkinter.CTkFrame):
                 tags.append("checked")
             if is_fav:
                 tags.append("favorite")
+            is_clash = False
+            if is_checked and mod.get("character"):
+                m_slots = mod.get("slots", [])
+                if not m_slots and mod.get("emote_slot"):
+                    m_slots = [mod.get("emote_slot")]
+                for slot in m_slots:
+                    slot_key = f"{mod.get('character', '')}::{slot}".lower()
+                    if used_slots.get(slot_key, 0) > 1:
+                        is_clash = True
+                        break
+            if is_clash:
+                tags.append("clash")
 
             base_iid = name
             try:
@@ -349,6 +453,25 @@ class ModListPanel(customtkinter.CTkFrame):
 
             # Update just this row's display
             self._update_row_display(item)
+            
+            # If this mod has slots, update other mods sharing those slots to reflect clash changes
+            if mod and mod.get("character"):
+                m_slots = mod.get("slots", [])
+                if not m_slots and mod.get("emote_slot"):
+                    m_slots = [mod.get("emote_slot")]
+                if m_slots:
+                    slot_keys = {f"{mod.get('character', '')}::{s}".lower() for s in m_slots}
+                    for child in self.tree.get_children():
+                        if child == item:
+                            continue
+                        c_mod = self._find_mod(child)
+                        if c_mod and c_mod.get("character"):
+                            c_slots = c_mod.get("slots", [])
+                            if not c_slots and c_mod.get("emote_slot"):
+                                c_slots = [c_mod.get("emote_slot")]
+                            c_keys = {f"{c_mod.get('character', '')}::{s}".lower() for s in c_slots}
+                            if slot_keys.intersection(c_keys):
+                                self._update_row_display(child)
             if self.on_toggle:
                 self.on_toggle(mod_name, is_checked)
 
@@ -387,6 +510,32 @@ class ModListPanel(customtkinter.CTkFrame):
                 tags.append("checked")
             if mod and mod.get("is_favorite", False):
                 tags.append("favorite")
+            
+            # Recalculate clashes if needed
+            is_clash = False
+            if is_checked and mod and mod.get("character"):
+                m_slots = mod.get("slots", [])
+                if not m_slots and mod.get("emote_slot"):
+                    m_slots = [mod.get("emote_slot")]
+                
+                for slot in m_slots:
+                    slot_key = f"{mod.get('character', '')}::{slot}".lower()
+                    # To be accurate on single toggle, we count current checked ones
+                    count = 0
+                    for m in self._all_mods:
+                        if m.get("name", "") in self._checked_mods and m.get("character"):
+                            o_slots = m.get("slots", [])
+                            if not o_slots and m.get("emote_slot"):
+                                o_slots = [m.get("emote_slot")]
+                            o_keys = {f"{m.get('character', '')}::{s}".lower() for s in o_slots}
+                            if slot_key in o_keys:
+                                count += 1
+                    if count > 1:
+                        is_clash = True
+                        break
+            
+            if is_clash:
+                tags.append("clash")
 
             self.tree.item(item_id, values=values, tags=tuple(tags))
         except Exception:

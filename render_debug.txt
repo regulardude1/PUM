@@ -1,0 +1,3954 @@
+=== Render Cycle ===
+cw=3688, ch=1139, row_height=965
+len(mods)=29, total_rows=6
+y_top=0.0, y_bot=1139.0
+first_row=0, last_row=2, needed={0, 1, 2}
+Successfully drew 15 new cards. Total visible rows: 3
+
+[SWITCH CHANNEL] Switched to nsfw, len(self.mods)=0
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=402, total_rows=81
+y_top=0.0, y_bot=1435.0
+first_row=0, last_row=2, needed={0, 1, 2}
+Successfully drew 15 new cards. Total visible rows: 3
+
+[SWITCH CHANNEL] Switched to sfw, len(self.mods)=402
+
+[SWITCH CHANNEL] Switched to nsfw, len(self.mods)=0
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=4, total_rows=1
+y_top=0.0, y_bot=1435.0
+first_row=0, last_row=2, needed={0}
+Successfully drew 4 new cards. Total visible rows: 1
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=4, total_rows=1
+y_top=0.0, y_bot=1435.0
+first_row=0, last_row=2, needed={0}
+Successfully drew 0 new cards. Total visible rows: 1
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=8, total_rows=2
+y_top=0.0, y_bot=1435.0
+first_row=0, last_row=2, needed={0, 1}
+Successfully drew 8 new cards. Total visible rows: 2
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=8, total_rows=2
+y_top=0.0, y_bot=1435.0
+first_row=0, last_row=2, needed={0, 1}
+Successfully drew 0 new cards. Total visible rows: 2
+
+[SWITCH CHANNEL] Switched to nsfw, len(self.mods)=0
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=171, total_rows=35
+y_top=0.0, y_bot=1435.0
+first_row=0, last_row=2, needed={0, 1, 2}
+Successfully drew 15 new cards. Total visible rows: 3
+
+[SWITCH CHANNEL] Switched to sfw, len(self.mods)=171
+
+[SWITCH CHANNEL] Switched to nsfw, len(self.mods)=0
+
+[SWITCH CHANNEL] Switched to nsfw, len(self.mods)=0
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=29, total_rows=6
+y_top=0.0, y_bot=1435.0
+first_row=0, last_row=2, needed={0, 1, 2}
+Successfully drew 15 new cards. Total visible rows: 3
+
+[SWITCH CHANNEL] Switched to sfw, len(self.mods)=29
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=0.0, y_bot=1435.0
+first_row=0, last_row=2, needed={0, 1, 2}
+Successfully drew 15 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=0.0, y_bot=1435.0
+first_row=0, last_row=2, needed={0, 1, 2}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=858.0, y_bot=2293.0
+first_row=0, last_row=3, needed={0, 1, 2, 3}
+Successfully drew 5 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=1716.0, y_bot=3151.0
+first_row=0, last_row=4, needed={0, 1, 2, 3, 4}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=2574.0, y_bot=4009.0
+first_row=1, last_row=5, needed={1, 2, 3, 4, 5}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=3434.0, y_bot=4869.0
+first_row=2, last_row=6, needed={2, 3, 4, 5, 6}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=4292.0, y_bot=5727.0
+first_row=3, last_row=6, needed={3, 4, 5, 6}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=5151.0, y_bot=6586.0
+first_row=4, last_row=7, needed={4, 5, 6, 7}
+Successfully drew 5 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=6154.0, y_bot=7589.0
+first_row=5, last_row=8, needed={8, 5, 6, 7}
+Successfully drew 5 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=7155.0, y_bot=8590.0
+first_row=6, last_row=9, needed={8, 9, 6, 7}
+Successfully drew 5 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=6291.0, y_bot=7726.0
+first_row=5, last_row=9, needed={5, 6, 7, 8, 9}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=6147.0, y_bot=7582.0
+first_row=5, last_row=8, needed={8, 5, 6, 7}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=6003.0, y_bot=7438.0
+first_row=5, last_row=8, needed={8, 5, 6, 7}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=5284.0, y_bot=6719.0
+first_row=4, last_row=7, needed={4, 5, 6, 7}
+Successfully drew 5 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=4564.0, y_bot=5999.0
+first_row=3, last_row=7, needed={3, 4, 5, 6, 7}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=3700.0, y_bot=5135.0
+first_row=2, last_row=6, needed={2, 3, 4, 5, 6}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=2980.0, y_bot=4415.0
+first_row=2, last_row=5, needed={2, 3, 4, 5}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=2260.0, y_bot=3695.0
+first_row=1, last_row=4, needed={1, 2, 3, 4}
+Successfully drew 5 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=1685.0, y_bot=3120.0
+first_row=0, last_row=4, needed={0, 1, 2, 3, 4}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=1109.0, y_bot=2544.0
+first_row=0, last_row=3, needed={0, 1, 2, 3}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=389.0, y_bot=1824.0
+first_row=0, last_row=2, needed={0, 1, 2}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=0.0, y_bot=1435.0
+first_row=0, last_row=2, needed={0, 1, 2}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=0.0, y_bot=1435.0
+first_row=0, last_row=2, needed={0, 1, 2}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=29, total_rows=6
+y_top=0.0, y_bot=1435.0
+first_row=0, last_row=2, needed={0, 1, 2}
+Successfully drew 15 new cards. Total visible rows: 3
+
+[SWITCH CHANNEL] Switched to nsfw, len(self.mods)=0
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=147, total_rows=30
+y_top=0.0, y_bot=1435.0
+first_row=0, last_row=2, needed={0, 1, 2}
+Successfully drew 15 new cards. Total visible rows: 3
+
+[SWITCH CHANNEL] Switched to sfw, len(self.mods)=147
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=147, total_rows=30
+y_top=573.0, y_bot=2008.0
+first_row=0, last_row=3, needed={0, 1, 2, 3}
+Successfully drew 5 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=147, total_rows=30
+y_top=1288.0, y_bot=2723.0
+first_row=0, last_row=3, needed={0, 1, 2, 3}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=147, total_rows=30
+y_top=2004.0, y_bot=3439.0
+first_row=1, last_row=4, needed={1, 2, 3, 4}
+Successfully drew 5 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=176, total_rows=36
+y_top=2147.0, y_bot=3582.0
+first_row=1, last_row=4, needed={1, 2, 3, 4}
+Successfully drew 20 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=176, total_rows=36
+y_top=2147.0, y_bot=3582.0
+first_row=1, last_row=4, needed={1, 2, 3, 4}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=176, total_rows=36
+y_top=2721.0, y_bot=4156.0
+first_row=1, last_row=5, needed={1, 2, 3, 4, 5}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=206, total_rows=42
+y_top=2721.0, y_bot=4156.0
+first_row=1, last_row=5, needed={1, 2, 3, 4, 5}
+Successfully drew 25 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=206, total_rows=42
+y_top=2721.0, y_bot=4156.0
+first_row=1, last_row=5, needed={1, 2, 3, 4, 5}
+Successfully drew 0 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=29, total_rows=6
+y_top=0.0, y_bot=1435.0
+first_row=0, last_row=2, needed={0, 1, 2}
+Successfully drew 15 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=29, total_rows=6
+y_top=716.0, y_bot=2151.0
+first_row=0, last_row=3, needed={0, 1, 2, 3}
+Successfully drew 5 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=29, total_rows=6
+y_top=1432.0, y_bot=2867.0
+first_row=0, last_row=3, needed={0, 1, 2, 3}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=29, total_rows=6
+y_top=2147.0, y_bot=3582.0
+first_row=1, last_row=4, needed={1, 2, 3, 4}
+Successfully drew 5 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=2147.0, y_bot=3582.0
+first_row=1, last_row=4, needed={1, 2, 3, 4}
+Successfully drew 20 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=2147.0, y_bot=3582.0
+first_row=1, last_row=4, needed={1, 2, 3, 4}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=3005.0, y_bot=4440.0
+first_row=2, last_row=5, needed={2, 3, 4, 5}
+Successfully drew 5 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=3864.0, y_bot=5299.0
+first_row=3, last_row=6, needed={3, 4, 5, 6}
+Successfully drew 5 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=3144.0, y_bot=4579.0
+first_row=2, last_row=5, needed={2, 3, 4, 5}
+Successfully drew 5 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=29, total_rows=6
+y_top=3144.0, y_bot=4579.0
+first_row=2, last_row=5, needed={2, 3, 4, 5}
+Successfully drew 19 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=29, total_rows=6
+y_top=3144.0, y_bot=4579.0
+first_row=2, last_row=5, needed={2, 3, 4, 5}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=29, total_rows=6
+y_top=2424.0, y_bot=3859.0
+first_row=1, last_row=4, needed={1, 2, 3, 4}
+Successfully drew 5 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=29, total_rows=6
+y_top=1849.0, y_bot=3284.0
+first_row=0, last_row=4, needed={0, 1, 2, 3, 4}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=29, total_rows=6
+y_top=1705.0, y_bot=3140.0
+first_row=0, last_row=4, needed={0, 1, 2, 3, 4}
+Successfully drew 0 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=29, total_rows=6
+y_top=985.0, y_bot=2420.0
+first_row=0, last_row=3, needed={0, 1, 2, 3}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=29, total_rows=6
+y_top=841.0, y_bot=2276.0
+first_row=0, last_row=3, needed={0, 1, 2, 3}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=29, total_rows=6
+y_top=697.0, y_bot=2132.0
+first_row=0, last_row=3, needed={0, 1, 2, 3}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=697.0, y_bot=2132.0
+first_row=0, last_row=3, needed={0, 1, 2, 3}
+Successfully drew 20 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=697.0, y_bot=2132.0
+first_row=0, last_row=3, needed={0, 1, 2, 3}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=1555.0, y_bot=2990.0
+first_row=0, last_row=4, needed={0, 1, 2, 3, 4}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=2413.0, y_bot=3848.0
+first_row=1, last_row=4, needed={1, 2, 3, 4}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=3271.0, y_bot=4706.0
+first_row=2, last_row=5, needed={2, 3, 4, 5}
+Successfully drew 5 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=3986.0, y_bot=5421.0
+first_row=3, last_row=6, needed={3, 4, 5, 6}
+Successfully drew 5 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=4845.0, y_bot=6280.0
+first_row=4, last_row=7, needed={4, 5, 6, 7}
+Successfully drew 5 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=5703.0, y_bot=7138.0
+first_row=4, last_row=8, needed={4, 5, 6, 7, 8}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=6418.0, y_bot=7853.0
+first_row=5, last_row=9, needed={5, 6, 7, 8, 9}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=7277.0, y_bot=8712.0
+first_row=6, last_row=10, needed={6, 7, 8, 9, 10}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=6989.0, y_bot=8424.0
+first_row=6, last_row=9, needed={8, 9, 6, 7}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=6701.0, y_bot=8136.0
+first_row=5, last_row=9, needed={5, 6, 7, 8, 9}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=5837.0, y_bot=7272.0
+first_row=5, last_row=8, needed={8, 5, 6, 7}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=5118.0, y_bot=6553.0
+first_row=4, last_row=7, needed={4, 5, 6, 7}
+Successfully drew 5 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=4255.0, y_bot=5690.0
+first_row=3, last_row=6, needed={3, 4, 5, 6}
+Successfully drew 5 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=3535.0, y_bot=4970.0
+first_row=2, last_row=6, needed={2, 3, 4, 5, 6}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=2815.0, y_bot=4250.0
+first_row=1, last_row=5, needed={1, 2, 3, 4, 5}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=88, total_rows=18
+y_top=2815.0, y_bot=4250.0
+first_row=1, last_row=5, needed={1, 2, 3, 4, 5}
+Successfully drew 25 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=88, total_rows=18
+y_top=2815.0, y_bot=4250.0
+first_row=1, last_row=5, needed={1, 2, 3, 4, 5}
+Successfully drew 0 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=29, total_rows=6
+y_top=0.0, y_bot=1435.0
+first_row=0, last_row=2, needed={0, 1, 2}
+Successfully drew 15 new cards. Total visible rows: 3
+
+[SWITCH CHANNEL] Switched to nsfw, len(self.mods)=0
+
+[SWITCH CHANNEL] Switched to sfw, len(self.mods)=0
+
+[SWITCH CHANNEL] Switched to nsfw, len(self.mods)=0
+
+[SWITCH CHANNEL] Switched to sfw, len(self.mods)=0
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=6, total_rows=2
+y_top=0.0, y_bot=1435.0
+first_row=0, last_row=2, needed={0, 1}
+Successfully drew 6 new cards. Total visible rows: 2
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=6, total_rows=2
+y_top=0.0, y_bot=1435.0
+first_row=0, last_row=2, needed={0, 1}
+Successfully drew 0 new cards. Total visible rows: 2
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=12, total_rows=3
+y_top=0.0, y_bot=1435.0
+first_row=0, last_row=2, needed={0, 1, 2}
+Error drawing 0: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BCAD0>" doesn't exist
+Error drawing 1: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BC650>" doesn't exist
+Error drawing 2: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BFCD0>" doesn't exist
+Error drawing 3: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BDB50>" doesn't exist
+Error drawing 4: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BCF50>" doesn't exist
+Error drawing 5: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BFF50>" doesn't exist
+Error drawing 6: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BCAD0>" doesn't exist
+Error drawing 7: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BC650>" doesn't exist
+Error drawing 8: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BFCD0>" doesn't exist
+Error drawing 9: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BDB50>" doesn't exist
+Error drawing 10: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BCF50>" doesn't exist
+Error drawing 11: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BFF50>" doesn't exist
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=12, total_rows=3
+y_top=0.0, y_bot=1435.0
+first_row=0, last_row=2, needed={0, 1, 2}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=20, total_rows=4
+y_top=0.0, y_bot=1435.0
+first_row=0, last_row=2, needed={0, 1, 2}
+Error drawing 0: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BCAD0>" doesn't exist
+Error drawing 1: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BC650>" doesn't exist
+Error drawing 2: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BFCD0>" doesn't exist
+Error drawing 3: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BDB50>" doesn't exist
+Error drawing 4: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BCF50>" doesn't exist
+Error drawing 5: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BFF50>" doesn't exist
+Error drawing 6: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BCAD0>" doesn't exist
+Error drawing 7: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BC650>" doesn't exist
+Error drawing 8: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BFCD0>" doesn't exist
+Error drawing 9: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BDB50>" doesn't exist
+Error drawing 10: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BCF50>" doesn't exist
+Error drawing 11: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BFF50>" doesn't exist
+Error drawing 13: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BCAD0>" doesn't exist
+Successfully drew 2 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=20, total_rows=4
+y_top=0.0, y_bot=1435.0
+first_row=0, last_row=2, needed={0, 1, 2}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=37, total_rows=8
+y_top=0.0, y_bot=1435.0
+first_row=0, last_row=2, needed={0, 1, 2}
+Error drawing 0: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BCAD0>" doesn't exist
+Error drawing 1: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BC650>" doesn't exist
+Error drawing 2: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BFCD0>" doesn't exist
+Error drawing 3: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BDB50>" doesn't exist
+Error drawing 4: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BCF50>" doesn't exist
+Error drawing 5: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BFF50>" doesn't exist
+Error drawing 6: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BCAD0>" doesn't exist
+Error drawing 7: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BC650>" doesn't exist
+Error drawing 8: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BFCD0>" doesn't exist
+Error drawing 9: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BDB50>" doesn't exist
+Error drawing 10: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BCF50>" doesn't exist
+Error drawing 11: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BFF50>" doesn't exist
+Error drawing 12: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D85528D0>" doesn't exist
+Error drawing 13: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BCAD0>" doesn't exist
+Error drawing 14: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D8551250>" doesn't exist
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=37, total_rows=8
+y_top=0.0, y_bot=1435.0
+first_row=0, last_row=2, needed={0, 1, 2}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=53, total_rows=11
+y_top=0.0, y_bot=1435.0
+first_row=0, last_row=2, needed={0, 1, 2}
+Error drawing 0: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BCAD0>" doesn't exist
+Error drawing 1: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BC650>" doesn't exist
+Error drawing 2: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BFCD0>" doesn't exist
+Error drawing 3: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BDB50>" doesn't exist
+Error drawing 4: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BCF50>" doesn't exist
+Error drawing 5: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BFF50>" doesn't exist
+Error drawing 6: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BCAD0>" doesn't exist
+Error drawing 7: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BC650>" doesn't exist
+Error drawing 8: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BFCD0>" doesn't exist
+Error drawing 9: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BDB50>" doesn't exist
+Error drawing 10: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BCF50>" doesn't exist
+Error drawing 11: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BFF50>" doesn't exist
+Error drawing 12: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D85528D0>" doesn't exist
+Error drawing 13: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BCAD0>" doesn't exist
+Error drawing 14: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D8551250>" doesn't exist
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=53, total_rows=11
+y_top=0.0, y_bot=1435.0
+first_row=0, last_row=2, needed={0, 1, 2}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=81, total_rows=17
+y_top=0.0, y_bot=1435.0
+first_row=0, last_row=2, needed={0, 1, 2}
+Error drawing 0: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BCAD0>" doesn't exist
+Error drawing 1: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BC650>" doesn't exist
+Error drawing 2: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BFCD0>" doesn't exist
+Error drawing 3: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BDB50>" doesn't exist
+Error drawing 4: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BCF50>" doesn't exist
+Error drawing 5: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BFF50>" doesn't exist
+Error drawing 6: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BCAD0>" doesn't exist
+Error drawing 7: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BC650>" doesn't exist
+Error drawing 8: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BFCD0>" doesn't exist
+Error drawing 9: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BDB50>" doesn't exist
+Error drawing 10: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BCF50>" doesn't exist
+Error drawing 11: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BFF50>" doesn't exist
+Error drawing 12: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D85528D0>" doesn't exist
+Error drawing 13: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BCAD0>" doesn't exist
+Error drawing 14: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D8551250>" doesn't exist
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=81, total_rows=17
+y_top=0.0, y_bot=1435.0
+first_row=0, last_row=2, needed={0, 1, 2}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=108, total_rows=22
+y_top=0.0, y_bot=1435.0
+first_row=0, last_row=2, needed={0, 1, 2}
+Error drawing 0: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BCAD0>" doesn't exist
+Error drawing 1: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BC650>" doesn't exist
+Error drawing 2: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BFCD0>" doesn't exist
+Error drawing 3: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BDB50>" doesn't exist
+Error drawing 4: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BCF50>" doesn't exist
+Error drawing 5: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BFF50>" doesn't exist
+Error drawing 6: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BCAD0>" doesn't exist
+Error drawing 7: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BC650>" doesn't exist
+Error drawing 8: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BFCD0>" doesn't exist
+Error drawing 9: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BDB50>" doesn't exist
+Error drawing 10: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BCF50>" doesn't exist
+Error drawing 11: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BFF50>" doesn't exist
+Error drawing 12: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D85528D0>" doesn't exist
+Error drawing 13: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BCAD0>" doesn't exist
+Error drawing 14: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D8551250>" doesn't exist
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=108, total_rows=22
+y_top=0.0, y_bot=1435.0
+first_row=0, last_row=2, needed={0, 1, 2}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=108, total_rows=22
+y_top=572.0, y_bot=2007.0
+first_row=0, last_row=3, needed={0, 1, 2, 3}
+Error drawing 15: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BC650>" doesn't exist
+Error drawing 16: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BDB50>" doesn't exist
+Error drawing 18: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BCF50>" doesn't exist
+Error drawing 19: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BFF50>" doesn't exist
+Successfully drew 1 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=108, total_rows=22
+y_top=1001.0, y_bot=2436.0
+first_row=0, last_row=3, needed={0, 1, 2, 3}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=136, total_rows=28
+y_top=1001.0, y_bot=2436.0
+first_row=0, last_row=3, needed={0, 1, 2, 3}
+Error drawing 0: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BCAD0>" doesn't exist
+Error drawing 1: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BC650>" doesn't exist
+Error drawing 2: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BFCD0>" doesn't exist
+Error drawing 3: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BDB50>" doesn't exist
+Error drawing 4: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BCF50>" doesn't exist
+Error drawing 5: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BFF50>" doesn't exist
+Error drawing 6: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BCAD0>" doesn't exist
+Error drawing 7: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BC650>" doesn't exist
+Error drawing 8: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BFCD0>" doesn't exist
+Error drawing 9: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BDB50>" doesn't exist
+Error drawing 10: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BCF50>" doesn't exist
+Error drawing 11: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BFF50>" doesn't exist
+Error drawing 12: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D85528D0>" doesn't exist
+Error drawing 13: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BCAD0>" doesn't exist
+Error drawing 14: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D8551250>" doesn't exist
+Error drawing 15: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BC650>" doesn't exist
+Error drawing 16: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BDB50>" doesn't exist
+Error drawing 17: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D43D3CD0>" doesn't exist
+Error drawing 18: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BCF50>" doesn't exist
+Error drawing 19: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D84BFF50>" doesn't exist
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=136, total_rows=28
+y_top=1001.0, y_bot=2436.0
+first_row=0, last_row=3, needed={0, 1, 2, 3}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=136, total_rows=28
+y_top=1716.0, y_bot=3151.0
+first_row=0, last_row=4, needed={0, 1, 2, 3, 4}
+Error drawing 20: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D8BFE6D0>" doesn't exist
+Error drawing 21: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D8BA3F50>" doesn't exist
+Error drawing 22: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D8BFC940>" doesn't exist
+Error drawing 23: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D82BFE70>" doesn't exist
+Error drawing 24: image "<PIL.Image.Image image mode=RGB size=680x408 at 0x211D8BD6650>" doesn't exist
+Successfully drew 0 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=136, total_rows=28
+y_top=996.0, y_bot=2431.0
+first_row=0, last_row=3, needed={0, 1, 2, 3}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=136, total_rows=28
+y_top=565.0, y_bot=2000.0
+first_row=0, last_row=3, needed={0, 1, 2, 3}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=17, total_rows=4
+y_top=0.0, y_bot=1435.0
+first_row=0, last_row=2, needed={0, 1, 2}
+Successfully drew 15 new cards. Total visible rows: 3
+
+[SWITCH CHANNEL] Switched to nsfw, len(self.mods)=0
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=3, total_rows=1
+y_top=0.0, y_bot=1435.0
+first_row=0, last_row=2, needed={0}
+Successfully drew 3 new cards. Total visible rows: 1
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=3, total_rows=1
+y_top=0.0, y_bot=1435.0
+first_row=0, last_row=2, needed={0}
+Successfully drew 0 new cards. Total visible rows: 1
+
+[SWITCH CHANNEL] Switched to nsfw, len(self.mods)=0
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=28, total_rows=6
+y_top=0.0, y_bot=1435.0
+first_row=0, last_row=2, needed={0, 1, 2}
+Successfully drew 15 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=28, total_rows=6
+y_top=0.0, y_bot=1435.0
+first_row=0, last_row=2, needed={0, 1, 2}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=28, total_rows=6
+y_top=858.0, y_bot=2293.0
+first_row=0, last_row=3, needed={0, 1, 2, 3}
+Successfully drew 5 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=28, total_rows=6
+y_top=0.0, y_bot=1435.0
+first_row=0, last_row=2, needed={0, 1, 2}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=28, total_rows=6
+y_top=0.0, y_bot=1435.0
+first_row=0, last_row=2, needed={0, 1, 2}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=28, total_rows=6
+y_top=715.0, y_bot=2150.0
+first_row=0, last_row=3, needed={0, 1, 2, 3}
+Successfully drew 5 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=28, total_rows=6
+y_top=1573.0, y_bot=3008.0
+first_row=0, last_row=4, needed={0, 1, 2, 3, 4}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=28, total_rows=6
+y_top=2002.0, y_bot=3437.0
+first_row=1, last_row=4, needed={1, 2, 3, 4}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=30, total_rows=6
+y_top=2002.0, y_bot=3437.0
+first_row=1, last_row=4, needed={1, 2, 3, 4}
+Successfully drew 20 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=30, total_rows=6
+y_top=2002.0, y_bot=3437.0
+first_row=1, last_row=4, needed={1, 2, 3, 4}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=30, total_rows=6
+y_top=2574.0, y_bot=4009.0
+first_row=1, last_row=5, needed={1, 2, 3, 4, 5}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=30, total_rows=6
+y_top=3146.0, y_bot=4581.0
+first_row=2, last_row=5, needed={2, 3, 4, 5}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=30, total_rows=6
+y_top=3575.0, y_bot=5010.0
+first_row=2, last_row=6, needed={2, 3, 4, 5}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=30, total_rows=6
+y_top=4147.0, y_bot=5582.0
+first_row=3, last_row=6, needed={3, 4, 5}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=30, total_rows=6
+y_top=4395.0, y_bot=5830.0
+first_row=3, last_row=7, needed={3, 4, 5}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=30, total_rows=6
+y_top=4395.0, y_bot=5830.0
+first_row=3, last_row=7, needed={3, 4, 5}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=30, total_rows=6
+y_top=4395.0, y_bot=5830.0
+first_row=3, last_row=7, needed={3, 4, 5}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=30, total_rows=6
+y_top=4395.0, y_bot=5830.0
+first_row=3, last_row=7, needed={3, 4, 5}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=30, total_rows=6
+y_top=4395.0, y_bot=5830.0
+first_row=3, last_row=7, needed={3, 4, 5}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=30, total_rows=6
+y_top=3820.0, y_bot=5255.0
+first_row=2, last_row=6, needed={2, 3, 4, 5}
+Successfully drew 5 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=30, total_rows=6
+y_top=3100.0, y_bot=4535.0
+first_row=2, last_row=5, needed={2, 3, 4, 5}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=30, total_rows=6
+y_top=2668.0, y_bot=4103.0
+first_row=1, last_row=5, needed={1, 2, 3, 4, 5}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=30, total_rows=6
+y_top=1948.0, y_bot=3383.0
+first_row=1, last_row=4, needed={1, 2, 3, 4}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=30, total_rows=6
+y_top=1228.0, y_bot=2663.0
+first_row=0, last_row=3, needed={0, 1, 2, 3}
+Successfully drew 5 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=30, total_rows=6
+y_top=508.0, y_bot=1943.0
+first_row=0, last_row=3, needed={0, 1, 2, 3}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=30, total_rows=6
+y_top=0.0, y_bot=1435.0
+first_row=0, last_row=2, needed={0, 1, 2}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=30, total_rows=6
+y_top=0.0, y_bot=1435.0
+first_row=0, last_row=2, needed={0, 1, 2}
+Successfully drew 0 new cards. Total visible rows: 3
+
+[SWITCH CHANNEL] Switched to nsfw, len(self.mods)=0
+
+[SWITCH CHANNEL] Switched to sfw, len(self.mods)=0
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=25, total_rows=5
+y_top=0.0, y_bot=1435.0
+first_row=0, last_row=2, needed={0, 1, 2}
+Successfully drew 15 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=25, total_rows=5
+y_top=0.0, y_bot=1435.0
+first_row=0, last_row=2, needed={0, 1, 2}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=30, total_rows=6
+y_top=0.0, y_bot=1435.0
+first_row=0, last_row=2, needed={0, 1, 2}
+Successfully drew 15 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=30, total_rows=6
+y_top=0.0, y_bot=1435.0
+first_row=0, last_row=2, needed={0, 1, 2}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=30, total_rows=6
+y_top=0.0, y_bot=1435.0
+first_row=0, last_row=2, needed={0, 1, 2}
+Successfully drew 15 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=30, total_rows=6
+y_top=0.0, y_bot=1435.0
+first_row=0, last_row=2, needed={0, 1, 2}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=30, total_rows=6
+y_top=715.0, y_bot=2150.0
+first_row=0, last_row=3, needed={0, 1, 2, 3}
+Successfully drew 5 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=30, total_rows=6
+y_top=1431.0, y_bot=2866.0
+first_row=0, last_row=3, needed={0, 1, 2, 3}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=30, total_rows=6
+y_top=2146.0, y_bot=3581.0
+first_row=1, last_row=4, needed={1, 2, 3, 4}
+Successfully drew 5 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=30, total_rows=6
+y_top=3004.0, y_bot=4439.0
+first_row=2, last_row=5, needed={2, 3, 4, 5}
+Successfully drew 5 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=30, total_rows=6
+y_top=3720.0, y_bot=5155.0
+first_row=2, last_row=6, needed={2, 3, 4, 5}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=30, total_rows=6
+y_top=4395.0, y_bot=5830.0
+first_row=3, last_row=7, needed={3, 4, 5}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=30, total_rows=6
+y_top=4395.0, y_bot=5830.0
+first_row=3, last_row=7, needed={3, 4, 5}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=30, total_rows=6
+y_top=4251.0, y_bot=5686.0
+first_row=3, last_row=6, needed={3, 4, 5}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=30, total_rows=6
+y_top=4395.0, y_bot=5830.0
+first_row=3, last_row=7, needed={3, 4, 5}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=30, total_rows=6
+y_top=4107.0, y_bot=5542.0
+first_row=3, last_row=6, needed={3, 4, 5}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=30, total_rows=6
+y_top=4395.0, y_bot=5830.0
+first_row=3, last_row=7, needed={3, 4, 5}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=30, total_rows=6
+y_top=4395.0, y_bot=5830.0
+first_row=3, last_row=7, needed={3, 4, 5}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=30, total_rows=6
+y_top=4395.0, y_bot=5830.0
+first_row=3, last_row=7, needed={3, 4, 5}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=30, total_rows=6
+y_top=4395.0, y_bot=5830.0
+first_row=3, last_row=7, needed={3, 4, 5}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=30, total_rows=6
+y_top=4395.0, y_bot=5830.0
+first_row=3, last_row=7, needed={3, 4, 5}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=30, total_rows=6
+y_top=3675.0, y_bot=5110.0
+first_row=2, last_row=6, needed={2, 3, 4, 5}
+Successfully drew 5 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=30, total_rows=6
+y_top=4395.0, y_bot=5830.0
+first_row=3, last_row=7, needed={3, 4, 5}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=30, total_rows=6
+y_top=4395.0, y_bot=5830.0
+first_row=3, last_row=7, needed={3, 4, 5}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=30, total_rows=6
+y_top=3531.0, y_bot=4966.0
+first_row=2, last_row=6, needed={2, 3, 4, 5}
+Successfully drew 5 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=30, total_rows=6
+y_top=4395.0, y_bot=5830.0
+first_row=3, last_row=7, needed={3, 4, 5}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=30, total_rows=6
+y_top=4395.0, y_bot=5830.0
+first_row=3, last_row=7, needed={3, 4, 5}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=58, total_rows=12
+y_top=4395.0, y_bot=5830.0
+first_row=3, last_row=7, needed={3, 4, 5, 6, 7}
+Successfully drew 25 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=58, total_rows=12
+y_top=4395.0, y_bot=5830.0
+first_row=3, last_row=7, needed={3, 4, 5, 6, 7}
+Successfully drew 0 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=58, total_rows=12
+y_top=5256.0, y_bot=6691.0
+first_row=4, last_row=7, needed={4, 5, 6, 7}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=58, total_rows=12
+y_top=4393.0, y_bot=5828.0
+first_row=3, last_row=7, needed={3, 4, 5, 6, 7}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=58, total_rows=12
+y_top=3674.0, y_bot=5109.0
+first_row=2, last_row=6, needed={2, 3, 4, 5, 6}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=58, total_rows=12
+y_top=4532.0, y_bot=5967.0
+first_row=3, last_row=7, needed={3, 4, 5, 6, 7}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=58, total_rows=12
+y_top=5391.0, y_bot=6826.0
+first_row=4, last_row=8, needed={4, 5, 6, 7, 8}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=58, total_rows=12
+y_top=6249.0, y_bot=7684.0
+first_row=5, last_row=8, needed={8, 5, 6, 7}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=58, total_rows=12
+y_top=6964.0, y_bot=8399.0
+first_row=6, last_row=9, needed={8, 9, 6, 7}
+Successfully drew 5 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=58, total_rows=12
+y_top=7822.0, y_bot=9257.0
+first_row=7, last_row=10, needed={8, 9, 10, 7}
+Successfully drew 5 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=58, total_rows=12
+y_top=8680.0, y_bot=10115.0
+first_row=7, last_row=11, needed={7, 8, 9, 10, 11}
+Successfully drew 3 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=58, total_rows=12
+y_top=9396.0, y_bot=10831.0
+first_row=8, last_row=12, needed={8, 9, 10, 11}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=58, total_rows=12
+y_top=10111.0, y_bot=11546.0
+first_row=9, last_row=12, needed={9, 10, 11}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=58, total_rows=12
+y_top=10185.0, y_bot=11620.0
+first_row=9, last_row=13, needed={9, 10, 11}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=58, total_rows=12
+y_top=10185.0, y_bot=11620.0
+first_row=9, last_row=13, needed={9, 10, 11}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=58, total_rows=12
+y_top=9754.0, y_bot=11189.0
+first_row=9, last_row=12, needed={9, 10, 11}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=58, total_rows=12
+y_top=10185.0, y_bot=11620.0
+first_row=9, last_row=13, needed={9, 10, 11}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=58, total_rows=12
+y_top=10185.0, y_bot=11620.0
+first_row=9, last_row=13, needed={9, 10, 11}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=58, total_rows=12
+y_top=10185.0, y_bot=11620.0
+first_row=9, last_row=13, needed={9, 10, 11}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=87, total_rows=18
+y_top=10185.0, y_bot=11620.0
+first_row=9, last_row=13, needed={9, 10, 11, 12, 13}
+Successfully drew 25 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=87, total_rows=18
+y_top=10185.0, y_bot=11620.0
+first_row=9, last_row=13, needed={9, 10, 11, 12, 13}
+Successfully drew 0 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=87, total_rows=18
+y_top=10327.0, y_bot=11762.0
+first_row=9, last_row=13, needed={9, 10, 11, 12, 13}
+Successfully drew 0 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=116, total_rows=24
+y_top=10327.0, y_bot=11762.0
+first_row=9, last_row=13, needed={9, 10, 11, 12, 13}
+Successfully drew 25 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=116, total_rows=24
+y_top=10327.0, y_bot=11762.0
+first_row=9, last_row=13, needed={9, 10, 11, 12, 13}
+Successfully drew 0 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=116, total_rows=24
+y_top=11044.0, y_bot=12479.0
+first_row=10, last_row=13, needed={10, 11, 12, 13}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=116, total_rows=24
+y_top=11330.0, y_bot=12765.0
+first_row=10, last_row=14, needed={10, 11, 12, 13, 14}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=116, total_rows=24
+y_top=10898.0, y_bot=12333.0
+first_row=10, last_row=13, needed={10, 11, 12, 13}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=116, total_rows=24
+y_top=10322.0, y_bot=11757.0
+first_row=9, last_row=13, needed={9, 10, 11, 12, 13}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=116, total_rows=24
+y_top=10178.0, y_bot=11613.0
+first_row=9, last_row=13, needed={9, 10, 11, 12, 13}
+Successfully drew 0 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=116, total_rows=24
+y_top=10750.0, y_bot=12185.0
+first_row=10, last_row=13, needed={10, 11, 12, 13}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=116, total_rows=24
+y_top=11322.0, y_bot=12757.0
+first_row=10, last_row=14, needed={10, 11, 12, 13, 14}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=116, total_rows=24
+y_top=11894.0, y_bot=13329.0
+first_row=11, last_row=14, needed={11, 12, 13, 14}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=116, total_rows=24
+y_top=12466.0, y_bot=13901.0
+first_row=11, last_row=15, needed={11, 12, 13, 14, 15}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=116, total_rows=24
+y_top=12895.0, y_bot=14330.0
+first_row=12, last_row=15, needed={12, 13, 14, 15}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=116, total_rows=24
+y_top=13467.0, y_bot=14902.0
+first_row=12, last_row=16, needed={12, 13, 14, 15, 16}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=116, total_rows=24
+y_top=13896.0, y_bot=15331.0
+first_row=13, last_row=16, needed={16, 13, 14, 15}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=116, total_rows=24
+y_top=14468.0, y_bot=15903.0
+first_row=13, last_row=17, needed={13, 14, 15, 16, 17}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=116, total_rows=24
+y_top=15040.0, y_bot=16475.0
+first_row=14, last_row=18, needed={14, 15, 16, 17, 18}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=116, total_rows=24
+y_top=15469.0, y_bot=16904.0
+first_row=15, last_row=18, needed={16, 17, 18, 15}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=116, total_rows=24
+y_top=15612.0, y_bot=17047.0
+first_row=15, last_row=18, needed={16, 17, 18, 15}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=116, total_rows=24
+y_top=15898.0, y_bot=17333.0
+first_row=15, last_row=18, needed={16, 17, 18, 15}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=116, total_rows=24
+y_top=16041.0, y_bot=17476.0
+first_row=15, last_row=19, needed={15, 16, 17, 18, 19}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=116, total_rows=24
+y_top=16327.0, y_bot=17762.0
+first_row=15, last_row=19, needed={15, 16, 17, 18, 19}
+Successfully drew 0 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=116, total_rows=24
+y_top=16470.0, y_bot=17905.0
+first_row=16, last_row=19, needed={16, 17, 18, 19}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=116, total_rows=24
+y_top=17042.0, y_bot=18477.0
+first_row=16, last_row=20, needed={16, 17, 18, 19, 20}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=116, total_rows=24
+y_top=17757.0, y_bot=19192.0
+first_row=17, last_row=20, needed={17, 18, 19, 20}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=28, total_rows=6
+y_top=0.0, y_bot=1435.0
+first_row=0, last_row=2, needed={0, 1, 2}
+Successfully drew 15 new cards. Total visible rows: 3
+
+[SWITCH CHANNEL] Switched to nsfw, len(self.mods)=28
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=28, total_rows=6
+y_top=715.0, y_bot=2150.0
+first_row=0, last_row=3, needed={0, 1, 2, 3}
+Successfully drew 5 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=28, total_rows=6
+y_top=1574.0, y_bot=3009.0
+first_row=0, last_row=4, needed={0, 1, 2, 3, 4}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=56, total_rows=12
+y_top=1574.0, y_bot=3009.0
+first_row=0, last_row=4, needed={0, 1, 2, 3, 4}
+Successfully drew 25 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=56, total_rows=12
+y_top=1574.0, y_bot=3009.0
+first_row=0, last_row=4, needed={0, 1, 2, 3, 4}
+Successfully drew 0 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=56, total_rows=12
+y_top=2432.0, y_bot=3867.0
+first_row=1, last_row=5, needed={1, 2, 3, 4, 5}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=56, total_rows=12
+y_top=3290.0, y_bot=4725.0
+first_row=2, last_row=5, needed={2, 3, 4, 5}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=56, total_rows=12
+y_top=3862.0, y_bot=5297.0
+first_row=3, last_row=6, needed={3, 4, 5, 6}
+Successfully drew 5 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=56, total_rows=12
+y_top=4577.0, y_bot=6012.0
+first_row=3, last_row=7, needed={3, 4, 5, 6, 7}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=56, total_rows=12
+y_top=5293.0, y_bot=6728.0
+first_row=4, last_row=7, needed={4, 5, 6, 7}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=56, total_rows=12
+y_top=6008.0, y_bot=7443.0
+first_row=5, last_row=8, needed={8, 5, 6, 7}
+Successfully drew 5 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=56, total_rows=12
+y_top=6724.0, y_bot=8159.0
+first_row=5, last_row=9, needed={5, 6, 7, 8, 9}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=56, total_rows=12
+y_top=7439.0, y_bot=8874.0
+first_row=6, last_row=10, needed={6, 7, 8, 9, 10}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=56, total_rows=12
+y_top=8154.0, y_bot=9589.0
+first_row=7, last_row=10, needed={8, 9, 10, 7}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=56, total_rows=12
+y_top=8869.0, y_bot=10304.0
+first_row=8, last_row=11, needed={8, 9, 10, 11}
+Successfully drew 1 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=56, total_rows=12
+y_top=9585.0, y_bot=11020.0
+first_row=8, last_row=12, needed={8, 9, 10, 11}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=57, total_rows=12
+y_top=10157.0, y_bot=11592.0
+first_row=9, last_row=13, needed={9, 10, 11}
+Successfully drew 12 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=57, total_rows=12
+y_top=10157.0, y_bot=11592.0
+first_row=9, last_row=13, needed={9, 10, 11}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=57, total_rows=12
+y_top=10185.0, y_bot=11620.0
+first_row=9, last_row=13, needed={9, 10, 11}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=57, total_rows=12
+y_top=10185.0, y_bot=11620.0
+first_row=9, last_row=13, needed={9, 10, 11}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=57, total_rows=12
+y_top=10185.0, y_bot=11620.0
+first_row=9, last_row=13, needed={9, 10, 11}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=57, total_rows=12
+y_top=9465.0, y_bot=10900.0
+first_row=8, last_row=12, needed={8, 9, 10, 11}
+Successfully drew 5 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=57, total_rows=12
+y_top=10185.0, y_bot=11620.0
+first_row=9, last_row=13, needed={9, 10, 11}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=57, total_rows=12
+y_top=10185.0, y_bot=11620.0
+first_row=9, last_row=13, needed={9, 10, 11}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=57, total_rows=12
+y_top=9322.0, y_bot=10757.0
+first_row=8, last_row=12, needed={8, 9, 10, 11}
+Successfully drew 5 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=57, total_rows=12
+y_top=8602.0, y_bot=10037.0
+first_row=7, last_row=11, needed={7, 8, 9, 10, 11}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=57, total_rows=12
+y_top=7882.0, y_bot=9317.0
+first_row=7, last_row=10, needed={8, 9, 10, 7}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=57, total_rows=12
+y_top=7019.0, y_bot=8454.0
+first_row=6, last_row=9, needed={8, 9, 6, 7}
+Successfully drew 5 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=57, total_rows=12
+y_top=6156.0, y_bot=7591.0
+first_row=5, last_row=8, needed={8, 5, 6, 7}
+Successfully drew 5 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=57, total_rows=12
+y_top=5292.0, y_bot=6727.0
+first_row=4, last_row=7, needed={4, 5, 6, 7}
+Successfully drew 5 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=57, total_rows=12
+y_top=4429.0, y_bot=5864.0
+first_row=3, last_row=7, needed={3, 4, 5, 6, 7}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=57, total_rows=12
+y_top=3566.0, y_bot=5001.0
+first_row=2, last_row=6, needed={2, 3, 4, 5, 6}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=57, total_rows=12
+y_top=2846.0, y_bot=4281.0
+first_row=1, last_row=5, needed={1, 2, 3, 4, 5}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=57, total_rows=12
+y_top=1982.0, y_bot=3417.0
+first_row=1, last_row=4, needed={1, 2, 3, 4}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=57, total_rows=12
+y_top=1118.0, y_bot=2553.0
+first_row=0, last_row=3, needed={0, 1, 2, 3}
+Successfully drew 5 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=57, total_rows=12
+y_top=254.0, y_bot=1689.0
+first_row=0, last_row=2, needed={0, 1, 2}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=57, total_rows=12
+y_top=0.0, y_bot=1435.0
+first_row=0, last_row=2, needed={0, 1, 2}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=57, total_rows=12
+y_top=0.0, y_bot=1435.0
+first_row=0, last_row=2, needed={0, 1, 2}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=57, total_rows=12
+y_top=858.0, y_bot=2293.0
+first_row=0, last_row=3, needed={0, 1, 2, 3}
+Successfully drew 5 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=57, total_rows=12
+y_top=1861.0, y_bot=3296.0
+first_row=0, last_row=4, needed={0, 1, 2, 3, 4}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=57, total_rows=12
+y_top=2719.0, y_bot=4154.0
+first_row=1, last_row=5, needed={1, 2, 3, 4, 5}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=57, total_rows=12
+y_top=3435.0, y_bot=4870.0
+first_row=2, last_row=6, needed={2, 3, 4, 5, 6}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=57, total_rows=12
+y_top=4150.0, y_bot=5585.0
+first_row=3, last_row=6, needed={3, 4, 5, 6}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=57, total_rows=12
+y_top=4866.0, y_bot=6301.0
+first_row=4, last_row=7, needed={4, 5, 6, 7}
+Successfully drew 5 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=57, total_rows=12
+y_top=5438.0, y_bot=6873.0
+first_row=4, last_row=8, needed={4, 5, 6, 7, 8}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=57, total_rows=12
+y_top=607.0, y_bot=2042.0
+first_row=0, last_row=3, needed={0, 1, 2, 3}
+Successfully drew 20 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=57, total_rows=12
+y_top=0.0, y_bot=1435.0
+first_row=0, last_row=2, needed={0, 1, 2}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=57, total_rows=12
+y_top=0.0, y_bot=1435.0
+first_row=0, last_row=2, needed={0, 1, 2}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=57, total_rows=12
+y_top=0.0, y_bot=1435.0
+first_row=0, last_row=2, needed={0, 1, 2}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=57, total_rows=12
+y_top=858.0, y_bot=2293.0
+first_row=0, last_row=3, needed={0, 1, 2, 3}
+Successfully drew 5 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=57, total_rows=12
+y_top=1718.0, y_bot=3153.0
+first_row=0, last_row=4, needed={0, 1, 2, 3, 4}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=57, total_rows=12
+y_top=2433.0, y_bot=3868.0
+first_row=1, last_row=5, needed={1, 2, 3, 4, 5}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=57, total_rows=12
+y_top=3150.0, y_bot=4585.0
+first_row=2, last_row=5, needed={2, 3, 4, 5}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=57, total_rows=12
+y_top=3723.0, y_bot=5158.0
+first_row=2, last_row=6, needed={2, 3, 4, 5, 6}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=57, total_rows=12
+y_top=4438.0, y_bot=5873.0
+first_row=3, last_row=7, needed={3, 4, 5, 6, 7}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=57, total_rows=12
+y_top=5010.0, y_bot=6445.0
+first_row=4, last_row=7, needed={4, 5, 6, 7}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=57, total_rows=12
+y_top=5725.0, y_bot=7160.0
+first_row=4, last_row=8, needed={4, 5, 6, 7, 8}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=57, total_rows=12
+y_top=6011.0, y_bot=7446.0
+first_row=5, last_row=8, needed={8, 5, 6, 7}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=57, total_rows=12
+y_top=5435.0, y_bot=6870.0
+first_row=4, last_row=8, needed={4, 5, 6, 7, 8}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=57, total_rows=12
+y_top=4715.0, y_bot=6150.0
+first_row=3, last_row=7, needed={3, 4, 5, 6, 7}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=57, total_rows=12
+y_top=3851.0, y_bot=5286.0
+first_row=2, last_row=6, needed={2, 3, 4, 5, 6}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=57, total_rows=12
+y_top=3131.0, y_bot=4566.0
+first_row=2, last_row=5, needed={2, 3, 4, 5}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=57, total_rows=12
+y_top=2411.0, y_bot=3846.0
+first_row=1, last_row=4, needed={1, 2, 3, 4}
+Successfully drew 5 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=57, total_rows=12
+y_top=1547.0, y_bot=2982.0
+first_row=0, last_row=4, needed={0, 1, 2, 3, 4}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=57, total_rows=12
+y_top=683.0, y_bot=2118.0
+first_row=0, last_row=3, needed={0, 1, 2, 3}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=57, total_rows=12
+y_top=0.0, y_bot=1435.0
+first_row=0, last_row=2, needed={0, 1, 2}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=57, total_rows=12
+y_top=0.0, y_bot=1435.0
+first_row=0, last_row=2, needed={0, 1, 2}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=57, total_rows=12
+y_top=1003.0, y_bot=2438.0
+first_row=0, last_row=3, needed={0, 1, 2, 3}
+Successfully drew 5 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=57, total_rows=12
+y_top=2006.0, y_bot=3441.0
+first_row=1, last_row=4, needed={1, 2, 3, 4}
+Successfully drew 5 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=57, total_rows=12
+y_top=3153.0, y_bot=4588.0
+first_row=2, last_row=5, needed={2, 3, 4, 5}
+Successfully drew 5 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=57, total_rows=12
+y_top=4300.0, y_bot=5735.0
+first_row=3, last_row=6, needed={3, 4, 5, 6}
+Successfully drew 5 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=57, total_rows=12
+y_top=5304.0, y_bot=6739.0
+first_row=4, last_row=7, needed={4, 5, 6, 7}
+Successfully drew 5 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=57, total_rows=12
+y_top=6307.0, y_bot=7742.0
+first_row=5, last_row=9, needed={5, 6, 7, 8, 9}
+Successfully drew 10 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=57, total_rows=12
+y_top=7309.0, y_bot=8744.0
+first_row=6, last_row=10, needed={6, 7, 8, 9, 10}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=57, total_rows=12
+y_top=8455.0, y_bot=9890.0
+first_row=7, last_row=11, needed={7, 8, 9, 10, 11}
+Successfully drew 2 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=57, total_rows=12
+y_top=9457.0, y_bot=10892.0
+first_row=8, last_row=12, needed={8, 9, 10, 11}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=57, total_rows=12
+y_top=10185.0, y_bot=11620.0
+first_row=9, last_row=13, needed={9, 10, 11}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=57, total_rows=12
+y_top=10185.0, y_bot=11620.0
+first_row=9, last_row=13, needed={9, 10, 11}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=57, total_rows=12
+y_top=10185.0, y_bot=11620.0
+first_row=9, last_row=13, needed={9, 10, 11}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=3, total_rows=1
+y_top=0.0, y_bot=1435.0
+first_row=0, last_row=2, needed={0}
+Successfully drew 3 new cards. Total visible rows: 1
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=3, total_rows=1
+y_top=0.0, y_bot=1435.0
+first_row=0, last_row=2, needed={0}
+Successfully drew 0 new cards. Total visible rows: 1
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=6, total_rows=2
+y_top=0.0, y_bot=1435.0
+first_row=0, last_row=2, needed={0, 1}
+Successfully drew 6 new cards. Total visible rows: 2
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=6, total_rows=2
+y_top=0.0, y_bot=1435.0
+first_row=0, last_row=2, needed={0, 1}
+Successfully drew 0 new cards. Total visible rows: 2
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=6, total_rows=2
+y_top=0.0, y_bot=1435.0
+first_row=0, last_row=2, needed={0, 1}
+Successfully drew 0 new cards. Total visible rows: 2
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=6, total_rows=2
+y_top=0.0, y_bot=1435.0
+first_row=0, last_row=2, needed={0, 1}
+Successfully drew 0 new cards. Total visible rows: 2
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=6, total_rows=2
+y_top=572.0, y_bot=2007.0
+first_row=0, last_row=3, needed={0, 1}
+Successfully drew 0 new cards. Total visible rows: 2
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=6, total_rows=2
+y_top=575.0, y_bot=2010.0
+first_row=0, last_row=3, needed={0, 1}
+Successfully drew 0 new cards. Total visible rows: 2
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=6, total_rows=2
+y_top=575.0, y_bot=2010.0
+first_row=0, last_row=3, needed={0, 1}
+Successfully drew 0 new cards. Total visible rows: 2
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=6, total_rows=2
+y_top=575.0, y_bot=2010.0
+first_row=0, last_row=3, needed={0, 1}
+Successfully drew 0 new cards. Total visible rows: 2
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=6, total_rows=2
+y_top=575.0, y_bot=2010.0
+first_row=0, last_row=3, needed={0, 1}
+Successfully drew 0 new cards. Total visible rows: 2
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=36, total_rows=8
+y_top=575.0, y_bot=2010.0
+first_row=0, last_row=3, needed={0, 1, 2, 3}
+Successfully drew 20 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=36, total_rows=8
+y_top=575.0, y_bot=2010.0
+first_row=0, last_row=3, needed={0, 1, 2, 3}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=36, total_rows=8
+y_top=1290.0, y_bot=2725.0
+first_row=0, last_row=3, needed={0, 1, 2, 3}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=36, total_rows=8
+y_top=2005.0, y_bot=3440.0
+first_row=1, last_row=4, needed={1, 2, 3, 4}
+Successfully drew 5 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=64, total_rows=13
+y_top=2005.0, y_bot=3440.0
+first_row=1, last_row=4, needed={1, 2, 3, 4}
+Successfully drew 20 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=64, total_rows=13
+y_top=2005.0, y_bot=3440.0
+first_row=1, last_row=4, needed={1, 2, 3, 4}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=64, total_rows=13
+y_top=2579.0, y_bot=4014.0
+first_row=1, last_row=5, needed={1, 2, 3, 4, 5}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=64, total_rows=13
+y_top=2865.0, y_bot=4300.0
+first_row=1, last_row=5, needed={1, 2, 3, 4, 5}
+Successfully drew 0 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=64, total_rows=13
+y_top=3580.0, y_bot=5015.0
+first_row=2, last_row=6, needed={2, 3, 4, 5, 6}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=64, total_rows=13
+y_top=4296.0, y_bot=5731.0
+first_row=3, last_row=6, needed={3, 4, 5, 6}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=64, total_rows=13
+y_top=4869.0, y_bot=6304.0
+first_row=4, last_row=7, needed={4, 5, 6, 7}
+Successfully drew 5 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=64, total_rows=13
+y_top=5441.0, y_bot=6876.0
+first_row=4, last_row=8, needed={4, 5, 6, 7, 8}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=64, total_rows=13
+y_top=6014.0, y_bot=7449.0
+first_row=5, last_row=8, needed={8, 5, 6, 7}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=64, total_rows=13
+y_top=6586.0, y_bot=8021.0
+first_row=5, last_row=9, needed={5, 6, 7, 8, 9}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=64, total_rows=13
+y_top=7158.0, y_bot=8593.0
+first_row=6, last_row=9, needed={8, 9, 6, 7}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=64, total_rows=13
+y_top=7873.0, y_bot=9308.0
+first_row=7, last_row=10, needed={8, 9, 10, 7}
+Successfully drew 5 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=64, total_rows=13
+y_top=8588.0, y_bot=10023.0
+first_row=7, last_row=11, needed={7, 8, 9, 10, 11}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=64, total_rows=13
+y_top=7868.0, y_bot=9303.0
+first_row=7, last_row=10, needed={8, 9, 10, 7}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=64, total_rows=13
+y_top=8727.0, y_bot=10162.0
+first_row=8, last_row=11, needed={8, 9, 10, 11}
+Successfully drew 5 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=64, total_rows=13
+y_top=9443.0, y_bot=10878.0
+first_row=8, last_row=12, needed={8, 9, 10, 11, 12}
+Successfully drew 4 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=64, total_rows=13
+y_top=10158.0, y_bot=11593.0
+first_row=9, last_row=13, needed={9, 10, 11, 12}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=64, total_rows=13
+y_top=11016.0, y_bot=12451.0
+first_row=10, last_row=13, needed={10, 11, 12}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=64, total_rows=13
+y_top=11190.0, y_bot=12625.0
+first_row=10, last_row=14, needed={10, 11, 12}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=64, total_rows=13
+y_top=11190.0, y_bot=12625.0
+first_row=10, last_row=14, needed={10, 11, 12}
+Successfully drew 0 new cards. Total visible rows: 3
+
+[SWITCH CHANNEL] Switched to nsfw, len(self.mods)=0
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=1, total_rows=1
+y_top=-390.0, y_bot=1045.0
+first_row=0, last_row=2, needed={0}
+Successfully drew 1 new cards. Total visible rows: 1
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=1, total_rows=1
+y_top=-390.0, y_bot=1045.0
+first_row=0, last_row=2, needed={0}
+Successfully drew 0 new cards. Total visible rows: 1
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=1, total_rows=1
+y_top=-390.0, y_bot=1045.0
+first_row=0, last_row=2, needed={0}
+Successfully drew 0 new cards. Total visible rows: 1
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=1, total_rows=1
+y_top=0.0, y_bot=1435.0
+first_row=0, last_row=2, needed={0}
+Successfully drew 0 new cards. Total visible rows: 1
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=1, total_rows=1
+y_top=-143.0, y_bot=1292.0
+first_row=0, last_row=2, needed={0}
+Successfully drew 0 new cards. Total visible rows: 1
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=1, total_rows=1
+y_top=-390.0, y_bot=1045.0
+first_row=0, last_row=2, needed={0}
+Successfully drew 0 new cards. Total visible rows: 1
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=1, total_rows=1
+y_top=-246.0, y_bot=1189.0
+first_row=0, last_row=2, needed={0}
+Successfully drew 0 new cards. Total visible rows: 1
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=1, total_rows=1
+y_top=-102.0, y_bot=1333.0
+first_row=0, last_row=2, needed={0}
+Successfully drew 0 new cards. Total visible rows: 1
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=1, total_rows=1
+y_top=0.0, y_bot=1435.0
+first_row=0, last_row=2, needed={0}
+Successfully drew 0 new cards. Total visible rows: 1
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=1, total_rows=1
+y_top=-390.0, y_bot=1045.0
+first_row=0, last_row=2, needed={0}
+Successfully drew 0 new cards. Total visible rows: 1
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=1, total_rows=1
+y_top=-390.0, y_bot=1045.0
+first_row=0, last_row=2, needed={0}
+Successfully drew 0 new cards. Total visible rows: 1
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=1, total_rows=1
+y_top=-390.0, y_bot=1045.0
+first_row=0, last_row=2, needed={0}
+Successfully drew 0 new cards. Total visible rows: 1
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=1, total_rows=1
+y_top=0.0, y_bot=1435.0
+first_row=0, last_row=2, needed={0}
+Successfully drew 0 new cards. Total visible rows: 1
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=1, total_rows=1
+y_top=0.0, y_bot=1435.0
+first_row=0, last_row=2, needed={0}
+Successfully drew 0 new cards. Total visible rows: 1
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=29, total_rows=6
+y_top=0.0, y_bot=1435.0
+first_row=0, last_row=2, needed={0, 1, 2}
+Successfully drew 15 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=29, total_rows=6
+y_top=0.0, y_bot=1435.0
+first_row=0, last_row=2, needed={0, 1, 2}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=29, total_rows=6
+y_top=0.0, y_bot=1435.0
+first_row=0, last_row=2, needed={0, 1, 2}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=29, total_rows=6
+y_top=573.0, y_bot=2008.0
+first_row=0, last_row=3, needed={0, 1, 2, 3}
+Successfully drew 5 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=29, total_rows=6
+y_top=0.0, y_bot=1435.0
+first_row=0, last_row=2, needed={0, 1, 2}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=29, total_rows=6
+y_top=0.0, y_bot=1435.0
+first_row=0, last_row=2, needed={0, 1, 2}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=29, total_rows=6
+y_top=858.0, y_bot=2293.0
+first_row=0, last_row=3, needed={0, 1, 2, 3}
+Successfully drew 5 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=29, total_rows=6
+y_top=1573.0, y_bot=3008.0
+first_row=0, last_row=4, needed={0, 1, 2, 3, 4}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=29, total_rows=6
+y_top=2288.0, y_bot=3723.0
+first_row=1, last_row=4, needed={1, 2, 3, 4}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=29, total_rows=6
+y_top=3003.0, y_bot=4438.0
+first_row=2, last_row=5, needed={2, 3, 4, 5}
+Successfully drew 4 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=29, total_rows=6
+y_top=3861.0, y_bot=5296.0
+first_row=3, last_row=6, needed={3, 4, 5}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=29, total_rows=6
+y_top=4435.0, y_bot=5870.0
+first_row=3, last_row=7, needed={3, 4, 5}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=29, total_rows=6
+y_top=4435.0, y_bot=5870.0
+first_row=3, last_row=7, needed={3, 4, 5}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=29, total_rows=6
+y_top=4435.0, y_bot=5870.0
+first_row=3, last_row=7, needed={3, 4, 5}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=29, total_rows=6
+y_top=4435.0, y_bot=5870.0
+first_row=3, last_row=7, needed={3, 4, 5}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=29, total_rows=6
+y_top=4435.0, y_bot=5870.0
+first_row=3, last_row=7, needed={3, 4, 5}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=29, total_rows=6
+y_top=4003.0, y_bot=5438.0
+first_row=3, last_row=6, needed={3, 4, 5}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=29, total_rows=6
+y_top=4435.0, y_bot=5870.0
+first_row=3, last_row=7, needed={3, 4, 5}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=29, total_rows=6
+y_top=4435.0, y_bot=5870.0
+first_row=3, last_row=7, needed={3, 4, 5}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=29, total_rows=6
+y_top=4147.0, y_bot=5582.0
+first_row=3, last_row=6, needed={3, 4, 5}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=29, total_rows=6
+y_top=4435.0, y_bot=5870.0
+first_row=3, last_row=7, needed={3, 4, 5}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=29, total_rows=6
+y_top=4435.0, y_bot=5870.0
+first_row=3, last_row=7, needed={3, 4, 5}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=29, total_rows=6
+y_top=3859.0, y_bot=5294.0
+first_row=2, last_row=6, needed={2, 3, 4, 5}
+Successfully drew 5 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=29, total_rows=6
+y_top=4435.0, y_bot=5870.0
+first_row=3, last_row=7, needed={3, 4, 5}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=29, total_rows=6
+y_top=4435.0, y_bot=5870.0
+first_row=3, last_row=7, needed={3, 4, 5}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=29, total_rows=6
+y_top=4435.0, y_bot=5870.0
+first_row=3, last_row=7, needed={3, 4, 5}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=29, total_rows=6
+y_top=4435.0, y_bot=5870.0
+first_row=3, last_row=7, needed={3, 4, 5}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=29, total_rows=6
+y_top=4435.0, y_bot=5870.0
+first_row=3, last_row=7, needed={3, 4, 5}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=29, total_rows=6
+y_top=4435.0, y_bot=5870.0
+first_row=3, last_row=7, needed={3, 4, 5}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=29, total_rows=6
+y_top=4435.0, y_bot=5870.0
+first_row=3, last_row=7, needed={3, 4, 5}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=29, total_rows=6
+y_top=4435.0, y_bot=5870.0
+first_row=3, last_row=7, needed={3, 4, 5}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=29, total_rows=6
+y_top=3715.0, y_bot=5150.0
+first_row=2, last_row=6, needed={2, 3, 4, 5}
+Successfully drew 5 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=29, total_rows=6
+y_top=2995.0, y_bot=4430.0
+first_row=2, last_row=5, needed={2, 3, 4, 5}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=29, total_rows=6
+y_top=2275.0, y_bot=3710.0
+first_row=1, last_row=4, needed={1, 2, 3, 4}
+Successfully drew 5 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=29, total_rows=6
+y_top=1555.0, y_bot=2990.0
+first_row=0, last_row=4, needed={0, 1, 2, 3, 4}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=29, total_rows=6
+y_top=835.0, y_bot=2270.0
+first_row=0, last_row=3, needed={0, 1, 2, 3}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=29, total_rows=6
+y_top=115.0, y_bot=1550.0
+first_row=0, last_row=2, needed={0, 1, 2}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=29, total_rows=6
+y_top=0.0, y_bot=1435.0
+first_row=0, last_row=2, needed={0, 1, 2}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=29, total_rows=6
+y_top=0.0, y_bot=1435.0
+first_row=0, last_row=2, needed={0, 1, 2}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=29, total_rows=6
+y_top=572.0, y_bot=2007.0
+first_row=0, last_row=3, needed={0, 1, 2, 3}
+Successfully drew 5 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=29, total_rows=6
+y_top=1287.0, y_bot=2722.0
+first_row=0, last_row=3, needed={0, 1, 2, 3}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=29, total_rows=6
+y_top=2002.0, y_bot=3437.0
+first_row=1, last_row=4, needed={1, 2, 3, 4}
+Successfully drew 5 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=29, total_rows=6
+y_top=2717.0, y_bot=4152.0
+first_row=1, last_row=5, needed={1, 2, 3, 4, 5}
+Successfully drew 4 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=29, total_rows=6
+y_top=3576.0, y_bot=5011.0
+first_row=2, last_row=6, needed={2, 3, 4, 5}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=29, total_rows=6
+y_top=4292.0, y_bot=5727.0
+first_row=3, last_row=6, needed={3, 4, 5}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=29, total_rows=6
+y_top=4435.0, y_bot=5870.0
+first_row=3, last_row=7, needed={3, 4, 5}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=29, total_rows=6
+y_top=4435.0, y_bot=5870.0
+first_row=3, last_row=7, needed={3, 4, 5}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=29, total_rows=6
+y_top=4435.0, y_bot=5870.0
+first_row=3, last_row=7, needed={3, 4, 5}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=29, total_rows=6
+y_top=4291.0, y_bot=5726.0
+first_row=3, last_row=6, needed={3, 4, 5}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=29, total_rows=6
+y_top=3715.0, y_bot=5150.0
+first_row=2, last_row=6, needed={2, 3, 4, 5}
+Successfully drew 5 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=29, total_rows=6
+y_top=2995.0, y_bot=4430.0
+first_row=2, last_row=5, needed={2, 3, 4, 5}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=29, total_rows=6
+y_top=2275.0, y_bot=3710.0
+first_row=1, last_row=4, needed={1, 2, 3, 4}
+Successfully drew 5 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=29, total_rows=6
+y_top=1555.0, y_bot=2990.0
+first_row=0, last_row=4, needed={0, 1, 2, 3, 4}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=29, total_rows=6
+y_top=691.0, y_bot=2126.0
+first_row=0, last_row=3, needed={0, 1, 2, 3}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=29, total_rows=6
+y_top=0.0, y_bot=1435.0
+first_row=0, last_row=2, needed={0, 1, 2}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=29, total_rows=6
+y_top=0.0, y_bot=1435.0
+first_row=0, last_row=2, needed={0, 1, 2}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=29, total_rows=6
+y_top=0.0, y_bot=1435.0
+first_row=0, last_row=2, needed={0, 1, 2}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=29, total_rows=6
+y_top=858.0, y_bot=2293.0
+first_row=0, last_row=3, needed={0, 1, 2, 3}
+Successfully drew 5 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=29, total_rows=6
+y_top=1716.0, y_bot=3151.0
+first_row=0, last_row=4, needed={0, 1, 2, 3, 4}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=29, total_rows=6
+y_top=853.0, y_bot=2288.0
+first_row=0, last_row=3, needed={0, 1, 2, 3}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=29, total_rows=6
+y_top=1854.0, y_bot=3289.0
+first_row=0, last_row=4, needed={0, 1, 2, 3, 4}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=29, total_rows=6
+y_top=2426.0, y_bot=3861.0
+first_row=1, last_row=5, needed={1, 2, 3, 4, 5}
+Successfully drew 4 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=29, total_rows=6
+y_top=3141.0, y_bot=4576.0
+first_row=2, last_row=5, needed={2, 3, 4, 5}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=29, total_rows=6
+y_top=3857.0, y_bot=5292.0
+first_row=2, last_row=6, needed={2, 3, 4, 5}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=29, total_rows=6
+y_top=4435.0, y_bot=5870.0
+first_row=3, last_row=7, needed={3, 4, 5}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=30, total_rows=6
+y_top=0.0, y_bot=1435.0
+first_row=0, last_row=2, needed={0, 1, 2}
+Successfully drew 15 new cards. Total visible rows: 3
+
+[SWITCH CHANNEL] Switched to sfw, len(self.mods)=30
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=0.0, y_bot=1435.0
+first_row=0, last_row=2, needed={0, 1, 2}
+Successfully drew 15 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=0.0, y_bot=1435.0
+first_row=0, last_row=2, needed={0, 1, 2}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=572.0, y_bot=2007.0
+first_row=0, last_row=3, needed={0, 1, 2, 3}
+Successfully drew 5 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=0.0, y_bot=1435.0
+first_row=0, last_row=2, needed={0, 1, 2}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=715.0, y_bot=2150.0
+first_row=0, last_row=3, needed={0, 1, 2, 3}
+Successfully drew 5 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=1430.0, y_bot=2865.0
+first_row=0, last_row=3, needed={0, 1, 2, 3}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=2002.0, y_bot=3437.0
+first_row=1, last_row=4, needed={1, 2, 3, 4}
+Successfully drew 5 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=2861.0, y_bot=4296.0
+first_row=1, last_row=5, needed={1, 2, 3, 4, 5}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=3576.0, y_bot=5011.0
+first_row=2, last_row=6, needed={2, 3, 4, 5, 6}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=4291.0, y_bot=5726.0
+first_row=3, last_row=6, needed={3, 4, 5, 6}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=4577.0, y_bot=6012.0
+first_row=3, last_row=7, needed={3, 4, 5, 6, 7}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=4720.0, y_bot=6155.0
+first_row=3, last_row=7, needed={3, 4, 5, 6, 7}
+Successfully drew 0 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=4863.0, y_bot=6298.0
+first_row=4, last_row=7, needed={4, 5, 6, 7}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=5149.0, y_bot=6584.0
+first_row=4, last_row=7, needed={4, 5, 6, 7}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=4717.0, y_bot=6152.0
+first_row=3, last_row=7, needed={3, 4, 5, 6, 7}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=5289.0, y_bot=6724.0
+first_row=4, last_row=7, needed={4, 5, 6, 7}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=5575.0, y_bot=7010.0
+first_row=4, last_row=8, needed={4, 5, 6, 7, 8}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=5861.0, y_bot=7296.0
+first_row=5, last_row=8, needed={8, 5, 6, 7}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=6290.0, y_bot=7725.0
+first_row=5, last_row=9, needed={5, 6, 7, 8, 9}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=6433.0, y_bot=7868.0
+first_row=5, last_row=9, needed={5, 6, 7, 8, 9}
+Successfully drew 0 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=6719.0, y_bot=8154.0
+first_row=5, last_row=9, needed={5, 6, 7, 8, 9}
+Successfully drew 0 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=7005.0, y_bot=8440.0
+first_row=6, last_row=9, needed={8, 9, 6, 7}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=7148.0, y_bot=8583.0
+first_row=6, last_row=9, needed={8, 9, 6, 7}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=7291.0, y_bot=8726.0
+first_row=6, last_row=10, needed={6, 7, 8, 9, 10}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=7434.0, y_bot=8869.0
+first_row=6, last_row=10, needed={6, 7, 8, 9, 10}
+Successfully drew 0 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=7577.0, y_bot=9012.0
+first_row=6, last_row=10, needed={6, 7, 8, 9, 10}
+Successfully drew 0 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=7720.0, y_bot=9155.0
+first_row=7, last_row=10, needed={8, 9, 10, 7}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=8149.0, y_bot=9584.0
+first_row=7, last_row=10, needed={8, 9, 10, 7}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=8292.0, y_bot=9727.0
+first_row=7, last_row=11, needed={7, 8, 9, 10, 11}
+Successfully drew 4 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=8435.0, y_bot=9870.0
+first_row=7, last_row=11, needed={7, 8, 9, 10, 11}
+Successfully drew 0 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=8864.0, y_bot=10299.0
+first_row=8, last_row=11, needed={8, 9, 10, 11}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=9007.0, y_bot=10442.0
+first_row=8, last_row=11, needed={8, 9, 10, 11}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=9150.0, y_bot=10585.0
+first_row=8, last_row=11, needed={8, 9, 10, 11}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=9293.0, y_bot=10728.0
+first_row=8, last_row=12, needed={8, 9, 10, 11}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=9579.0, y_bot=11014.0
+first_row=8, last_row=12, needed={8, 9, 10, 11}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=9722.0, y_bot=11157.0
+first_row=9, last_row=12, needed={9, 10, 11}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=9865.0, y_bot=11300.0
+first_row=9, last_row=12, needed={9, 10, 11}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=10008.0, y_bot=11443.0
+first_row=9, last_row=12, needed={9, 10, 11}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=89, total_rows=18
+y_top=10008.0, y_bot=11443.0
+first_row=9, last_row=12, needed={9, 10, 11, 12}
+Successfully drew 20 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=89, total_rows=18
+y_top=10008.0, y_bot=11443.0
+first_row=9, last_row=12, needed={9, 10, 11, 12}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=89, total_rows=18
+y_top=10294.0, y_bot=11729.0
+first_row=9, last_row=13, needed={9, 10, 11, 12, 13}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=89, total_rows=18
+y_top=10437.0, y_bot=11872.0
+first_row=9, last_row=13, needed={9, 10, 11, 12, 13}
+Successfully drew 0 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=89, total_rows=18
+y_top=10723.0, y_bot=12158.0
+first_row=10, last_row=13, needed={10, 11, 12, 13}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=89, total_rows=18
+y_top=11295.0, y_bot=12730.0
+first_row=10, last_row=14, needed={10, 11, 12, 13, 14}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=89, total_rows=18
+y_top=11867.0, y_bot=13302.0
+first_row=11, last_row=14, needed={11, 12, 13, 14}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=89, total_rows=18
+y_top=12440.0, y_bot=13875.0
+first_row=11, last_row=15, needed={11, 12, 13, 14, 15}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=89, total_rows=18
+y_top=13155.0, y_bot=14590.0
+first_row=12, last_row=16, needed={12, 13, 14, 15, 16}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=89, total_rows=18
+y_top=13727.0, y_bot=15162.0
+first_row=13, last_row=16, needed={16, 13, 14, 15}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=89, total_rows=18
+y_top=14299.0, y_bot=15734.0
+first_row=13, last_row=17, needed={13, 14, 15, 16, 17}
+Successfully drew 4 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=89, total_rows=18
+y_top=14585.0, y_bot=16020.0
+first_row=14, last_row=17, needed={16, 17, 14, 15}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=89, total_rows=18
+y_top=14728.0, y_bot=16163.0
+first_row=14, last_row=17, needed={16, 17, 14, 15}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=89, total_rows=18
+y_top=14871.0, y_bot=16306.0
+first_row=14, last_row=17, needed={16, 17, 14, 15}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=89, total_rows=18
+y_top=15300.0, y_bot=16735.0
+first_row=14, last_row=18, needed={16, 17, 14, 15}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=89, total_rows=18
+y_top=15729.0, y_bot=17164.0
+first_row=15, last_row=18, needed={16, 17, 15}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=89, total_rows=18
+y_top=16015.0, y_bot=17450.0
+first_row=15, last_row=19, needed={16, 17, 15}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=89, total_rows=18
+y_top=16015.0, y_bot=17450.0
+first_row=15, last_row=19, needed={16, 17, 15}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=117, total_rows=24
+y_top=16015.0, y_bot=17450.0
+first_row=15, last_row=19, needed={15, 16, 17, 18, 19}
+Successfully drew 25 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=117, total_rows=24
+y_top=16015.0, y_bot=17450.0
+first_row=15, last_row=19, needed={15, 16, 17, 18, 19}
+Successfully drew 0 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=117, total_rows=24
+y_top=16587.0, y_bot=18022.0
+first_row=16, last_row=19, needed={16, 17, 18, 19}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=117, total_rows=24
+y_top=17159.0, y_bot=18594.0
+first_row=16, last_row=20, needed={16, 17, 18, 19, 20}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=117, total_rows=24
+y_top=17731.0, y_bot=19166.0
+first_row=17, last_row=20, needed={17, 18, 19, 20}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=117, total_rows=24
+y_top=18304.0, y_bot=19739.0
+first_row=17, last_row=21, needed={17, 18, 19, 20, 21}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=117, total_rows=24
+y_top=18876.0, y_bot=20311.0
+first_row=18, last_row=22, needed={18, 19, 20, 21, 22}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=117, total_rows=24
+y_top=19592.0, y_bot=21027.0
+first_row=19, last_row=22, needed={19, 20, 21, 22}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=117, total_rows=24
+y_top=20307.0, y_bot=21742.0
+first_row=20, last_row=23, needed={20, 21, 22, 23}
+Successfully drew 2 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=117, total_rows=24
+y_top=21023.0, y_bot=22458.0
+first_row=20, last_row=24, needed={20, 21, 22, 23}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=117, total_rows=24
+y_top=21739.0, y_bot=23174.0
+first_row=21, last_row=25, needed={21, 22, 23}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=117, total_rows=24
+y_top=21805.0, y_bot=23240.0
+first_row=21, last_row=25, needed={21, 22, 23}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=117, total_rows=24
+y_top=21805.0, y_bot=23240.0
+first_row=21, last_row=25, needed={21, 22, 23}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=146, total_rows=30
+y_top=21805.0, y_bot=23240.0
+first_row=21, last_row=25, needed={21, 22, 23, 24, 25}
+Successfully drew 25 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=146, total_rows=30
+y_top=21805.0, y_bot=23240.0
+first_row=21, last_row=25, needed={21, 22, 23, 24, 25}
+Successfully drew 0 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=146, total_rows=30
+y_top=22377.0, y_bot=23812.0
+first_row=22, last_row=25, needed={24, 25, 22, 23}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=146, total_rows=30
+y_top=22949.0, y_bot=24384.0
+first_row=22, last_row=26, needed={22, 23, 24, 25, 26}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=146, total_rows=30
+y_top=23521.0, y_bot=24956.0
+first_row=23, last_row=26, needed={24, 25, 26, 23}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=146, total_rows=30
+y_top=24093.0, y_bot=25528.0
+first_row=23, last_row=27, needed={23, 24, 25, 26, 27}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=146, total_rows=30
+y_top=24808.0, y_bot=26243.0
+first_row=24, last_row=28, needed={24, 25, 26, 27, 28}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=176, total_rows=36
+y_top=24808.0, y_bot=26243.0
+first_row=24, last_row=28, needed={24, 25, 26, 27, 28}
+Successfully drew 25 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=176, total_rows=36
+y_top=24808.0, y_bot=26243.0
+first_row=24, last_row=28, needed={24, 25, 26, 27, 28}
+Successfully drew 0 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=176, total_rows=36
+y_top=25523.0, y_bot=26958.0
+first_row=25, last_row=28, needed={25, 26, 27, 28}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=176, total_rows=36
+y_top=26238.0, y_bot=27673.0
+first_row=26, last_row=29, needed={26, 27, 28, 29}
+Successfully drew 5 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=176, total_rows=36
+y_top=26953.0, y_bot=28388.0
+first_row=26, last_row=30, needed={26, 27, 28, 29, 30}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=176, total_rows=36
+y_top=27812.0, y_bot=29247.0
+first_row=27, last_row=31, needed={27, 28, 29, 30, 31}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=176, total_rows=36
+y_top=28527.0, y_bot=29962.0
+first_row=28, last_row=32, needed={32, 28, 29, 30, 31}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=176, total_rows=36
+y_top=29385.0, y_bot=30820.0
+first_row=29, last_row=32, needed={32, 29, 30, 31}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=176, total_rows=36
+y_top=30100.0, y_bot=31535.0
+first_row=30, last_row=33, needed={32, 33, 30, 31}
+Successfully drew 5 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=176, total_rows=36
+y_top=30815.0, y_bot=32250.0
+first_row=30, last_row=34, needed={32, 33, 34, 30, 31}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=205, total_rows=41
+y_top=30815.0, y_bot=32250.0
+first_row=30, last_row=34, needed={32, 33, 34, 30, 31}
+Successfully drew 25 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=205, total_rows=41
+y_top=30815.0, y_bot=32250.0
+first_row=30, last_row=34, needed={32, 33, 34, 30, 31}
+Successfully drew 0 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=29, total_rows=6
+y_top=0.0, y_bot=1435.0
+first_row=0, last_row=2, needed={0, 1, 2}
+Successfully drew 15 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=29, total_rows=6
+y_top=0.0, y_bot=1435.0
+first_row=0, last_row=2, needed={0, 1, 2}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=30, total_rows=6
+y_top=0.0, y_bot=1435.0
+first_row=0, last_row=2, needed={0, 1, 2}
+Successfully drew 15 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=30, total_rows=6
+y_top=0.0, y_bot=1435.0
+first_row=0, last_row=2, needed={0, 1, 2}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=30, total_rows=6
+y_top=143.0, y_bot=1578.0
+first_row=0, last_row=2, needed={0, 1, 2}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=30, total_rows=6
+y_top=286.0, y_bot=1721.0
+first_row=0, last_row=2, needed={0, 1, 2}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=30, total_rows=6
+y_top=429.0, y_bot=1864.0
+first_row=0, last_row=2, needed={0, 1, 2}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=30, total_rows=6
+y_top=572.0, y_bot=2007.0
+first_row=0, last_row=3, needed={0, 1, 2, 3}
+Successfully drew 5 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=30, total_rows=6
+y_top=715.0, y_bot=2150.0
+first_row=0, last_row=3, needed={0, 1, 2, 3}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=30, total_rows=6
+y_top=858.0, y_bot=2293.0
+first_row=0, last_row=3, needed={0, 1, 2, 3}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=30, total_rows=6
+y_top=1001.0, y_bot=2436.0
+first_row=0, last_row=3, needed={0, 1, 2, 3}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=30, total_rows=6
+y_top=1144.0, y_bot=2579.0
+first_row=0, last_row=3, needed={0, 1, 2, 3}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=30, total_rows=6
+y_top=1430.0, y_bot=2865.0
+first_row=0, last_row=3, needed={0, 1, 2, 3}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=30, total_rows=6
+y_top=1573.0, y_bot=3008.0
+first_row=0, last_row=4, needed={0, 1, 2, 3, 4}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=1573.0, y_bot=3008.0
+first_row=0, last_row=4, needed={0, 1, 2, 3, 4}
+Successfully drew 25 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=1573.0, y_bot=3008.0
+first_row=0, last_row=4, needed={0, 1, 2, 3, 4}
+Successfully drew 0 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=1573.0, y_bot=3008.0
+first_row=0, last_row=4, needed={0, 1, 2, 3, 4}
+Successfully drew 0 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=2145.0, y_bot=3580.0
+first_row=1, last_row=4, needed={1, 2, 3, 4}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=2717.0, y_bot=4152.0
+first_row=1, last_row=5, needed={1, 2, 3, 4, 5}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=3146.0, y_bot=4581.0
+first_row=2, last_row=5, needed={2, 3, 4, 5}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=3289.0, y_bot=4724.0
+first_row=2, last_row=5, needed={2, 3, 4, 5}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=3432.0, y_bot=4867.0
+first_row=2, last_row=6, needed={2, 3, 4, 5, 6}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=3432.0, y_bot=4867.0
+first_row=2, last_row=6, needed={2, 3, 4, 5, 6}
+Successfully drew 0 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=3432.0, y_bot=4867.0
+first_row=2, last_row=6, needed={2, 3, 4, 5, 6}
+Successfully drew 0 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=3432.0, y_bot=4867.0
+first_row=2, last_row=6, needed={2, 3, 4, 5, 6}
+Successfully drew 0 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=3432.0, y_bot=4867.0
+first_row=2, last_row=6, needed={2, 3, 4, 5, 6}
+Successfully drew 0 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=59, total_rows=12
+y_top=3432.0, y_bot=4867.0
+first_row=2, last_row=6, needed={2, 3, 4, 5, 6}
+Successfully drew 0 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=89, total_rows=18
+y_top=3432.0, y_bot=4867.0
+first_row=2, last_row=6, needed={2, 3, 4, 5, 6}
+Successfully drew 25 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=89, total_rows=18
+y_top=3432.0, y_bot=4867.0
+first_row=2, last_row=6, needed={2, 3, 4, 5, 6}
+Successfully drew 0 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=89, total_rows=18
+y_top=3432.0, y_bot=4867.0
+first_row=2, last_row=6, needed={2, 3, 4, 5, 6}
+Successfully drew 0 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=89, total_rows=18
+y_top=3718.0, y_bot=5153.0
+first_row=2, last_row=6, needed={2, 3, 4, 5, 6}
+Successfully drew 0 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=89, total_rows=18
+y_top=3861.0, y_bot=5296.0
+first_row=3, last_row=6, needed={3, 4, 5, 6}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=89, total_rows=18
+y_top=4004.0, y_bot=5439.0
+first_row=3, last_row=6, needed={3, 4, 5, 6}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=89, total_rows=18
+y_top=4147.0, y_bot=5582.0
+first_row=3, last_row=6, needed={3, 4, 5, 6}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=89, total_rows=18
+y_top=4290.0, y_bot=5725.0
+first_row=3, last_row=6, needed={3, 4, 5, 6}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=89, total_rows=18
+y_top=4433.0, y_bot=5868.0
+first_row=3, last_row=7, needed={3, 4, 5, 6, 7}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=89, total_rows=18
+y_top=4576.0, y_bot=6011.0
+first_row=3, last_row=7, needed={3, 4, 5, 6, 7}
+Successfully drew 0 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=89, total_rows=18
+y_top=4719.0, y_bot=6154.0
+first_row=3, last_row=7, needed={3, 4, 5, 6, 7}
+Successfully drew 0 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=89, total_rows=18
+y_top=4862.0, y_bot=6297.0
+first_row=4, last_row=7, needed={4, 5, 6, 7}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=89, total_rows=18
+y_top=5005.0, y_bot=6440.0
+first_row=4, last_row=7, needed={4, 5, 6, 7}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=89, total_rows=18
+y_top=5148.0, y_bot=6583.0
+first_row=4, last_row=7, needed={4, 5, 6, 7}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=89, total_rows=18
+y_top=5291.0, y_bot=6726.0
+first_row=4, last_row=7, needed={4, 5, 6, 7}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=89, total_rows=18
+y_top=5434.0, y_bot=6869.0
+first_row=4, last_row=8, needed={4, 5, 6, 7, 8}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=89, total_rows=18
+y_top=5863.0, y_bot=7298.0
+first_row=5, last_row=8, needed={8, 5, 6, 7}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=89, total_rows=18
+y_top=6149.0, y_bot=7584.0
+first_row=5, last_row=8, needed={8, 5, 6, 7}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=89, total_rows=18
+y_top=6292.0, y_bot=7727.0
+first_row=5, last_row=9, needed={5, 6, 7, 8, 9}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=89, total_rows=18
+y_top=6435.0, y_bot=7870.0
+first_row=5, last_row=9, needed={5, 6, 7, 8, 9}
+Successfully drew 0 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=89, total_rows=18
+y_top=6578.0, y_bot=8013.0
+first_row=5, last_row=9, needed={5, 6, 7, 8, 9}
+Successfully drew 0 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=89, total_rows=18
+y_top=7007.0, y_bot=8442.0
+first_row=6, last_row=9, needed={8, 9, 6, 7}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=89, total_rows=18
+y_top=7579.0, y_bot=9014.0
+first_row=6, last_row=10, needed={6, 7, 8, 9, 10}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=89, total_rows=18
+y_top=8008.0, y_bot=9443.0
+first_row=7, last_row=10, needed={8, 9, 10, 7}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=89, total_rows=18
+y_top=8437.0, y_bot=9872.0
+first_row=7, last_row=11, needed={7, 8, 9, 10, 11}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=89, total_rows=18
+y_top=8723.0, y_bot=10158.0
+first_row=8, last_row=11, needed={8, 9, 10, 11}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=89, total_rows=18
+y_top=9152.0, y_bot=10587.0
+first_row=8, last_row=11, needed={8, 9, 10, 11}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=89, total_rows=18
+y_top=9581.0, y_bot=11016.0
+first_row=8, last_row=12, needed={8, 9, 10, 11, 12}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=89, total_rows=18
+y_top=10010.0, y_bot=11445.0
+first_row=9, last_row=12, needed={9, 10, 11, 12}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=89, total_rows=18
+y_top=10439.0, y_bot=11874.0
+first_row=9, last_row=13, needed={9, 10, 11, 12, 13}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=89, total_rows=18
+y_top=10725.0, y_bot=12160.0
+first_row=10, last_row=13, needed={10, 11, 12, 13}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=89, total_rows=18
+y_top=11154.0, y_bot=12589.0
+first_row=10, last_row=14, needed={10, 11, 12, 13, 14}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=89, total_rows=18
+y_top=11583.0, y_bot=13018.0
+first_row=11, last_row=14, needed={11, 12, 13, 14}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=89, total_rows=18
+y_top=12155.0, y_bot=13590.0
+first_row=11, last_row=15, needed={11, 12, 13, 14, 15}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=89, total_rows=18
+y_top=12727.0, y_bot=14162.0
+first_row=12, last_row=15, needed={12, 13, 14, 15}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=89, total_rows=18
+y_top=13299.0, y_bot=14734.0
+first_row=12, last_row=16, needed={12, 13, 14, 15, 16}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=89, total_rows=18
+y_top=13871.0, y_bot=15306.0
+first_row=13, last_row=16, needed={16, 13, 14, 15}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=89, total_rows=18
+y_top=14300.0, y_bot=15735.0
+first_row=13, last_row=17, needed={13, 14, 15, 16, 17}
+Successfully drew 4 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=116, total_rows=24
+y_top=14300.0, y_bot=15735.0
+first_row=13, last_row=17, needed={13, 14, 15, 16, 17}
+Successfully drew 25 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=116, total_rows=24
+y_top=14300.0, y_bot=15735.0
+first_row=13, last_row=17, needed={13, 14, 15, 16, 17}
+Successfully drew 0 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=116, total_rows=24
+y_top=14872.0, y_bot=16307.0
+first_row=14, last_row=17, needed={16, 17, 14, 15}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=116, total_rows=24
+y_top=15301.0, y_bot=16736.0
+first_row=14, last_row=18, needed={14, 15, 16, 17, 18}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=116, total_rows=24
+y_top=15873.0, y_bot=17308.0
+first_row=15, last_row=18, needed={16, 17, 18, 15}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=116, total_rows=24
+y_top=16445.0, y_bot=17880.0
+first_row=16, last_row=19, needed={16, 17, 18, 19}
+Successfully drew 5 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=116, total_rows=24
+y_top=15869.0, y_bot=17304.0
+first_row=15, last_row=18, needed={16, 17, 18, 15}
+Successfully drew 5 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=29, total_rows=6
+y_top=0.0, y_bot=1435.0
+first_row=0, last_row=2, needed={0, 1, 2}
+Successfully drew 15 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=29, total_rows=6
+y_top=0.0, y_bot=1435.0
+first_row=0, last_row=2, needed={0, 1, 2}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=1, total_rows=1
+y_top=0.0, y_bot=1435.0
+first_row=0, last_row=2, needed={0}
+Successfully drew 1 new cards. Total visible rows: 1
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=1, total_rows=1
+y_top=0.0, y_bot=1435.0
+first_row=0, last_row=2, needed={0}
+Successfully drew 0 new cards. Total visible rows: 1
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=147, total_rows=30
+y_top=0.0, y_bot=1435.0
+first_row=0, last_row=2, needed={0, 1, 2}
+Successfully drew 15 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=147, total_rows=30
+y_top=715.0, y_bot=2150.0
+first_row=0, last_row=3, needed={0, 1, 2, 3}
+Successfully drew 5 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=147, total_rows=30
+y_top=1287.0, y_bot=2722.0
+first_row=0, last_row=3, needed={0, 1, 2, 3}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=147, total_rows=30
+y_top=1859.0, y_bot=3294.0
+first_row=0, last_row=4, needed={0, 1, 2, 3, 4}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=147, total_rows=30
+y_top=2288.0, y_bot=3723.0
+first_row=1, last_row=4, needed={1, 2, 3, 4}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=147, total_rows=30
+y_top=2431.0, y_bot=3866.0
+first_row=1, last_row=5, needed={1, 2, 3, 4, 5}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=147, total_rows=30
+y_top=2574.0, y_bot=4009.0
+first_row=1, last_row=5, needed={1, 2, 3, 4, 5}
+Successfully drew 0 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=147, total_rows=30
+y_top=2717.0, y_bot=4152.0
+first_row=1, last_row=5, needed={1, 2, 3, 4, 5}
+Successfully drew 0 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=147, total_rows=30
+y_top=3289.0, y_bot=4724.0
+first_row=2, last_row=5, needed={2, 3, 4, 5}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=147, total_rows=30
+y_top=3861.0, y_bot=5296.0
+first_row=3, last_row=6, needed={3, 4, 5, 6}
+Successfully drew 5 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=147, total_rows=30
+y_top=4290.0, y_bot=5725.0
+first_row=3, last_row=6, needed={3, 4, 5, 6}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=147, total_rows=30
+y_top=4719.0, y_bot=6154.0
+first_row=3, last_row=7, needed={3, 4, 5, 6, 7}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=147, total_rows=30
+y_top=5291.0, y_bot=6726.0
+first_row=4, last_row=7, needed={4, 5, 6, 7}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=147, total_rows=30
+y_top=4859.0, y_bot=6294.0
+first_row=4, last_row=7, needed={4, 5, 6, 7}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=147, total_rows=30
+y_top=4715.0, y_bot=6150.0
+first_row=3, last_row=7, needed={3, 4, 5, 6, 7}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=147, total_rows=30
+y_top=5287.0, y_bot=6722.0
+first_row=4, last_row=7, needed={4, 5, 6, 7}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=147, total_rows=30
+y_top=5859.0, y_bot=7294.0
+first_row=5, last_row=8, needed={8, 5, 6, 7}
+Successfully drew 5 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=147, total_rows=30
+y_top=6431.0, y_bot=7866.0
+first_row=5, last_row=9, needed={5, 6, 7, 8, 9}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=147, total_rows=30
+y_top=6860.0, y_bot=8295.0
+first_row=6, last_row=9, needed={8, 9, 6, 7}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=147, total_rows=30
+y_top=7432.0, y_bot=8867.0
+first_row=6, last_row=10, needed={6, 7, 8, 9, 10}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=147, total_rows=30
+y_top=7718.0, y_bot=9153.0
+first_row=6, last_row=10, needed={6, 7, 8, 9, 10}
+Successfully drew 0 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=147, total_rows=30
+y_top=7861.0, y_bot=9296.0
+first_row=7, last_row=10, needed={8, 9, 10, 7}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=147, total_rows=30
+y_top=8004.0, y_bot=9439.0
+first_row=7, last_row=10, needed={8, 9, 10, 7}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=147, total_rows=30
+y_top=8147.0, y_bot=9582.0
+first_row=7, last_row=10, needed={8, 9, 10, 7}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=147, total_rows=30
+y_top=8576.0, y_bot=10011.0
+first_row=7, last_row=11, needed={7, 8, 9, 10, 11}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=147, total_rows=30
+y_top=9006.0, y_bot=10441.0
+first_row=8, last_row=11, needed={8, 9, 10, 11}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=147, total_rows=30
+y_top=9292.0, y_bot=10727.0
+first_row=8, last_row=12, needed={8, 9, 10, 11, 12}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=147, total_rows=30
+y_top=9435.0, y_bot=10870.0
+first_row=8, last_row=12, needed={8, 9, 10, 11, 12}
+Successfully drew 0 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=147, total_rows=30
+y_top=9721.0, y_bot=11156.0
+first_row=9, last_row=12, needed={9, 10, 11, 12}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=147, total_rows=30
+y_top=9864.0, y_bot=11299.0
+first_row=9, last_row=12, needed={9, 10, 11, 12}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=147, total_rows=30
+y_top=10007.0, y_bot=11442.0
+first_row=9, last_row=12, needed={9, 10, 11, 12}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=147, total_rows=30
+y_top=10579.0, y_bot=12014.0
+first_row=9, last_row=13, needed={9, 10, 11, 12, 13}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=147, total_rows=30
+y_top=10722.0, y_bot=12157.0
+first_row=10, last_row=13, needed={10, 11, 12, 13}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=147, total_rows=30
+y_top=10865.0, y_bot=12300.0
+first_row=10, last_row=13, needed={10, 11, 12, 13}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=147, total_rows=30
+y_top=11008.0, y_bot=12443.0
+first_row=10, last_row=13, needed={10, 11, 12, 13}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=147, total_rows=30
+y_top=11294.0, y_bot=12729.0
+first_row=10, last_row=14, needed={10, 11, 12, 13, 14}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=147, total_rows=30
+y_top=12009.0, y_bot=13444.0
+first_row=11, last_row=14, needed={11, 12, 13, 14}
+Successfully drew 0 new cards. Total visible rows: 4
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=147, total_rows=30
+y_top=12295.0, y_bot=13730.0
+first_row=11, last_row=15, needed={11, 12, 13, 14, 15}
+Successfully drew 5 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=147, total_rows=30
+y_top=12438.0, y_bot=13873.0
+first_row=11, last_row=15, needed={11, 12, 13, 14, 15}
+Successfully drew 0 new cards. Total visible rows: 5
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=9, total_rows=2
+y_top=575.0, y_bot=2010.0
+first_row=0, last_row=3, needed={0, 1}
+Successfully drew 9 new cards. Total visible rows: 2
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=9, total_rows=2
+y_top=575.0, y_bot=2010.0
+first_row=0, last_row=3, needed={0, 1}
+Successfully drew 0 new cards. Total visible rows: 2
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=9, total_rows=2
+y_top=575.0, y_bot=2010.0
+first_row=0, last_row=3, needed={0, 1}
+Successfully drew 0 new cards. Total visible rows: 2
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=9, total_rows=2
+y_top=0.0, y_bot=1435.0
+first_row=0, last_row=2, needed={0, 1}
+Successfully drew 0 new cards. Total visible rows: 2
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=9, total_rows=2
+y_top=0.0, y_bot=1435.0
+first_row=0, last_row=2, needed={0, 1}
+Successfully drew 0 new cards. Total visible rows: 2
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=11, total_rows=3
+y_top=0.0, y_bot=1435.0
+first_row=0, last_row=2, needed={0, 1, 2}
+Successfully drew 11 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=11, total_rows=3
+y_top=0.0, y_bot=1435.0
+first_row=0, last_row=2, needed={0, 1, 2}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=11, total_rows=3
+y_top=286.0, y_bot=1721.0
+first_row=0, last_row=2, needed={0, 1, 2}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=11, total_rows=3
+y_top=429.0, y_bot=1864.0
+first_row=0, last_row=2, needed={0, 1, 2}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=11, total_rows=3
+y_top=572.0, y_bot=2007.0
+first_row=0, last_row=3, needed={0, 1, 2}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=11, total_rows=3
+y_top=1001.0, y_bot=2436.0
+first_row=0, last_row=3, needed={0, 1, 2}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=11, total_rows=3
+y_top=1430.0, y_bot=2865.0
+first_row=0, last_row=3, needed={0, 1, 2}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=11, total_rows=3
+y_top=1540.0, y_bot=2975.0
+first_row=0, last_row=4, needed={0, 1, 2}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=11, total_rows=3
+y_top=1540.0, y_bot=2975.0
+first_row=0, last_row=4, needed={0, 1, 2}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=11, total_rows=3
+y_top=1540.0, y_bot=2975.0
+first_row=0, last_row=4, needed={0, 1, 2}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=12, total_rows=3
+y_top=1540.0, y_bot=2975.0
+first_row=0, last_row=4, needed={0, 1, 2}
+Successfully drew 12 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=12, total_rows=3
+y_top=1540.0, y_bot=2975.0
+first_row=0, last_row=4, needed={0, 1, 2}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=12, total_rows=3
+y_top=1540.0, y_bot=2975.0
+first_row=0, last_row=4, needed={0, 1, 2}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=12, total_rows=3
+y_top=1252.0, y_bot=2687.0
+first_row=0, last_row=3, needed={0, 1, 2}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=12, total_rows=3
+y_top=1108.0, y_bot=2543.0
+first_row=0, last_row=3, needed={0, 1, 2}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=12, total_rows=3
+y_top=964.0, y_bot=2399.0
+first_row=0, last_row=3, needed={0, 1, 2}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=12, total_rows=3
+y_top=1540.0, y_bot=2975.0
+first_row=0, last_row=4, needed={0, 1, 2}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=12, total_rows=3
+y_top=1540.0, y_bot=2975.0
+first_row=0, last_row=4, needed={0, 1, 2}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=12, total_rows=3
+y_top=1540.0, y_bot=2975.0
+first_row=0, last_row=4, needed={0, 1, 2}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=13, total_rows=3
+y_top=1540.0, y_bot=2975.0
+first_row=0, last_row=4, needed={0, 1, 2}
+Successfully drew 13 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=13, total_rows=3
+y_top=1540.0, y_bot=2975.0
+first_row=0, last_row=4, needed={0, 1, 2}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=13, total_rows=3
+y_top=1540.0, y_bot=2975.0
+first_row=0, last_row=4, needed={0, 1, 2}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=13, total_rows=3
+y_top=964.0, y_bot=2399.0
+first_row=0, last_row=3, needed={0, 1, 2}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=13, total_rows=3
+y_top=1540.0, y_bot=2975.0
+first_row=0, last_row=4, needed={0, 1, 2}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=13, total_rows=3
+y_top=1540.0, y_bot=2975.0
+first_row=0, last_row=4, needed={0, 1, 2}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=13, total_rows=3
+y_top=1540.0, y_bot=2975.0
+first_row=0, last_row=4, needed={0, 1, 2}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=14, total_rows=3
+y_top=1540.0, y_bot=2975.0
+first_row=0, last_row=4, needed={0, 1, 2}
+Successfully drew 14 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=14, total_rows=3
+y_top=1540.0, y_bot=2975.0
+first_row=0, last_row=4, needed={0, 1, 2}
+Successfully drew 0 new cards. Total visible rows: 3
+=== Render Cycle ===
+cw=3688, ch=1435, row_height=965
+len(mods)=264, total_rows=53
+y_top=1540.0, y_bot=2975.0
+first_row=0, last_row=4, needed={0, 1, 2, 3, 4}
+Successfully drew 25 new cards. Total visible rows: 5
